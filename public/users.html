@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Registration and Login System</title>
@@ -14,17 +12,18 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Registration and Login System</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
                 data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" th:href="@{/register}">Register</a>
+                    <a aria-current="page" class="nav-link active" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" th:href="@{/logout}">Logout</a>
+                    <a aria-current="page" class="nav-link active" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
@@ -43,11 +42,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-        </tr>
+<!--        <tr th:each="user: ${users}">-->
+<!--            <td th:text="${user.firstName}"></td>-->
+<!--            <td th:text="${user.lastName}"></td>-->
+<!--            <td th:text="${user.email}"></td>-->
+<!--        </tr>-->
         </tbody>
     </table>
 </div>

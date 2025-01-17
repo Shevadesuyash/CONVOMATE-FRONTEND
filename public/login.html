@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Convomate - A Voice Communication Bot</title>
@@ -8,25 +8,24 @@
     <meta content="" name="description">
 
     <!-- Favicons -->
-    <link href="img/robot web icon.jpeg" rel="icon">
-    <link href="img/robot web icon.jpeg" rel="robot hello">
+    <link href="img/4.jpeg" rel="icon">
+    <link href="img/4.jpeg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700"
           rel="stylesheet">
 
-    <!-- Bootstrap CSS File -->
+    <!-- Bootstrap CSS -->
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Libraries CSS Files -->
+    <!-- Libraries CSS -->
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 
-    <!-- Main Stylesheet File -->
+    <!-- Main Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
@@ -38,7 +37,7 @@
 <section class="d-none d-lg-block" id="topbar">
     <div class="container clearfix">
         <div class="contact-info float-left">
-            <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">convomate@star.com</a>
+            <i class="fa fa-envelope-o"></i> <a href="mailto:convomate@star.com">convomate@star.com</a>
             <i class="fa fa-phone"></i> +1 5589 55488 55
         </div>
         <div class="social-links float-right">
@@ -56,31 +55,29 @@
 ============================-->
 <header id="header">
     <div class="container">
-
         <div class="pull-left" id="logo">
-            <h1><a class="scrollto" th:href="@{/index}">Convo<span>Mate</span></a></h1>
-
-            <!-- <a th:href="@{/index}"><img src="img/logo.png" alt="" title="" /></a>-->
+            <h1><a class="scrollto" href="/index.html">Convo<span>Mate</span></a></h1>
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-                <li class="menu-active"><a th:href="@{/index}">Home</a></li>
-                <li><a th:href="@{/index}">About Us</a></li>
-                <li><a th:href="@{/index}">Team</a></li>
+                <li class="menu-active"><a href="/index.html">Home</a></li>
+                <li><a href="/about.html">About Us</a></li>
+                <li><a href="/team.html">Team</a></li>
                 <li class="menu-has-children"><a href="#">Models</a>
                     <ul>
-                        <li><a href="#">Voice Convomate</a></li>
-                        <li><a href="#">Paragraph checker</a></li>
-                        <li><a href="#">Learning basics of Languages</a></li>
-                        <li><a href="#">Text to Voice</a></li>
+                        <li><a href="/models/voice-convomate.html">Voice Convomate</a></li>
+                        <li><a href="/models/paragraph-checker.html">Paragraph Checker</a></li>
+                        <li><a href="/models/learning-languages.html">Learning Languages</a></li>
+                        <li><a href="/models/text-to-voice.html">Text to Voice</a></li>
                     </ul>
                 </li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="/contact.html">Contact</a></li>
             </ul>
         </nav>
     </div>
 </header>
+
 <br><br>
 
 <!--==========================
@@ -88,25 +85,46 @@
 ============================-->
 <section id="intro">
     <div class="intro-content">
-        <form method="post" th:action="@{/login}">
-            <div class="container" style="text-align:right;">
-                <h1 style="color:blue; text-align:right; padding:25px; font-weight:2000;">Login</h1>
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid Email or Password</div>
-                </div>
-                <div th:if="${param.logout}">
-                    <div class="alert alert-success">You have been logged out.</div>
-                </div>
-                <label for="username"><b>Username</b></label>
-                <input name="username" placeholder="Enter Username" required type="text"><br><br>
-                <label for="password"><b>Password</b></label>
-                <input name="password" placeholder="Enter Password" required type="password"><br><br>
-                <div>
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <span>Not registered?
-              <a th:href="@{/register}">Register/Signup here</a>
+        <form action="/login" method="post">
+            <div class="container" style="max-width: 400px; margin: 0 auto;">
+                <h1 class="text-primary text-center mb-4" style="font-weight: 700;">Login</h1>
 
-            </span>
+                <div class="alert alert-danger" id="error" style="display: none;">Invalid Email or Password</div>
+                <div class="alert alert-success" id="logout-success" style="display: none;">You have been logged out.
+                </div>
+
+                <div class="form-group">
+                    <label for="username"><b>Username</b></label>
+                    <input
+                            autocomplete="off"
+                            class="form-control"
+                            id="username"
+                            name="username"
+                            placeholder="Enter Email"
+                            required
+                            type="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><b>Password</b></label>
+                    <input
+                            autocomplete="off"
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="Enter Password"
+                            required
+                            type="password">
+                </div>
+
+                <div class="form-group text-center">
+                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                </div>
+
+                <div class="text-center mt-2">
+                    <span>Not registered?
+                        <a href="/register.html">Register/Signup here</a>
+                    </span>
                 </div>
             </div>
         </form>
@@ -123,7 +141,6 @@
 
     <!-- JavaScript Libraries -->
     <script src="lib/jquery/jquery.min.js"></script>
-    <script src="lib/jquery/jquery-migrate.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/superfish/hoverIntent.js"></script>
@@ -132,8 +149,10 @@
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/magnific-popup/magnific-popup.min.js"></script>
     <script src="lib/sticky/sticky.js"></script>
-    <script src="contactform/contactform.js"></script>
+
+    <!-- Main JavaScript -->
     <script src="js/main.js"></script>
+</main>
 
 </body>
 </html>
