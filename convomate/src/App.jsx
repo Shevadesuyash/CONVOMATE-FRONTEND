@@ -1,13 +1,11 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import HomePage from './components/Pages/Home/HomePage';
-import LoginPage from './components/Pages/Login/LoginPage';
-import RegisterPage from './components/Pages/Register/RegisterPage';
-import ModelPage from './components/Pages/Model/ModelPage';
-import UserPage from './components/Pages/Users/UserPage';
+import HomePage from './pages/HomePage';
+import ModelPage from './pages/ModelPage'; // Import the new ModelPage
+import LoginPage from './pages/LoginPage'; // Adjust the path as necessary
+import RegisterPage from './pages/RegisterPage'; // Import the new RegisterPage
 import NotFoundPage from './components/Pages/NotFoundPage'; // Create this file
-import React from 'react'; // Add this line
-
 
 const App = () => {
   return (
@@ -15,11 +13,10 @@ const App = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/model" element={<ModelPage />} />
-          <Route path="/user" element={<UserPage />} />
-          <Route path="*" element={<NotFoundPage />} /> {/* 404 Route */}
+          <Route path="/models" element={<ModelPage />} /> {/* Add route for Model Page */}
+           <Route path="/login" element={<LoginPage />} />
+           <Route path="/register" element={<RegisterPage />} />
+           <Route path="*" element={<NotFoundPage />} /> {/* 404 Route */}
         </Routes>
       </Layout>
     </Router>
