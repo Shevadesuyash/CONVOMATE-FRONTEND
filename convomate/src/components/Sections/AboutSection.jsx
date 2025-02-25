@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/AboutSection.css'; // Import the CSS file for AboutSection
 
 const AboutSection = () => {
   return (

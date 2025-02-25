@@ -4,9 +4,9 @@ import ModelSection from '../components/Sections/ModelSection';
 
 const ModelPage = () => {
   return (
-    <Layout>
+
       <ModelSection />
-    </Layout>
+
   );
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
-
-// Import team member images
+import '../css/TeamSection.css'; // Import the CSS file for TeamSection
 import Team1 from '../../assets/img/team-1.jpg';
 import Team2 from '../../assets/img/team-2.jpeg';
 import Team3 from '../../assets/img/team-3.jpeg';

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../css/IntroSection.css'; // Import the CSS file for IntroSection
 
 const IntroSection = () => {
   return (
