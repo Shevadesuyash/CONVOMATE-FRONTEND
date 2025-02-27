@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/IntroSection.css'; // Import the CSS file for IntroSection
-
+import "../../assets/css/style.css";
 const IntroSection = () => {
   return (
     <section id="intro">
@@ -13,7 +13,7 @@ const IntroSection = () => {
         </div>
       </div>
       <div className="owl-carousel" id="intro-carousel">
-        <div className="item" style={{ backgroundImage: "url('../img/intro-carousel/3.1.jpeg')" }}></div>
+        <div className="item" style={{ backgroundImage: "url('../../assets/img/intro-carousel/3.1.jpeg')" }}></div>
       </div>
     </section>
   );
