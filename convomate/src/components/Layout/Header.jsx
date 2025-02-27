@@ -1,6 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.css'; // Import the CSS file for Header
+import React from "react";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom"; // ✅ Import Link
+import "../../assets/css/style.css";
+
 
 const Header = () => {
   return (
