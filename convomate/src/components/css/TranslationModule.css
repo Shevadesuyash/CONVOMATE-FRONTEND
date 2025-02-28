@@ -1,0 +1,52 @@
+/* Translation Module Styles */
+#translator {
+  max-width: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#translator h2 {
+  color: #343a40;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#translator select,
+#translator textarea,
+#translator button {
+  margin-bottom: 15px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#translator button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#translator button:hover {
+  background-color: #0056b3;
+}
+
+#translator textarea {
+  resize: vertical;
+}
+
+#translatedText {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
