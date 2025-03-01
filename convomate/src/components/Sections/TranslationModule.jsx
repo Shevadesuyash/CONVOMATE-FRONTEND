@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/TranslationModule.css'; // Import the CSS file for TranslationModule
+import "../../assets/css/style.css";
 
 
 const TranslationModule = () => {

@@ -7,6 +7,7 @@ import "../../assets/lib/ionicons/css/ionicons.min.css";
 import "../../assets/lib/owlcarousel/assets/owl.carousel.min.css";
 import "../../assets/lib/magnific-popup/magnific-popup.css";
 import "../Main.css";
+import "bootstrap"
 const TopBar = () => {
   useEffect(() => {
     // Function to dynamically load scripts
