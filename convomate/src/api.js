@@ -1,46 +1,41 @@
-import axios from 'axios';
+const BASE_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080', // Default for dev
-  headers: {
+const apiCall = async (endpoint, method = 'GET', data = null, params = null) => {
+  const token = localStorage.getItem('token');
+  const headers = {
     'Content-Type': 'application/json',
-  },
-});
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
 
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+  const url = params ? `${BASE_URL}${endpoint}?${new URLSearchParams(params)}` : `${BASE_URL}${endpoint}`;
+  const options = {
+    method,
+    headers,
+    ...(data && { body: JSON.stringify(data) }),
+  };
 
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    if (response.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';
     }
-    return Promise.reject({
-      message: error.response?.data?.message || 'An error occurred',
-      status: error.response?.status || 500,
-    });
+    const error = await response.json();
+    throw { message: error.message || 'An error occurred', status: response.status };
   }
-);
+  return response.json();
+};
 
 export default {
-  register: (userData) => api.post('/user/register', userData),
-  generateOtp: (email) => api.post('/user/generateOtp', { email }),
-  login: (username, otp) => api.post('/user/login', null, { params: { username, otp } }), // Using query params as per backend
-  logout: () => api.post('/user/logout'), // Stateless, just clears token on client
-  getUserProfile: (username) => api.get(`/user/profile?username=${username}`),
-  submitReview: (reviewData) => api.post('/user/review/submit', reviewData),
-  getAllReviews: () => api.get('/user/review/all'),
-  createModel: () => api.get('/model/create'),
-  sendMail: (emailData) => api.post('/model/sendMail', emailData),
-  test: () => api.get('/model/test'),
+  register: (userData) => apiCall('/user/register', 'POST', userData),
+  generateOtp: (email) => apiCall('/user/generateOtp', 'POST', { email }),
+  login: (username, otp) => apiCall('/user/login', 'POST', null, { username, otp }),
+  logout: () => apiCall('/user/logout', 'POST'),
+  getUserProfile: (username) => apiCall(`/user/profile`, 'GET', null, { username }),
+  submitReview: (reviewData) => apiCall('/user/review/submit', 'POST', reviewData),
+  getAllReviews: () => apiCall('/user/review/all', 'GET'),
+  createModel: () => apiCall('/model/create', 'GET'),
+  sendMail: (emailData) => apiCall('/model/sendMail', 'POST', emailData),
+  test: () => apiCall('/model/test', 'GET'),
+  translate: (data) => apiCall('/model/translate', 'POST', data),
 };

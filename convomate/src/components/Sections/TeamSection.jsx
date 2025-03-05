@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/TeamSection.css'; // Import the CSS file for TeamSection
+import '../../assets/css/Main.css'; // Updated to Main.css
 import Team1 from '../../assets/img/team-1.jpg';
 import Team2 from '../../assets/img/team-2.jpeg';
 import Team3 from '../../assets/img/team-3.jpeg';
@@ -13,7 +13,6 @@ const TeamSection = () => {
           <h2>Our Team</h2>
         </div>
         <div className="row">
-          {/* Team Member 1 */}
           <div className="col-lg-3 col-md-6">
             <div className="member">
               <div className="pic">
@@ -31,8 +30,6 @@ const TeamSection = () => {
               </div>
             </div>
           </div>
-
-          {/* Team Member 2 */}
           <div className="col-lg-3 col-md-6">
             <div className="member">
               <div className="pic">
@@ -50,8 +47,6 @@ const TeamSection = () => {
               </div>
             </div>
           </div>
-
-          {/* Team Member 3 */}
           <div className="col-lg-3 col-md-6">
             <div className="member">
               <div className="pic">
@@ -69,8 +64,6 @@ const TeamSection = () => {
               </div>
             </div>
           </div>
-
-          {/* Team Member 4 */}
           <div className="col-lg-3 col-md-6">
             <div className="member">
               <div className="pic">
