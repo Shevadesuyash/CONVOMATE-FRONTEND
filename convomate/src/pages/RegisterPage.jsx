@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const { register, error, loading } = useAuth();
+  const navigate = useNavigate();
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !name || !email) {
-      setError('Please fill in all fields.');
       return;
     }
-    // Add logic to send registration data to the backend
-    console.log('Registration data:', { username, name, email });
+    try {
+      await register(username, name, email);
+      navigate('/'); // Redirect to home after registration (since it logs in automatically)
+    } catch (err) {
+      console.error('Registration failed:', err);
+    }
   };
 
   return (
@@ -23,11 +28,7 @@ const RegisterPage = () => {
         <form onSubmit={handleSubmit}>
           <div className="container text-right" style={{ maxWidth: '400px', margin: '0 auto' }}>
             <h1 className="text-primary" style={{ padding: '25px' }}>Registration</h1>
-
-            {/* Error message */}
             {error && <div className="alert alert-danger">{error}</div>}
-
-            {/* Username input */}
             <div className="form-group">
               <label htmlFor="username"><b>Username</b></label>
               <input
@@ -39,10 +40,9 @@ const RegisterPage = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 className="form-control"
+                disabled={loading}
               />
             </div>
-
-            {/* Name input */}
             <div className="form-group">
               <label htmlFor="name"><b>Name</b></label>
               <input
@@ -54,10 +54,9 @@ const RegisterPage = () => {
                 onChange={(e) => setName(e.target.value)}
                 required
                 className="form-control"
+                disabled={loading}
               />
             </div>
-
-            {/* Email input */}
             <div className="form-group">
               <label htmlFor="email"><b>Email</b></label>
               <input
@@ -69,17 +68,18 @@ const RegisterPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="form-control"
+                disabled={loading}
               />
             </div>
-
-            {/* Submit button */}
             <div className="form-group text-center">
-              <button type="submit" className="btn btn-primary">
-                Register
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Register'}
               </button>
             </div>
-
-            {/* Login link */}
             <div className="text-center mt-2">
               <span>Already registered? <a href="/login">Login here</a></span>
             </div>

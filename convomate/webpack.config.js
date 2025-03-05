@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack'); // Add this line
 
 module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: '/', // Ensure correct routing for React Router
   },
   module: {
     rules: [
@@ -21,7 +23,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'], // Add this rule
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -37,10 +39,17 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html',
     }),
+    new Dotenv({
+      path: './.env', // Path to your .env file
+      safe: true, // Ensures all variables are defined
+      systemvars: true, // Also load system environment variables
+    }),
   ],
   devServer: {
     static: path.join(__dirname, 'dist'),
     port: 3030,
-    historyApiFallback: true,
+    historyApiFallback: true, // Supports React Router
+    open: true, // Opens browser automatically
   },
+  mode: 'development', // Explicitly set mode (optional, since you use --mode)
 };
