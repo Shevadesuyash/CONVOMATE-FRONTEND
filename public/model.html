@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
-    <title>Convomate - An Voice Communication Bot </title>
+    <title>Convomate - A Voice Communication Bot</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicons -->
-    <link href="img/robot web icon.jpeg" rel="icon">
-    <link href="img/robot web icon.jpeg" rel="robot hello">
+    <link href="img/robot-web-icon.jpeg" rel="icon">
+    <link href="img/robot-web-icon.jpeg" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800|Montserrat:300,400,700"
@@ -25,12 +25,9 @@
     <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/magnific-popup/magnific-popup.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 
     <!-- Main Stylesheet File -->
     <link href="css/style.css" rel="stylesheet">
-
-
 </head>
 
 <body id="body">
@@ -41,7 +38,7 @@
 <section class="d-none d-lg-block" id="topbar">
     <div class="container clearfix">
         <div class="contact-info float-left">
-            <i class="fa fa-envelope-o"></i> <a href="mailto:contact@example.com">convomate@star.com</a>
+            <i class="fa fa-envelope-o"></i> <a href="mailto:convomate@star.com">convomate@star.com</a>
             <i class="fa fa-phone"></i> +1 5589 55488 55
         </div>
         <div class="social-links float-right">
@@ -59,37 +56,33 @@
 ============================-->
 <header id="header">
     <div class="container">
-
         <div class="pull-left" id="logo">
-            <h1><a class="scrollto" th:href="@{/index}">Convo<span>Mate</span></a></h1>
-
-            <!-- <a th:href="@{/index}"><img src="img/logo.png" alt="" title="" /></a>-->
+            <h1><a class="scrollto" href="/index.html">Convo<span>Mate</span></a></h1>
         </div>
 
         <nav id="nav-menu-container">
             <ul class="nav-menu">
-                <li class="menu-active"><a th:href="@{/index}">Home</a></li>
-                <li><a th:href="@{/logout}">Logout</a></li>
-
-
+                <li class="menu-active"><a href="/index.html">Home</a></li>
+                <li><a href="/logout.html">Logout</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#team">Team</a></li>
-                <li class="menu-has-children"><a th:href="@{/model}"> Models </a>
+                <li class="menu-has-children"><a href="/model.html">Models</a>
                     <ul>
                         <li><a href="#">Voice Convomate</a></li>
                         <li><a href="#">Translator</a></li>
-                        <li><a href="#">Learning basics of Languages </a></li>
-                        <li><a href="#">Text to Voice </a></li>
+                        <li><a href="#">Learning Basics of Languages</a></li>
+                        <li><a href="#">Text to Voice</a></li>
                     </ul>
                 </li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav><!-- #nav-menu-container -->
+        </nav>
     </div>
-</header><!-- #header -->
+</header>
+
 <!--==========================
-    Intro Section
-  ============================-->
+  Intro Section
+============================-->
 <section id="intro">
     <div class="intro-content">
         <div class="container" style="text-align: center;">
@@ -97,42 +90,38 @@
                 <!-- First Image Column -->
                 <div class="col-lg-6">
                     <img alt="First Image" src="img/6.jpeg" style="width: 50%; height: auto;"><br><br>
-                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button"><a
-                            style="color: black;" th:href="@{/users}">Let's Start (This is user data for admin user)</a>
+                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button">
+                        <a href="/users.html" style="color: black;">Let's Start (User Data for Admin)</a>
                     </button>
-                    <br>
-
                 </div>
+
                 <!-- Second Image Column -->
                 <div class="col-lg-6">
                     <img alt="Second Image" src="img/7.png" style="width: 50%; height: 70%;"><br><br>
-                    <button class="btn btn-primary" style="background-color: #76D7C4; color: white;" type="button"><a
-                            ; style="color: black" th:href="@{/users}">Let's Start (This is user data for admin
-                        user)</a></button>
-                    <br>
-
-
+                    <button class="btn btn-primary" style="background-color: #76D7C4; color: white;" type="button">
+                        <a href="/users.html" style="color: black;">Let's Start (User Data for Admin)</a>
+                    </button>
                 </div>
-                <br><br>
+
                 <!-- Third Image Column -->
                 <div class="col-lg-6">
-                    <img alt="First Image" src="img/11.jpeg" style="width: 50%; height: auto;"><br><br>
-                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button"><a
-                            style="color: black;" th:href="@{/Translator}">Let's Start</a></button>
-                </div>
-                <!-- Forth Image Column -->
-                <div class="col-lg-6">
-                    <img alt="First Image" src="img/11.jpeg" style="width: 50%; height: auto;"><br><br>
-                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button"><a
-                            style="color: black;" th:href="@{/Translator}">Let's Start</a></button>
+                    <img alt="Third Image" src="img/11.jpeg" style="width: 50%; height: auto;"><br><br>
+                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button">
+                        <a href="/translator.html" style="color: black;">Let's Start</a>
+                    </button>
                 </div>
 
+                <!-- Fourth Image Column -->
+                <div class="col-lg-6">
+                    <img alt="Fourth Image" src="img/11.jpeg" style="width: 50%; height: auto;"><br><br>
+                    <button class="btn btn-primary" style="background-color: #76D7C4; color: black;" type="button">
+                        <a href="/translator.html" style="color: black;">Let's Start</a>
+                    </button>
+                </div>
             </div>
         </div>
-
-
-</section><!-- #intro --><br><br>
-
+    </div>
+</section>
 
 </body>
 </html>

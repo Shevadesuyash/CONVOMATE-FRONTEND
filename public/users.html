@@ -1,39 +1,67 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration and Login System</title>
-    <link crossorigin="anonymous"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          crossorigin="anonymous"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">
+    <script>
+        // JavaScript function to populate the users table
+        function populateUsers(users) {
+            const tableBody = document.getElementById('usersTableBody');
+            tableBody.innerHTML = ''; // Clear existing rows
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.email}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Example: Fetch user data and populate the table
+        document.addEventListener('DOMContentLoaded', () => {
+            const users = [
+                { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com' },
+                { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com' }
+            ];
+            populateUsers(users);
+        });
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Registration and Login System</a>
-        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
-                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" th:href="@{/register}">Register</a>
+                    <a class="nav-link active" href="/register">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link active" href="/logout">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
-        <h1> Registered Users </h1>
-    </div>
+<div class="container mt-4">
+    <h1>Registered Users</h1>
     <table class="table table-striped table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -42,14 +70,14 @@
             <th>Email</th>
         </tr>
         </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-        </tr>
+        <tbody id="usersTableBody">
+        <!-- User rows will be dynamically inserted here -->
         </tbody>
     </table>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+        integrity="sha384-MrcW6ZMFh0PurklzMO0PABLYnr9AU7Vs6fXlq1xBgUhzUnrUhP+8nbTov4+1p6Vo">
+</script>
 </body>
 </html>
