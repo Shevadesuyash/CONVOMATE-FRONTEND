@@ -1,7 +1,31 @@
-import React from 'react';
-import '../css/ReviewSection.css'; // Import the CSS file for ReviewSection
+import React, { useState } from 'react';
+import api from '../../api';
 
 const ReviewSection = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await api.submitReview(formData);
+      alert('Review submitted successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
+    } catch (err) {
+      setError(err.message || 'Failed to submit review.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact1">
       <div className="container">
@@ -9,29 +33,65 @@ const ReviewSection = () => {
           <h2>Review</h2>
         </div>
         <div className="form">
-          <div id="sendmessage">Your message has been sent. Thank you!</div>
-          <div id="errormessage"></div>
-          <form action="" className="contactForm" method="post" role="form">
+          {error && <div className="alert alert-danger">{error}</div>}
+          <form onSubmit={handleSubmit} className="contactForm" method="post" role="form">
             <div className="form-row">
               <div className="form-group col-md-6">
-                <input className="form-control" data-msg="Please enter at least 4 chars" data-rule="minlen:4" id="name" name="name" placeholder="Your Name" type="text" />
+                <input
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Your Name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  disabled={loading}
+                />
                 <div className="validation"></div>
               </div>
               <div className="form-group col-md-6">
-                <input className="form-control" data-msg="Please enter a valid email" data-rule="email" id="email" name="email" placeholder="Your Email" type="email" />
+                <input
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Your Email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  disabled={loading}
+                />
                 <div className="validation"></div>
               </div>
             </div>
             <div className="form-group">
-              <input className="form-control" data-msg="Please enter at least 8 chars of subject" data-rule="minlen:4" id="subject" name="subject" placeholder="Subject" type="text" />
+              <input
+                className="form-control"
+                id="subject"
+                name="subject"
+                placeholder="Subject"
+                type="text"
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                disabled={loading}
+              />
               <div className="validation"></div>
             </div>
             <div className="form-group">
-              <textarea className="form-control" data-msg="Please write something for us" data-rule="required" name="message" placeholder="Message" rows="5"></textarea>
+              <textarea
+                className="form-control"
+                name="message"
+                placeholder="Message"
+                rows="5"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                disabled={loading}
+              />
               <div className="validation"></div>
             </div>
             <div className="text-center">
-              <button type="submit">Send Message</button>
+              <button type="submit" disabled={loading}>
+                {loading ? 'Submitting...' : 'Send Message'}
+              </button>
             </div>
           </form>
         </div>
