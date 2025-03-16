@@ -15,12 +15,15 @@ const RegisterPage = () => {
       return;
     }
     try {
-      await register(username, name, email);
-      navigate('/'); // Redirect to home after registration (since it logs in automatically)
+      const success = await register(username, name, email);
+      if (success) {
+        navigate('/login'); // Redirect to login page after successful registration
+      }
     } catch (err) {
       console.error('Registration failed:', err);
     }
   };
+
 
   return (
     <section id="intro">

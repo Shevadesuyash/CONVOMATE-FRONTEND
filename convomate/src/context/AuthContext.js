@@ -63,11 +63,12 @@ const AuthProvider = ({ children }) => {
       const response = await api.register({ username, name, email });
       console.log('Register Response:', response);
 
-      const token = response.token;
-      if (!token) throw new Error('Token missing in response');
-
-      localStorage.setItem('token', token);
-      setAuthenticated(true);
+      if (response.message) {
+        alert(response.message); // Show success message
+        return true; // Indicate success
+      } else {
+        throw new Error('Unexpected response from server');
+      }
     } catch (err) {
       setError(err.message || 'Registration failed');
       throw err;
@@ -75,6 +76,7 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
 
   return (
     <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading, authKey }}>
