@@ -8,7 +8,6 @@ import "../../assets/lib/owlcarousel/assets/owl.carousel.min.css";
 import "../../assets/lib/magnific-popup/magnific-popup.css";
 import "../Main.css";
 import "bootstrap"
-import "font-awesome/css/font-awesome.min.css";
 const TopBar = () => {
   useEffect(() => {
     // Function to dynamically load scripts
