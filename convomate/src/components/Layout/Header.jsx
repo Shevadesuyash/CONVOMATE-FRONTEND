@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 const Header = () => {
-  const { authenticated, logout } = useAuth(); // Use authentication state and logout function
+  const { authenticated, logout, authKey } = useAuth(); // Use authentication state and logout function
 
   return (
-    <header id="header">
+    <header id="header" key={authKey}>
       <div className="container">
         <div className="pull-left" id="logo">
           <h1>
@@ -22,7 +22,7 @@ const Header = () => {
             </li>
             {authenticated ? (
               <li id="logoutLink">
-                <button onClick={logout} style={{ background: 'none', border: 'none', color: 'white' }}>
+                <button onClick={logout}>
                   Logout
                 </button>
               </li>

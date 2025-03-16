@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/css/Main.css'; // Updated to Main.css
+import '../../assets/css/style.css'; // Updated to Main.css
 
 const TranslationModule = () => {
   const [fromLanguage, setFromLanguage] = useState('en');

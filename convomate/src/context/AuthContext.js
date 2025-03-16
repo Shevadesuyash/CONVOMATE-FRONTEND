@@ -6,13 +6,12 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false);
 
+  // Keep user logged in on page refresh
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (token) {
-      setAuthenticated(true);
-    }
+    setAuthenticated(!!token);
   }, []);
 
   const generateOtp = async (email) => {
@@ -22,35 +21,51 @@ const AuthProvider = ({ children }) => {
       await api.generateOtp(email);
       return true; // Indicate success
     } catch (err) {
-      setError(err.message || 'Failed to generate OTP');
-      throw err;
+      const errorMessage = err.message || 'Failed to generate OTP';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     } finally {
       setLoading(false);
     }
   };
 
-  const login = async (email, otp) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await api.login(email, otp); // Backend expects username=email
-      const token = response.data.token; // Adjust based on actual response structure
-      localStorage.setItem('token', token);
-      setAuthenticated(true);
-    } catch (err) {
-      setError(err.message || 'Login failed');
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
+ const [authKey, setAuthKey] = useState(0);
+
+ const login = async (email, otp) => {
+   try {
+     setLoading(true);
+     setError(null);
+     const response = await api.login(email, otp);
+     const token = response.token;
+     if (!token) throw new Error('Token missing in response');
+
+     localStorage.setItem('token', token);
+     setAuthenticated(true);
+     setAuthKey((prev) => prev + 1); // 🔥 Force re-render
+   } catch (err) {
+     setError(err.message || 'Login failed');
+     throw err;
+   } finally {
+     setLoading(false);
+   }
+ };
+
+ const logout = () => {
+   localStorage.removeItem('token');
+   setAuthenticated(false);
+   setAuthKey((prev) => prev + 1); // 🔥 Force re-render
+ };
 
   const register = async (username, name, email) => {
     try {
       setLoading(true);
       setError(null);
       const response = await api.register({ username, name, email });
-      const token = response.data.token; // Adjust based on actual response structure
+      console.log('Register Response:', response);
+
+      const token = response.token;
+      if (!token) throw new Error('Token missing in response');
+
       localStorage.setItem('token', token);
       setAuthenticated(true);
     } catch (err) {
@@ -61,15 +76,8 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    setAuthenticated(false);
-    setError(null);
-    // No need to call api.logout() since JWT is stateless
-  };
-
   return (
-    <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading }}>
+    <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading, authKey }}>
       {children}
     </AuthContext.Provider>
   );

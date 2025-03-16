@@ -1,4 +1,3 @@
-// convomate/src/components/Sections/LoginSection.jsx
 import React from 'react';
 
 const LoginSection = ({
