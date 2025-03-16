@@ -1,27 +1,38 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import HomePage from './pages/HomePage';
-import ModelPage from './pages/ModelPage'; // Import the new ModelPage
-import LoginPage from './pages/LoginPage'; // Adjust the path as necessary
-import RegisterPage from './pages/RegisterPage'; // Import the new RegisterPage
-import NotFoundPage from './pages/NotFoundPage'; // Create this file
-import TranslationModulePage from './pages/TranslationModulePage'; // Import the new TranslationModulePage
+import NotFoundPage from './pages/NotFoundPage';
+import ProtectedRoute from './components/Shared/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
+import PublicRoute from './components/Shared/PublicRoute';
+import ErrorBoundary from './components/Shared/ErrorBoundary';
+
+const ModelPage = lazy(() => import('./pages/ModelPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const TranslationModulePage = lazy(() => import('./pages/TranslationModulePage'));
 
 const App = () => {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/models" element={<ModelPage />} /> {/* Add route for Model Page */}
-           <Route path="/login" element={<LoginPage />} />
-           <Route path="/register" element={<RegisterPage />} />
-           <Route path="/model/translator" element={<TranslationModulePage />} />
-           <Route path="*" element={<NotFoundPage />} /> {/* 404 Route */}
-        </Routes>
-      </Layout>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ErrorBoundary>
+          <Layout>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/models" element={<ModelPage />} />
+                <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+                <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+                <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </ErrorBoundary>
+      </Router>
+    </AuthProvider>
   );
 };
 
