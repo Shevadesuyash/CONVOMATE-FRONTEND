@@ -1,4 +1,3 @@
-// convomate/src/pages/LoginPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -15,7 +14,8 @@ const LoginPage = () => {
   const handleGenerateOtp = async (e) => {
     e.preventDefault();
     try {
-      await generateOtp(email);
+      const response = await generateOtp(email);
+      console.log('OTP generated:', response);
       setOtpSent(true);
       setTimer(30);
     } catch (err) {
@@ -27,7 +27,8 @@ const LoginPage = () => {
     e.preventDefault();
     if (!otp) return;
     try {
-      await login(email, otp);
+      const response = await login(email, otp);
+      console.log('Login successful:', response);
       navigate('/');
     } catch (err) {
       console.error('Login failed:', err);

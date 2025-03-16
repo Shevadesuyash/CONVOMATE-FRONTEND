@@ -14,22 +14,35 @@ const apiCall = async (endpoint, method = 'GET', data = null, params = null) => 
     ...(data && { body: JSON.stringify(data) }),
   };
 
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    if (response.status === 401) {
-      localStorage.removeItem('token');
-      window.location.href = '/login';
+  try {
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+        window.location.href = '/login';
+      }
+      const errorText = await response.text();
+      throw new Error(errorText || `Request failed with status ${response.status}`);
     }
-    const error = await response.json();
-    throw { message: error.message || 'An error occurred', status: response.status };
+
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+      return response.json();
+    } else {
+      return { message: await response.text() };
+    }
+  } catch (error) {
+    console.error(`API Call Error: ${endpoint}`, error);
+    throw error;
   }
-  return response.json();
 };
+
 
 export default {
   register: (userData) => apiCall('/user/register', 'POST', userData),
   generateOtp: (email) => apiCall('/user/generateOtp', 'POST', { email }),
-  login: (username, otp) => apiCall('/user/login', 'POST', null, { username, otp }),
+  login: (email, otp) => apiCall('/user/login', 'POST', { email, otp }),
   logout: () => apiCall('/user/logout', 'POST'),
   getUserProfile: (username) => apiCall(`/user/profile`, 'GET', null, { username }),
   submitReview: (reviewData) => apiCall('/user/review/submit', 'POST', reviewData),

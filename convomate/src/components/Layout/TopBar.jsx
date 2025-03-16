@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
-import "../../assets/css/Main.css"; // Updated to Main.css
-import "../../assets/lib/font-awesome/css/font-awesome.min.css";
-import "../../assets/lib/animate/animate.min.css";
-import "../../assets/lib/ionicons/css/ionicons.min.css";
-import "../../assets/lib/owlcarousel/assets/owl.carousel.min.css";
-import "../../assets/lib/magnific-popup/magnific-popup.css";
-import "../../assets/css/style.css";
+import 'font-awesome/css/font-awesome.min.css';
+
 const TopBar = () => {
   useEffect(() => {
     const loadScript = (src) => {
@@ -15,10 +10,6 @@ const TopBar = () => {
       script.async = true;
       document.body.appendChild(script);
     };
-
-    loadScript("/assets/lib/easing/easing.min.js");
-    loadScript("/assets/lib/owlcarousel/owl.carousel.min.js");
-    loadScript("/assets/lib/magnific-popup/magnific-popup.min.js");
 
     return () => {
       document.body.querySelectorAll("script").forEach((script) => {
