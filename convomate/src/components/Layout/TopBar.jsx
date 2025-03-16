@@ -1,16 +1,9 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
-import "../../assets/css/style.css";
-import "../../assets/lib/font-awesome/css/font-awesome.min.css";
-import "../../assets/lib/animate/animate.min.css";
-import "../../assets/lib/ionicons/css/ionicons.min.css";
-import "../../assets/lib/owlcarousel/assets/owl.carousel.min.css";
-import "../../assets/lib/magnific-popup/magnific-popup.css";
-import "../Main.css";
-import "bootstrap"
+import 'font-awesome/css/font-awesome.min.css';
+
 const TopBar = () => {
   useEffect(() => {
-    // Function to dynamically load scripts
     const loadScript = (src) => {
       const script = document.createElement("script");
       script.src = src;
@@ -18,13 +11,7 @@ const TopBar = () => {
       document.body.appendChild(script);
     };
 
-    // Load external scripts dynamically
-    loadScript("/assets/lib/easing/easing.min.js");
-    loadScript("/assets/lib/owlcarousel/owl.carousel.min.js");
-    loadScript("/assets/lib/magnific-popup/magnific-popup.min.js");
-
     return () => {
-      // Cleanup: Remove dynamically added scripts when component unmounts
       document.body.querySelectorAll("script").forEach((script) => {
         if (
           script.src.includes("easing") ||
