@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../css/ModelSection.css'; // Import the CSS file for ModelSection
 import Image6 from '../../assets/img/6.jpeg';
 import Image7 from '../../assets/img/7.png';
 import Image11 from '../../assets/img/11.jpeg';
