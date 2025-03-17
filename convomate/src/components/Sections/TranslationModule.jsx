@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import '../css/TranslationModule.css'; // Import the CSS file for TranslationModule
-
+import '../../assets/css/style.css'; // Updated to Main.css
 
 const TranslationModule = () => {
-  const [fromLanguage, setFromLanguage] = useState('en'); // Default: English
-  const [toLanguage, setToLanguage] = useState('es'); // Default: Spanish
+  const [fromLanguage, setFromLanguage] = useState('en');
+  const [toLanguage, setToLanguage] = useState('es');
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
 
@@ -44,7 +43,6 @@ const TranslationModule = () => {
           onChange={(e) => setFromLanguage(e.target.value)}
         >
           <option value="en">English</option>
-          {/* Add more language options as needed */}
         </select>
 
         <label htmlFor="toLanguage">To Language:</label>
@@ -59,7 +57,6 @@ const TranslationModule = () => {
           <option value="hi">Hindi</option>
           <option value="mr">Marathi</option>
           <option value="ja">Japanese</option>
-          {/* Add more language options as needed */}
         </select>
 
         <label htmlFor="textToTranslate">Text to Translate:</label>
@@ -73,15 +70,15 @@ const TranslationModule = () => {
         <button type="button" onClick={handleTranslate}>
           Translate
         </button>
-      </form>
 
-      <label htmlFor="translatedText">Translated Text:</label>
-      <textarea
-        id="translatedText"
-        rows="4"
-        value={translatedText}
-        readOnly
-      ></textarea>
+        <label htmlFor="translatedText">Translated Text:</label>
+        <textarea
+          id="translatedText"
+          rows="4"
+          value={translatedText}
+          readOnly
+        ></textarea>
+      </form>
     </div>
   );
 };

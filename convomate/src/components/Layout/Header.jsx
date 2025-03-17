@@ -1,12 +1,12 @@
-import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom"; // ✅ Import Link
-import "../../assets/css/style.css";
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 const Header = () => {
+  const { authenticated, logout, authKey } = useAuth(); // Use authentication state and logout function
+
   return (
-    <header id="header">
+    <header id="header" key={authKey}>
       <div className="container">
         <div className="pull-left" id="logo">
           <h1>
@@ -20,12 +20,17 @@ const Header = () => {
             <li className="menu-active">
               <Link to="/">Home</Link>
             </li>
-            <li id="loginLink">
-              <Link to="/login">Login</Link>
-            </li>
-            <li id="logoutLink">
-              <Link to="/logout">Logout</Link>
-            </li>
+            {authenticated ? (
+              <li id="logoutLink">
+                <button onClick={logout}>
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <li id="loginLink">
+                <Link to="/login">Login</Link>
+              </li>
+            )}
             <li>
               <Link to="/about">About Us</Link>
             </li>
