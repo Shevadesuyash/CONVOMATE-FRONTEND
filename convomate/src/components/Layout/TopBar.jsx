@@ -11,11 +11,11 @@ const TopBar = () => {
           <i className="fa fa-phone"></i> +1 5589 55488 55
         </div>
         <div className="social-links">
-          <a href="#" className="twitter"><i className="fa fa-twitter"></i></a>
-          <a href="#" className="facebook"><i className="fa fa-facebook"></i></a>
-          <a href="#" className="instagram"><i className="fa fa-instagram"></i></a>
-          <a href="#" className="google-plus"><i className="fa fa-google-plus"></i></a>
-          <a href="#" className="linkedin"><i className="fa fa-linkedin"></i></a>
+
+          <a href="https://www.facebook.com/" className="facebook"><i className="fa fa-facebook"></i></a>
+          <a href="https://www.instagram.com/accounts/login/?hl=en" className="instagram"><i className="fa fa-instagram"></i></a>
+          <a href="https://g.co/kgs/KxRpUCz" className="google-plus"><i className="fa fa-google-plus"></i></a>
+          <a href="https://in.linkedin.com/" className="linkedin"><i className="fa fa-linkedin"></i></a>
         </div>
       </div>
     </section>
