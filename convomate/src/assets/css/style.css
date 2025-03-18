@@ -890,6 +890,15 @@ body.mobile-nav-active #mobile-nav-toggle {
 #services {
   padding: 30px 0 0 0;
 }
+.container11 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align content to the left */
+  width: 100%; /* Full width */
+  padding-left: 200px;
+  padding-right:200px;
+   /* Adjust left spacing if needed */
+}
 
 #services .box {
   padding: 40px;
@@ -1017,42 +1026,74 @@ body.mobile-nav-active #mobile-nav-toggle {
 #contact {
   padding: 30px 0;
 }
-
+#contact .contact-info > div {
+   flex: 1;
+     min-width: 280px;
+     max-width: 320px;
+     height: 200px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     padding: 20px;
+     background: #ffffff;
+     border-radius: 15px;
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+     text-align: center;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     border-left: none !important;
+     border-right: none !important;
+}
+#contact .contact-info > div:hover {
+  transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+}
 #contact .contact-info {
-  margin-bottom: 20px;
-  text-align: center;
+    display: flex;
+     justify-content: center;
+     align-items: center;
+     text-align: center;
+     gap: 100px; /* Increased space between boxes */
+     flex-wrap: wrap;
 }
 
 #contact .contact-info i {
-  font-size: 48px;
-  display: inline-block;
-  margin-bottom: 10px;
-  color: #50d8af;
+   font-size: 50px;
+    color: #50d8af;
+    margin-bottom: 10px;
 }
 
-#contact .contact-info address, #contact .contact-info p {
+#contact .contact-info address {
   margin-bottom: 0;
   color: #000;
 }
 
 #contact .contact-info h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #999;
+  font-size: 20px;
+   margin-bottom: 10px;
+   font-weight: bold;
+   text-transform: uppercase;
+   color: #51d8af;;
 }
 
 #contact .contact-info a {
-  color: #000;
+text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 #contact .contact-info a:hover {
-  color: #50d8af;
+  color: #2dc899;
 }
 
 #contact .contact-address, #contact .contact-phone, #contact .contact-email {
   margin-bottom: 20px;
+}
+#contact .contact-info address,
+#contact .contact-info p,
+#contact .contact-info a {
+  font-size: 16px;
+  color: #555;
 }
 
 @media (min-width: 768px) {
@@ -1062,10 +1103,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (min-width: 768px) {
-  #contact .contact-phone {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
+  #contact .contact-info {
+        flex-direction: row;
+        gap: 150px;
+      }
 }
 
 #contact #google-map {
@@ -1074,10 +1115,26 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media (max-width: 576px) {
-  #contact #google-map {
-    margin-top: 20px;
-  }
+  #contact .contact-info {
+      flex-direction: column; /* Stack items vertically on small screens */
+    }
+    #contact .contact-phone {
+      border: none;
+    }
 }
+#contact .contact-info > div,
+#contact .contact-info > div * {
+    border: none !important;
+}
+#contact .contact-info > div::before,
+#contact .contact-info > div::after {
+    content: none !important;
+    display: none !important;
+}
+.row, [class*="col-"] {
+    border: none !important;
+}
+
 
 #contact .form #sendmessage {
   color: #50d8af;
@@ -1131,7 +1188,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 #contact .form button[type="submit"]:hover {
   background: #2dc899;
 }
-
+#contact .contact-phone {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
