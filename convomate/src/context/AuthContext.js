@@ -10,8 +10,12 @@ const AuthProvider = ({ children }) => {
 
   // Keep user logged in on page refresh
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem('token');
-    setAuthenticated(!!token);
+    if (token) {
+        setAuthenticated(true);
+      }
+      setLoading(false);
   }, []);
 
   const generateOtp = async (email) => {
@@ -41,7 +45,7 @@ const AuthProvider = ({ children }) => {
 
      localStorage.setItem('token', token);
      setAuthenticated(true);
-     setAuthKey((prev) => prev + 1); // 🔥 Force re-render
+     window.location.reload();
    } catch (err) {
      setError(err.message || 'Login failed');
      throw err;
@@ -53,7 +57,7 @@ const AuthProvider = ({ children }) => {
  const logout = () => {
    localStorage.removeItem('token');
    setAuthenticated(false);
-   setAuthKey((prev) => prev + 1); // 🔥 Force re-render
+   window.location.reload();
  };
 
   const register = async (username, name, email) => {

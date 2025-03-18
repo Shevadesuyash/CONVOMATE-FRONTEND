@@ -1,63 +1,119 @@
 import React, { useState } from 'react';
-import '../../assets/css/style.css'; // Updated to Main.css
+import api from '../../api';
+import '../../assets/css/style.css';
+
+// Language options (Top 50 common languages with their codes)
+const languages = [
+  { code: 'auto', label: 'Auto Detect' },
+  { code: 'en', label: 'English' },
+  { code: 'hi', label: 'Hindi' },
+  { code: 'es', label: 'Spanish' },
+  { code: 'fr', label: 'French' },
+  { code: 'de', label: 'German' },
+  { code: 'zh-cn', label: 'Chinese (Simplified)' },
+  { code: 'zh-tw', label: 'Chinese (Traditional)' },
+  { code: 'ja', label: 'Japanese' },
+  { code: 'ko', label: 'Korean' },
+  { code: 'ru', label: 'Russian' },
+  { code: 'ar', label: 'Arabic' },
+  { code: 'pt', label: 'Portuguese' },
+  { code: 'it', label: 'Italian' },
+  { code: 'mr', label: 'Marathi' },
+  { code: 'bn', label: 'Bengali' },
+  { code: 'pa', label: 'Punjabi' },
+  { code: 'gu', label: 'Gujarati' },
+  { code: 'ur', label: 'Urdu' },
+  { code: 'tr', label: 'Turkish' },
+  { code: 'vi', label: 'Vietnamese' },
+  { code: 'id', label: 'Indonesian' },
+  { code: 'ms', label: 'Malay' },
+  { code: 'ta', label: 'Tamil' },
+  { code: 'te', label: 'Telugu' },
+  { code: 'th', label: 'Thai' },
+  { code: 'pl', label: 'Polish' },
+  { code: 'nl', label: 'Dutch' },
+  { code: 'sv', label: 'Swedish' },
+  { code: 'fa', label: 'Persian' },
+  { code: 'ro', label: 'Romanian' },
+  { code: 'uk', label: 'Ukrainian' },
+  { code: 'he', label: 'Hebrew' },
+  { code: 'fi', label: 'Finnish' },
+  { code: 'el', label: 'Greek' },
+  { code: 'cs', label: 'Czech' },
+  { code: 'hu', label: 'Hungarian' },
+  { code: 'sr', label: 'Serbian' },
+  { code: 'sk', label: 'Slovak' },
+  { code: 'bg', label: 'Bulgarian' },
+  { code: 'no', label: 'Norwegian' },
+  { code: 'da', label: 'Danish' },
+  { code: 'sw', label: 'Swahili' },
+  { code: 'fil', label: 'Filipino' },
+  { code: 'ne', label: 'Nepali' },
+  { code: 'si', label: 'Sinhala' },
+  { code: 'af', label: 'Afrikaans' },
+];
 
 const TranslationModule = () => {
-  const [fromLanguage, setFromLanguage] = useState('en');
-  const [toLanguage, setToLanguage] = useState('es');
+  const [fromLanguage, setFromLanguage] = useState('auto');
+  const [toLanguage, setToLanguage] = useState(null);
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
+  const [error, setError] = useState(null);
 
   const handleTranslate = async () => {
+    setError(null);
+    if (!toLanguage) {
+          setError('Please select the "To Language".');
+          return;
+        }
     try {
-      const response = await fetch('/TranslationServlet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          fromLanguage,
-          toLanguage,
-          textToTranslate,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.text();
-        setTranslatedText(data);
+      const data = {
+        from_language: fromLanguage,
+        to_language: toLanguage,
+        text_to_translate: textToTranslate,
+      };
+      console.log('Request Data:', data);
+      const response = await api.translate(data);
+      console.log('API Response:', response);
+      if (response.error) {
+        setError(response.error);
+      } else if (response.translatedText) {
+        setTranslatedText(response.translatedText);
       } else {
-        console.error('Translation failed');
+        setError('No translated text received from API.');
       }
-    } catch (error) {
-      console.error('Error during translation:', error);
+    } catch (err) {
+      setError('Translation failed. Please try again.');
+      console.error('Error during translation:', err);
     }
   };
 
   return (
     <div id="translator">
-      <h2>Language Translator</h2>
-      <form>
+      <h2>🌐 Language Translator</h2>
+      <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="fromLanguage">From Language:</label>
-        <select
-          id="fromLanguage"
+        <input
+          list="languages"
           value={fromLanguage}
           onChange={(e) => setFromLanguage(e.target.value)}
-        >
-          <option value="en">English</option>
-        </select>
+          placeholder="Type or select a language"
+        />
+        <datalist id="languages">
+          {languages.map((lang) => (
+            <option key={lang.label} value={lang.label}>
+              {lang.label}
+            </option>
+          ))}
+        </datalist>
 
         <label htmlFor="toLanguage">To Language:</label>
-        <select
-          id="toLanguage"
+        <input
+          list="languages"
           value={toLanguage}
           onChange={(e) => setToLanguage(e.target.value)}
-        >
-          <option value="de">German</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="hi">Hindi</option>
-          <option value="mr">Marathi</option>
-          <option value="ja">Japanese</option>
-        </select>
+          placeholder="Type or select a language"
+        />
 
         <label htmlFor="textToTranslate">Text to Translate:</label>
         <textarea
@@ -65,11 +121,14 @@ const TranslationModule = () => {
           rows="4"
           value={textToTranslate}
           onChange={(e) => setTextToTranslate(e.target.value)}
+          placeholder="Enter text here..."
         ></textarea>
 
         <button type="button" onClick={handleTranslate}>
           Translate
         </button>
+
+        {error && <div className="error-message">{error}</div>}
 
         <label htmlFor="translatedText">Translated Text:</label>
         <textarea
