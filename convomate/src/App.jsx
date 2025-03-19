@@ -12,6 +12,8 @@ const ModelPage = lazy(() => import('./pages/ModelPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const TranslationModulePage = lazy(() => import('./pages/TranslationModulePage'));
+const ParagraphCheckerPage = lazy(() => import('./pages/ParagraphCheckerPage'));
+
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
                 <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
                 <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
                 <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
+                <Route path="/model/grammar-check" element={<ProtectedRoute><ParagraphCheckerPage /></ProtectedRoute>} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
