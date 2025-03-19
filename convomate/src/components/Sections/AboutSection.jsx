@@ -25,7 +25,7 @@ const AboutSection = () => {
                 Convomate is not just a platform; it's your companion in skill development, ensuring that every conversation adds value to your personal and professional journey.
               </li>
             </ul>
-          </div>
+          </div><br />
         </div>
       </div>
     </section>
