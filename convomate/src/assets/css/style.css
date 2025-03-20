@@ -25,6 +25,142 @@ button {
 button:hover {
   color: #00bcd4;
 }
+
+
+/*VoiceToTextSection.css*/
+
+
+.chatbot-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+#header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#chatbot {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+#conversation {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+.chatbot-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.chatbot-message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.chatbot-message.bot {
+  background-color: #f1f1f1;
+  color: black;
+  align-self: flex-start;
+}
+
+#input-form {
+  display: flex;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
+}
+
+.message-container {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+}
+
+#input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#voice-recorder,
+#submit-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+#voice-recorder:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.chatbot-message {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+}
+
+.chatbot-message.user {
+  background-color: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+.chatbot-message.bot {
+  background-color: #f1f1f1;
+  color: black;
+  align-self: flex-start;
+}
+
+.speaker-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.speaker-button:hover {
+  opacity: 0.8;
+}
+.voice-selection {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.voice-selection label {
+  margin-right: 10px;
+}
+
+.voice-selection select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
 /* Global styles */
 body {
   font-family: 'Arial', sans-serif;

@@ -24,7 +24,7 @@ const ModelSection = () => {
               <img alt="Second Image" src={Image7} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/users" style={{ color: 'black' }}>Let's Start (User Data for Admin)</Link>
+                <Link to="/model/voice-to-text" style={{ color: 'black' }}>Let's Start (User Data for Admin)</Link>
               </button>
             </div>
 
