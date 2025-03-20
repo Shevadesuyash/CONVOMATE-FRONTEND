@@ -27,9 +27,7 @@ button:hover {
 }
 
 
-/*VoiceToTextSection.css*/
-
-
+/* Chatbot Container */
 .chatbot-container {
   max-width: 600px;
   margin: 0 auto;
@@ -39,11 +37,41 @@ button:hover {
   background-color: #f9f9f9;
 }
 
+/* Header */
 #header {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Voice Selection Dropdown */
+.voice-selection {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.voice-selection label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.voice-selection select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.voice-selection select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Chatbot */
 #chatbot {
   display: flex;
   flex-direction: column;
@@ -53,6 +81,7 @@ button:hover {
   background-color: #fff;
 }
 
+/* Conversation */
 #conversation {
   flex: 1;
   padding: 10px;
@@ -60,59 +89,7 @@ button:hover {
   border-bottom: 1px solid #ddd;
 }
 
-.chatbot-message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 80%;
-}
-
-.chatbot-message.user {
-  background-color: #007bff;
-  color: white;
-  align-self: flex-end;
-}
-
-.chatbot-message.bot {
-  background-color: #f1f1f1;
-  color: black;
-  align-self: flex-start;
-}
-
-#input-form {
-  display: flex;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
-}
-
-.message-container {
-  display: flex;
-  flex: 1;
-  gap: 10px;
-}
-
-#input-field {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-#voice-recorder,
-#submit-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-}
-
-#voice-recorder:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
+/* Chatbot Message */
 .chatbot-message {
   display: flex;
   align-items: center;
@@ -135,6 +112,7 @@ button:hover {
   align-self: flex-start;
 }
 
+/* Speaker Button */
 .speaker-button {
   background: none;
   border: none;
@@ -146,20 +124,107 @@ button:hover {
 .speaker-button:hover {
   opacity: 0.8;
 }
-.voice-selection {
-  margin-bottom: 20px;
-  text-align: center;
+
+/* Input Form */
+#input-form {
+  display: flex;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #ddd;
 }
 
-.voice-selection label {
-  margin-right: 10px;
+/* Message Container */
+.message-container {
+  display: flex;
+  flex: 1;
+  gap: 10px;
 }
 
-.voice-selection select {
-  padding: 5px;
-  border-radius: 5px;
+/* Input Field */
+#input-field {
+  flex: 1;
+  padding: 10px;
   border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none; /* Prevent resizing */
+  overflow-y: auto; /* Add scrollbar if content overflows */
+  height: 40px; /* Fixed height */
+  max-height: 100px; /* Maximum height before scrolling */
 }
+
+/* Voice Recorder and Submit Button */
+#voice-recorder,
+#submit-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+#voice-recorder:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  margin: 10px 0;
+}
+
+/* Voice Button Styling */
+.voice-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.voice-button:hover {
+  opacity: 0.8;
+}
+
+/* Input Container */
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Animations for Chatbot Messages */
+.chatbot-message.user {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.chatbot-message.bot {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 
 /* Global styles */
 body {
