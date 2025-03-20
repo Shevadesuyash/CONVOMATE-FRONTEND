@@ -8,7 +8,7 @@ import Team4 from '../../assets/img/team-4.jpeg';
 const TeamSection = () => {
   return (
     <section id="team">
-      <div className="container">
+      <div className="container11">
         <div className="section-header">
           <h2>Our Team</h2>
         </div>

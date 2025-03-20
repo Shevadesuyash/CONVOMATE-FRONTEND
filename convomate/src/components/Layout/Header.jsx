@@ -41,16 +41,16 @@ const Header = () => {
               <Link to="/models">Models</Link>
               <ul>
                 <li>
-                  <Link to="/models/translator">Translator</Link>
+                  <Link to="/model/translator">Translator</Link>
                 </li>
                 <li>
                   <Link to="/models/paragraph-checker">Paragraph Checker</Link>
                 </li>
                 <li>
-                  <Link to="/models/learning-languages">Learning Basics of Languages</Link>
+                  <Link to="/model/voice-to-text">/model/voice-to-text</Link>
                 </li>
                 <li>
-                  <Link to="/models/voice-convomate">Voice Convomate</Link>
+                  <Link to="/model/grammar-check">/model/grammar-check</Link>
                 </li>
               </ul>
             </li>
