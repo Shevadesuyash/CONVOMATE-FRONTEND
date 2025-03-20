@@ -12,10 +12,8 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     setLoading(true);
     const token = localStorage.getItem('token');
-    if (token) {
-        setAuthenticated(true);
-      }
-      setLoading(false);
+    if (token) setAuthenticated(true);
+    setLoading(false);
   }, []);
 
   const generateOtp = async (email) => {
@@ -23,11 +21,10 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       await api.generateOtp(email);
-      return true; // Indicate success
+      return true;
     } catch (err) {
-      const errorMessage = err.message || 'Failed to generate OTP';
-      setError(errorMessage);
-      throw new Error(errorMessage);
+      setError(err.message || 'Failed to generate OTP');
+      throw err;
     } finally {
       setLoading(false);
     }
@@ -35,38 +32,36 @@ const AuthProvider = ({ children }) => {
 
  const [authKey, setAuthKey] = useState(0);
 
- const login = async (email, otp) => {
-   try {
-     setLoading(true);
-     setError(null);
-     const response = await api.login(email, otp);
-     const token = response.token;
-     if (!token) throw new Error('Token missing in response');
+  const login = async (email, otp) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await api.login(email, otp);
+      const token = response.token;
+      if (!token) throw new Error('Token missing in response');
 
-     localStorage.setItem('token', token);
-     setAuthenticated(true);
-     window.location.reload();
-   } catch (err) {
-     setError(err.message || 'Login failed');
-     throw err;
-   } finally {
-     setLoading(false);
-   }
- };
+      localStorage.setItem('token', token);
+      setAuthenticated(true);
+      window.location.reload();
+    } catch (err) {
+      setError(err.message || 'Login failed');
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
 
- const logout = () => {
-   localStorage.removeItem('token');
-   setAuthenticated(false);
-   window.location.reload();
- };
+  const logout = () => {
+    localStorage.removeItem('token');
+    setAuthenticated(false);
+    window.location.reload();
+  };
 
   const register = async (username, name, email) => {
     try {
       setLoading(true);
       setError(null);
       const response = await api.register({ username, name, email });
-      console.log('Register Response:', response);
-
       const token = response.token;
       if (!token) throw new Error('Token missing in response');
 
@@ -81,7 +76,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading, authKey }}>
+    <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading }}>
       {children}
     </AuthContext.Provider>
   );
