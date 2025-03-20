@@ -8,11 +8,7 @@ const apiCall = async (endpoint, method = 'GET', data = null, params = null) => 
   };
 
   const url = params ? `${BASE_URL}${endpoint}?${new URLSearchParams(params)}` : `${BASE_URL}${endpoint}`;
-  const options = {
-    method,
-    headers,
-    ...(data && { body: JSON.stringify(data) }),
-  };
+  const options = { method, headers, ...(data && { body: JSON.stringify(data) }) };
 
   try {
     const response = await fetch(url, options);
@@ -51,4 +47,5 @@ export default {
   sendMail: (emailData) => apiCall('/model/sendMail', 'POST', emailData),
   test: () => apiCall('/model/test', 'GET'),
   translate: (data) => apiCall('/model/translate', 'POST', data),
+  grammarCheck: (data) => apiCall('/model/grammar-check', 'POST', data),
 };
