@@ -6,16 +6,20 @@ const VoiceToTextSection = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isListening, setIsListening] = useState(false);
-  const [voices, setVoices] = useState([]); // Available voices
-  const [selectedVoice, setSelectedVoice] = useState(null); // Selected voice
+  const [voices, setVoices] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(null);
 
-  // Load available voices
+  // Load available voices for text-to-speech
   useEffect(() => {
     const loadVoices = () => {
-      const availableVoices = window.speechSynthesis.getVoices();
-      setVoices(availableVoices);
-      if (availableVoices.length > 0) {
-        setSelectedVoice(availableVoices[0]); // Set default voice
+      const allVoices = window.speechSynthesis.getVoices();
+      // Filter only Google voices
+      const googleVoices = allVoices.filter((voice) =>
+        voice.name.toLowerCase().includes('google')
+      );
+      setVoices(googleVoices);
+      if (googleVoices.length > 0) {
+        setSelectedVoice(googleVoices[0]);
       }
     };
 
@@ -31,28 +35,44 @@ const VoiceToTextSection = () => {
     };
   }, []);
 
-  // Function to handle voice input
+  // Handle voice-to-text input
   const handleVoiceInput = () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = true; // Keep listening
+    recognition.interimResults = true; // Get real-time results
     recognition.lang = 'en-US';
-    recognition.interimResults = false;
 
-    recognition.start();
-    setIsListening(true);
-
+    let timeout;
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setInputText(transcript);
-      setIsListening(false);
+      clearTimeout(timeout); // Reset timeout on new input
+      timeout = setTimeout(() => {
+        recognition.stop(); // Stop after 5 seconds of silence
+        setIsListening(false);
+      }, 5000); // 5 seconds
+
+      let transcript = '';
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        transcript += event.results[i][0].transcript;
+      }
+
+      // Append the new transcript to the existing inputText
+      setInputText((prevText) => (prevText ? `${prevText} ${transcript}` : transcript));
     };
 
     recognition.onerror = (event) => {
       console.error('Error occurred in recognition:', event.error);
       setIsListening(false);
     };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+    setIsListening(true);
   };
 
-  // Function to handle text submission
+  // Handle text submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.trim()) {
@@ -61,7 +81,7 @@ const VoiceToTextSection = () => {
     }
   };
 
-  // Function to handle text-to-speech
+  // Handle text-to-speech
   const handleTextToSpeech = (text) => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
