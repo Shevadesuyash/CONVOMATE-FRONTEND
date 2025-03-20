@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../api';
 import '../../assets/css/style.css';
 
@@ -59,13 +59,78 @@ const TranslationModule = () => {
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [error, setError] = useState(null);
+  const [isListening, setIsListening] = useState(false);
+  const [voices, setVoices] = useState([]); // Available voices for text-to-speech
+  const [selectedVoice, setSelectedVoice] = useState(null); // Selected voice for text-to-speech
 
+  // Load available voices for text-to-speech
+  useEffect(() => {
+    const loadVoices = () => {
+            const allVoices = window.speechSynthesis.getVoices();
+            // Filter only Google voices
+            const googleVoices = allVoices.filter((voice) =>
+              voice.name.toLowerCase().includes('google')
+            );
+            setVoices(googleVoices);
+            if (googleVoices.length > 0) {
+              setSelectedVoice(googleVoices[0]);
+      }
+    };
+
+    // Load voices when the component mounts
+    loadVoices();
+
+    // Add event listener for when voices are loaded
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    // Cleanup event listener
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, []);
+
+  // Handle voice-to-text input
+  const handleVoiceInput = () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = fromLanguage === 'auto' ? 'en-US' : fromLanguage; // Default to English if auto-detect
+    recognition.interimResults = false;
+
+    recognition.start();
+    setIsListening(true);
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setTextToTranslate(transcript);
+      setIsListening(false);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Error occurred in recognition:', event.error);
+      setIsListening(false);
+    };
+  };
+
+  // Handle text-to-speech for translated text
+  const handleTextToSpeech = () => {
+    if (!translatedText) {
+      setError('No translated text to speak.');
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(translatedText);
+    utterance.lang = toLanguage; // Set language for TTS
+    utterance.voice = selectedVoice; // Set selected voice
+    synth.speak(utterance);
+  };
+
+  // Handle translation
   const handleTranslate = async () => {
     setError(null);
     if (!toLanguage) {
-          setError('Please select the "To Language".');
-          return;
-        }
+      setError('Please select the "To Language".');
+      return;
+    }
     try {
       const data = {
         from_language: fromLanguage,
@@ -92,6 +157,7 @@ const TranslationModule = () => {
     <div id="translator">
       <h2>🌐 Language Translator</h2>
       <form onSubmit={(e) => e.preventDefault()}>
+        {/* From Language */}
         <label htmlFor="fromLanguage">From Language:</label>
         <input
           list="languages"
@@ -107,6 +173,7 @@ const TranslationModule = () => {
           ))}
         </datalist>
 
+        {/* To Language */}
         <label htmlFor="toLanguage">To Language:</label>
         <input
           list="languages"
@@ -115,28 +182,68 @@ const TranslationModule = () => {
           placeholder="Type or select a language"
         />
 
+        {/* Text to Translate */}
         <label htmlFor="textToTranslate">Text to Translate:</label>
-        <textarea
-          id="textToTranslate"
-          rows="4"
-          value={textToTranslate}
-          onChange={(e) => setTextToTranslate(e.target.value)}
-          placeholder="Enter text here..."
-        ></textarea>
+        <div className="input-container">
+          <textarea
+            id="textToTranslate"
+            rows="4"
+            value={textToTranslate}
+            onChange={(e) => setTextToTranslate(e.target.value)}
+            placeholder="Enter text here..."
+          ></textarea>
+          <button
+            type="button"
+            onClick={handleVoiceInput}
+            disabled={isListening}
+            className="voice-button"
+          >
+            <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
+          </button>
+        </div>
 
+        {/* Translate Button */}
         <button type="button" onClick={handleTranslate}>
           Translate
         </button>
 
+        {/* Error Message */}
         {error && <div className="error-message">{error}</div>}
 
+        {/* Translated Text */}
         <label htmlFor="translatedText">Translated Text:</label>
-        <textarea
-          id="translatedText"
-          rows="4"
-          value={translatedText}
-          readOnly
-        ></textarea>
+        <div className="input-container">
+          <textarea
+            id="translatedText"
+            rows="4"
+            value={translatedText}
+            readOnly
+          ></textarea>
+          <button
+            type="button"
+            onClick={handleTextToSpeech}
+            className="voice-button"
+          >
+            <i className="fa fa-volume-up"></i>
+          </button>
+        </div>
+
+        {/* Voice Selection for Text-to-Speech */}
+        <label htmlFor="voice-select">Select Voice:</label>
+                  <select
+                    id="voice-select"
+                    value={selectedVoice ? selectedVoice.name : ''}
+                    onChange={(e) => {
+                      const voice = voices.find((v) => v.name === e.target.value);
+                      setSelectedVoice(voice);
+                    }}
+                  >
+                    {voices.map((voice) => (
+                      <option key={voice.name} value={voice.name}>
+                        {voice.name} ({voice.lang})
+                      </option>
+                    ))}
+                  </select>
       </form>
     </div>
   );
