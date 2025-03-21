@@ -15,28 +15,28 @@ const ModelSection = () => {
           <div className="row">
             {/* First Image Column */}
             <div className="col-lg-6">
-              <img alt="First Image" src={Image6} style={{ width: '50%', height: 'auto' }} />
+              <img alt="Second Image" src={Image7} style={{ width: '50%', height: 'auto' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/grammar-check" style={{ color: 'black' }}>Language Translator</Link>
+                <Link to="/model/grammar-check" style={{ color: 'black' }}>Grammar Checker </Link>
               </button>
             </div>
 
             {/* Second Image Column */}
             <div className="col-lg-6">
-              <img alt="Second Image" src={Image7} style={{ width: '50%', height: '70%' }} />
+              <img alt="First Image" src={Image8} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/voice-to-text" style={{ color: 'black' }}>Paragraph Checker</Link>
+                <Link to="/model/voice-to-text" style={{ color: 'black' }}>Voice to text </Link>
               </button>
             </div>
 
             {/* Third Image Column */}
             <div className="col-lg-6">
-              <img alt="Third Image" src={Image8} style={{ width: '50%', height: '45%' }} />
+              <img alt="Third Image" src={Image6} style={{ width: '50%', height: '65%' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/translator" style={{ color: 'black' }}>Voice to Text</Link>
+                <Link to="/model/translator" style={{ color: 'black' }}>Language translator</Link>
               </button>
             </div>
 
@@ -45,7 +45,7 @@ const ModelSection = () => {
               <img alt="Fourth Image" src={Image11} style={{ width: '50%', height: 'auto' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/translator" style={{ color: 'black' }}>Grammar Checker</Link>
+                <Link to="/model/translator" style={{ color: 'black' }}>ConvoMate ChatBot </Link>
               </button>
             </div>
           </div>

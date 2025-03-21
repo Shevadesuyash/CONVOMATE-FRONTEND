@@ -26,31 +26,49 @@ const ParagraphChecker = () => {
     }
   };
 
+  const handleClearText = () => {
+    setInputText('');
+    setCorrectedText('');
+    setError('');
+  };
+
   return (
-    <div className="flex flex-col gap-4">
-      <textarea
-        className="border border-gray-300 p-3 rounded-lg w-full h-40 resize-none"
-        placeholder="Type your paragraph here..."
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-      />
+    <div className="grammar-checker-container">
+      {/* Input and Output Section */}
+      <h2>Paragraph Grammar Checker</h2>
+      <div className="text-area-container">
+        <textarea
+          className="input-textarea"
+          placeholder="Type your paragraph here..."
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
 
-      <textarea
-        className="border border-gray-300 p-3 rounded-lg w-full h-40 resize-none bg-gray-100"
-        placeholder="Corrected paragraph will appear here..."
-        value={correctedText}
-        readOnly
-      />
+        <textarea
+          className="output-textarea"
+          placeholder="Corrected paragraph will appear here..."
+          value={correctedText}
+          readOnly
+        />
+      </div>
 
-      {error && <div className="text-red-500">{error}</div>}
+      {/* Error Message */}
+      {error && <div className="error-message">{error}</div>}
 
-      <button
-        onClick={handleGrammarCheck}
-        disabled={loading}
-        className="bg-black text-white px-6 py-3 rounded-lg border border-black hover:bg-gray-800"
-      >
-        {loading ? 'Checking...' : 'Correct'}
-      </button>
+      {/* Button Section */}
+      <div className="button-container">
+        <button
+          onClick={handleGrammarCheck}
+          disabled={loading}
+          className="correct-button"
+        >
+          {loading ? 'Checking...' : 'Correct'}
+        </button>
+
+        <button onClick={handleClearText} className="clear-button">
+          Clear
+        </button>
+      </div>
     </div>
   );
 };

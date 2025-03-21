@@ -12,6 +12,73 @@ html {
 section {
   padding: 60px 0;
 }
+.grammar-checker-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.text-area-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.input-textarea, .output-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
+}
+
+.output-textarea {
+  background-color: #f8f8f8;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.correct-button, .clear-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.correct-button {
+  background-color: black;
+  color: white;
+}
+
+.correct-button:hover {
+  background-color: #333;
+}
+
+.clear-button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+.clear-button:hover {
+  background-color: black;
+  color: white;
+}
 
 /* Navigation button styles */
 button {
@@ -221,8 +288,8 @@ button:hover {
   }
   to {
     transform: translateX(0);
-    opacity: 1;
   }
+    opacity: 1;
 }
 
 
@@ -460,16 +527,6 @@ body {
 
 /* Add more global styles as needed */
 
-
-
-
-
-
-
-
-
-
---------------------------------------------------------------*/
 body {
   background: #fff;
   color: #444;
