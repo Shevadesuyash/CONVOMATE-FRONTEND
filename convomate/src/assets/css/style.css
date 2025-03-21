@@ -1017,6 +1017,18 @@ body.mobile-nav-active #mobile-nav-toggle {
   bottom: 0;
   left: 0;
 }
+#intro11 {
+  background-image: url('../../assets/img/intro-carousel/bg1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
 
 .section-header p {
   padding: 0;
