@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Image6 from '../../assets/img/6.jpeg';
 import Image7 from '../../assets/img/7.png';
-import Image8 from '../../assets/img/8.jpeg';
+import Image8 from '../../assets/img/8.png';
 import Image11 from '../../assets/img/11.jpeg';
+import bgImage from '../../assets/img/intro-carousel/bg1.jpg'; // Adjust the path as per your folder structure
+
 
 const ModelSection = () => {
   return (
-    <section id="intro">
+    <section id="intro11">
       <div className="intro-content">
         <div className="container" style={{ textAlign: 'center' }}>
           <div className="row">
