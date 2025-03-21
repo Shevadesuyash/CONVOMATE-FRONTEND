@@ -1,52 +1,57 @@
 import React from 'react';
-
+import bgImage from '../../assets/img/intro-carousel/bg1.jpg';
 const LoginSection = ({
   email,
   setEmail,
   otp,
   setOtp,
   otpSent,
-  timer,
   error,
   loading,
   handleGenerateOtp,
-  handleResendOtp,
   handleSubmit,
 }) => {
   return (
-    <section id="intro" className="d-flex align-items-center justify-content-center vh-100 bg-light">
-      <div className="container p-4 shadow-lg rounded bg-white" style={{ maxWidth: '400px' }}>
-        <h2 className="text-center text-primary mb-4" style={{ fontWeight: 700 }}>Login</h2>
-        {error && <div className="alert alert-danger text-center">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3 d-flex align-items-center">
-            <label htmlFor="email" className="me-3"><b>Email</b></label>
+    <div style={styles.container}>
+      <div style={styles.formContainer}>
+        {/* Heading with Proper Alignment */}
+        <div style={styles.headingContainer}>
+          <h2 style={styles.heading}>Login</h2>
+        </div>
+
+        {error && <div style={styles.error}>{error}</div>}
+
+        <form onSubmit={handleSubmit} style={styles.form}>
+          {/* Email Section with More Spacing */}
+          <div style={styles.inputGroup}>
+            <label htmlFor="email" style={styles.label}>Email</label>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="Enter Email"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="form-control"
               disabled={loading}
-              style={{ maxWidth: '250px' }}
+              style={styles.input}
             />
           </div>
-          <div className="text-center mb-3">
-            <button
-              type="button"
-              className="btn btn-primary w-100"
-              onClick={handleGenerateOtp}
-              disabled={loading}
-            >
-              {loading ? 'Sending...' : 'Send OTP'}
-            </button>
-          </div>
+
+          {/* Send OTP Button */}
+          <button
+            type="button"
+            onClick={handleGenerateOtp}
+            disabled={loading}
+            style={styles.button}
+          >
+            {loading ? 'Sending...' : 'Send OTP'}
+          </button>
+
+          {/* OTP Input Field (Visible only after sending OTP) */}
           {otpSent && (
-            <div className="mb-3">
-              <label htmlFor="otp" className="form-label"><b>OTP</b></label>
+            <div style={styles.inputGroup}>
+              <label htmlFor="otp" style={styles.label}>OTP</label>
               <input
                 type="text"
                 id="otp"
@@ -55,18 +60,104 @@ const LoginSection = ({
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 required
-                className="form-control"
                 disabled={loading}
+                style={styles.input}
               />
             </div>
           )}
-          <div className="text-center mt-3">
-            <span>Not registered? <a href="/register" className="text-decoration-none">Register/Signup here</a></span>
-          </div>
+
+          {/* Registration Link */}
+          <p style={styles.registerText}>
+            Not registered? <a href="/register" style={styles.link}>Register/Signup here</a>
+          </p>
         </form>
       </div>
-    </section>
+    </div>
   );
+};
+
+/* INLINE CSS STYLES */
+const styles = {
+
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        backgroundImage: `url(${bgImage})`, // ✅ Use imported image
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+  },
+  formContainer: {
+    backgroundColor: 'white',
+    padding: '30px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    width: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundImage: "url('/bg1.jpg')",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      zIndex: 1,
+
+  },
+  headingContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    marginBottom: '20px',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color:'#5DDAB4',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  inputGroup: {
+    marginBottom: '20px', // ⬅ Increased spacing between fields
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    marginBottom: '8px', // ⬅ Added gap between label and input
+    display: 'block',
+  },
+  input: {
+    width: '100%',
+    padding: '12px', // ⬅ Increased padding inside input
+    fontSize: '16px',
+    border: '1px solid #ddd',
+    borderRadius: '5px',
+    marginTop: '5px', // ⬅ Extra gap after label
+  },
+  button: {
+    padding: '12px',
+    backgroundColor: '#033452',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '15px', // ⬅ More space above button
+  },
+  registerText: {
+    textAlign: 'center',
+    marginTop: '20px',
+  },
+  link: {
+    color: '#007bff',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: '10px',
+  },
 };
 
 export default LoginSection;
