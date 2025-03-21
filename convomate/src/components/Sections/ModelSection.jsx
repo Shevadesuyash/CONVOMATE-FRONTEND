@@ -33,7 +33,7 @@ const ModelSection = () => {
 
             {/* Third Image Column */}
             <div className="col-lg-6">
-              <img alt="Third Image" src={Image8} style={{ width: '50%', height: '60%' }} />
+              <img alt="Third Image" src={Image8} style={{ width: '50%', height: '45%' }} />
               <br /><br />
               <button className="btn btn-primary">
                 <Link to="/model/translator" style={{ color: 'black' }}>Voice to Text</Link>
