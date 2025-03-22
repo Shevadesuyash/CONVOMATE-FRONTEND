@@ -64,7 +64,17 @@ const LoginSection = ({
                 style={styles.input}
               />
             </div>
+
           )}
+          <div className="form-group text-center">
+                            <button
+                              type="submit"
+                              className="btn btn-primary btn-block"
+                              disabled={loading}
+                            >
+                              {loading ? 'Submitting...' : 'Submit OTP'}
+                            </button>
+                          </div>
 
           {/* Registration Link */}
           <p style={styles.registerText}>
