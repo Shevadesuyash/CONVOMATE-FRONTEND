@@ -47,5 +47,5 @@ export default {
   sendMail: (emailData) => apiCall('/model/sendMail', 'POST', emailData),
   test: () => apiCall('/model/test', 'GET'),
   translate: (data) => apiCall('/model/translate', 'POST', data),
-  grammarCheck: (data) => apiCall('/model/grammar-check', 'POST', data),
+  grammarCheck: (data) => apiCall('/model/correct_text', 'POST', data),
 };
