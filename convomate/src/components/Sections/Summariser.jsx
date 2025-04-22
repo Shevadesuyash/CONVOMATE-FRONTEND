@@ -3,7 +3,7 @@ import api from '../../api';
 import { diffWords } from 'diff';
 import "../../assets/css/style.css";
 
-const ParagraphChecker = () => {
+const Summariser = () => {
   const [inputText, setInputText] = useState('');
   const [correctedText, setCorrectedText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -94,11 +94,11 @@ const ParagraphChecker = () => {
 
   return (
     <div className="grammar-checker-container">
-      <h2>Paragraph Grammar Checker</h2>
+      <h2>Text Summarizer</h2>
       <div className="text-area-container">
       <textarea
                 className="input-textarea"
-                placeholder="Type your paragraph here..."
+                placeholder="Type your text here..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
               />
@@ -106,10 +106,10 @@ const ParagraphChecker = () => {
 
 
         <div className="output-section">
-          <h3>Corrected Text:</h3>
+          <h3>Summarized Text:</h3>
           <div className="output-display">
             {highlightedCorrected.length > 0 ? highlightedCorrected :
-             correctedText || 'Corrected text will appear here...'}
+             correctedText || 'Summarized text will appear here...'}
           </div>
         </div>
       </div>
@@ -136,4 +136,4 @@ const ParagraphChecker = () => {
   );
 };
 
-export default ParagraphChecker;
+export default Summariser;
