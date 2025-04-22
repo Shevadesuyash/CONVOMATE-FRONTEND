@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/style.css';
 
-const VoiceToTextSection = () => {
+const ChatbotSection = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [isListening, setIsListening] = useState(false);
@@ -96,7 +96,7 @@ const VoiceToTextSection = () => {
 
   return (
     <div className="chatbot-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ textAlign: 'center' }}>Voice-to-Text Chat</h2>
+      <h2 style={{ textAlign: 'center' }}>Chat-bot Chat</h2>
 
       <div id="chatbot" style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '20px', backgroundColor: '#fdfdfd' }}>
 
@@ -229,4 +229,4 @@ const VoiceToTextSection = () => {
   );
 };
 
-export default VoiceToTextSection;
+export default ChatbotSection;

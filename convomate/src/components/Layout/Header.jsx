@@ -47,7 +47,7 @@ const Header = () => {
                   <Link to="/models/paragraph-checker">Paragraph Checker</Link>
                 </li>
                 <li>
-                  <Link to="/model/voice-to-text">/model/voice-to-text</Link>
+                  <Link to="/model/Chat-bot">/model/Chat-bot</Link>
                 </li>
                 <li>
                   <Link to="/model/grammar-check">/model/grammar-check</Link>

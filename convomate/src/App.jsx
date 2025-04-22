@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
-import PublicRoute from './components/Shared/PublicRoute';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 
 const ModelPage = lazy(() => import('./pages/ModelPage'));
@@ -13,7 +12,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const TranslationModulePage = lazy(() => import('./pages/TranslationModulePage'));
 const ParagraphCheckerPage = lazy(() => import('./pages/ParagraphCheckerPage'));
-const VoiceToTextPage = lazy(() => import('./pages/VoiceToTextPage'));
+const ChatbotPage = lazy(() => import('./pages/ChatbotPage'));
 const SummariserPage= lazy(() => import('./pages/SummariserPage'));
 
 const App = () => {
@@ -26,11 +25,11 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/models" element={<ModelPage />} />
-                <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
-                <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
                 <Route path="/model/grammar-check" element={<ProtectedRoute><ParagraphCheckerPage /></ProtectedRoute>} />
-                <Route path="/model/voice-to-text" element={<ProtectedRoute><VoiceToTextPage /></ProtectedRoute>} />
+                <Route path="/model/Chat-bot" element={<ChatbotPage />} />
                 <Route path="/model/Summariser" element={<SummariserPage/>} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

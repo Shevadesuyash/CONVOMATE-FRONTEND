@@ -27,7 +27,7 @@ const ModelSection = () => {
               <img alt="First Image" src={Image11} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/voice-to-text" style={{ color: 'black' }}>ConvoMate Chatbot  </Link>
+                <Link to="/model/Chat-bot" style={{ color: 'black' }}>ConvoMate Chatbot  </Link>
               </button>
             </div>
 

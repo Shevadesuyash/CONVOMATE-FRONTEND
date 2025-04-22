@@ -89,7 +89,7 @@ const TranslationModule = () => {
     };
   }, []);
 
-  // Handle voice-to-text input
+  // Handle Chat-bot input
   const handleVoiceInput = () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = fromLanguage === 'auto' ? 'en-US' : fromLanguage; // Default to English if auto-detect
