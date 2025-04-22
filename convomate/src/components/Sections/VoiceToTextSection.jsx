@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/style.css';
 
@@ -8,12 +8,11 @@ const VoiceToTextSection = () => {
   const [isListening, setIsListening] = useState(false);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
+  const conversationRef = useRef(null);
 
-  // Load available voices for text-to-speech
   useEffect(() => {
     const loadVoices = () => {
       const allVoices = window.speechSynthesis.getVoices();
-      // Filter only Google voices
       const googleVoices = allVoices.filter((voice) =>
         voice.name.toLowerCase().includes('google')
       );
@@ -23,130 +22,207 @@ const VoiceToTextSection = () => {
       }
     };
 
-    // Load voices when the component mounts
     loadVoices();
-
-    // Add event listener for when voices are loaded
     window.speechSynthesis.onvoiceschanged = loadVoices;
 
-    // Cleanup event listener
     return () => {
       window.speechSynthesis.onvoiceschanged = null;
     };
   }, []);
 
-  // Handle voice-to-text input
+  useEffect(() => {
+    if (conversationRef.current) {
+      conversationRef.current.scrollTop = conversationRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   const handleVoiceInput = () => {
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous = true; // Keep listening
-    recognition.interimResults = true; // Get real-time results
+    recognition.continuous = true;
+    recognition.interimResults = true;
     recognition.lang = 'en-US';
 
     let timeout;
     recognition.onresult = (event) => {
-      clearTimeout(timeout); // Reset timeout on new input
+      clearTimeout(timeout);
       timeout = setTimeout(() => {
-        recognition.stop(); // Stop after 5 seconds of silence
+        recognition.stop();
         setIsListening(false);
-      }, 5000); // 5 seconds
+      }, 5000);
 
       let transcript = '';
       for (let i = event.resultIndex; i < event.results.length; i++) {
         transcript += event.results[i][0].transcript;
       }
 
-      // Append the new transcript to the existing inputText
       setInputText((prevText) => (prevText ? `${prevText} ${transcript}` : transcript));
     };
 
     recognition.onerror = (event) => {
-      console.error('Error occurred in recognition:', event.error);
+      console.error('Error in recognition:', event.error);
       setIsListening(false);
     };
 
-    recognition.onend = () => {
-      setIsListening(false);
-    };
+    recognition.onend = () => setIsListening(false);
 
     recognition.start();
     setIsListening(true);
   };
 
-  // Handle text submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.trim()) {
-      setMessages([...messages, { text: inputText, sender: 'user' }]);
+      const userMessage = { text: inputText, sender: 'user' };
+      setMessages((prev) => [...prev, userMessage]);
       setInputText('');
+
+      setTimeout(() => {
+        const botReply = {
+          text: `You said: "${userMessage.text}"`,
+          sender: 'bot',
+        };
+        setMessages((prev) => [...prev, botReply]);
+      }, 1000);
     }
   };
 
-  // Handle text-to-speech
   const handleTextToSpeech = (text) => {
     const synth = window.speechSynthesis;
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US'; // Set language
-    utterance.voice = selectedVoice; // Set selected voice
+    utterance.lang = 'en-US';
+    utterance.voice = selectedVoice;
     synth.speak(utterance);
   };
 
   return (
-    <div className="chatbot-container">
-      <div id="header">
-        <h2>Voice-to-Text Chat</h2>
-        <div className="voice-selection">
-          <label htmlFor="voice-select">Select Voice:</label>
+    <div className="chatbot-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+      <h2 style={{ textAlign: 'center' }}>Voice-to-Text Chat</h2>
+
+      <div id="chatbot" style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '20px', backgroundColor: '#fdfdfd' }}>
+
+        {/* Conversation Box */}
+        <div
+          id="conversation"
+          ref={conversationRef}
+          style={{
+            height: '400px',
+            overflowY: 'auto',
+            padding: '10px',
+            border: '1px solid #ddd',
+            background: '#fff',
+            borderRadius: '8px',
+            marginBottom: '10px'
+          }}
+        >
+          {messages.map((message, index) => (
+            <div key={index} className={`chatbot-message ${message.sender}`} style={{
+              display: 'flex',
+              justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start',
+              marginBottom: '10px'
+            }}>
+              <div style={{
+                backgroundColor: message.sender === 'user' ? '#007bff' : '#e9ecef',
+                color: message.sender === 'user' ? '#fff' : '#000',
+                padding: '10px 15px',
+                borderRadius: '20px',
+                maxWidth: '70%',
+                position: 'relative'
+              }}>
+                <p style={{ margin: 0 }}>{message.text}</p>
+                <button
+                  className="speaker-button"
+                  onClick={() => handleTextToSpeech(message.text)}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    position: 'absolute',
+                    bottom: '5px',
+                    right: '10px',
+                    cursor: 'pointer',
+                    color: message.sender === 'user' ? '#fff' : '#000'
+                  }}
+                >
+                  <i className="fa fa-volume-up"></i>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Input form */}
+        <form id="input-form" onSubmit={handleSubmit} style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+          <input
+            id="input-field"
+            type="text"
+            placeholder="Type your message here"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            style={{
+              flexGrow: 1,
+              padding: '10px',
+              borderRadius: '20px',
+              border: '1px solid #ccc',
+              outline: 'none'
+            }}
+          />
+
+          <button
+            id="voice-recorder"
+            type="button"
+            onClick={handleVoiceInput}
+            disabled={isListening}
+            style={{
+              backgroundColor: '#007bff',
+              border: 'none',
+              color: '#fff',
+              padding: '10px 15px',
+              borderRadius: '50%',
+              cursor: 'pointer'
+            }}
+          >
+            <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
+          </button>
+
+          <button
+            id="submit-button"
+            type="submit"
+            style={{
+              backgroundColor: '#007bff',
+              border: 'none',
+              color: '#fff',
+              padding: '10px 15px',
+              borderRadius: '50%',
+              cursor: 'pointer'
+            }}
+          >
+            <i className="fa fa-paper-plane"></i>
+          </button>
+
+          {/* Voice selector after send button */}
           <select
-            id="voice-select"
+            title="Select Voice"
             value={selectedVoice ? selectedVoice.name : ''}
             onChange={(e) => {
               const voice = voices.find((v) => v.name === e.target.value);
               setSelectedVoice(voice);
             }}
+            style={{
+              padding: '6px 8px',
+              borderRadius: '10px',
+              fontSize: '0.85rem',
+              border: '1px solid #ccc',
+              maxWidth: '180px',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}
           >
             {voices.map((voice) => (
               <option key={voice.name} value={voice.name}>
-                {voice.name} ({voice.lang})
+                {voice.name}
               </option>
             ))}
           </select>
-        </div>
-      </div>
-      <div id="chatbot">
-        <div id="conversation">
-          {messages.map((message, index) => (
-            <div key={index} className={`chatbot-message ${message.sender}`}>
-              <p className="chatbot-text">{message.text}</p>
-              <button
-                className="speaker-button"
-                onClick={() => handleTextToSpeech(message.text)}
-              >
-                <i className="fa fa-volume-up"></i>
-              </button>
-            </div>
-          ))}
-        </div>
-        <form id="input-form" onSubmit={handleSubmit}>
-          <div className="message-container">
-            <input
-              id="input-field"
-              type="text"
-              placeholder="Type your message here"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-            />
-            <button
-              id="voice-recorder"
-              type="button"
-              onClick={handleVoiceInput}
-              disabled={isListening}
-            >
-              <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
-            </button>
-            <button id="submit-button" type="submit">
-              <i className="fa fa-paper-plane"></i>
-            </button>
-          </div>
         </form>
       </div>
     </div>
