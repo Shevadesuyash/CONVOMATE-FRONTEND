@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import bgImage from '../assets/img/intro-carousel/bg1.jpg';
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('');
@@ -23,71 +24,153 @@ const RegisterPage = () => {
   };
 
   return (
-    <section id="intro">
-      <div className="intro-content">
-        <form onSubmit={handleSubmit}>
-          <div className="container text-right" style={{ maxWidth: '400px', margin: '0 auto' }}>
-            <h1 className="text-primary" style={{ padding: '25px' }}>Registration</h1>
-            {error && <div className="alert alert-danger">{error}</div>}
-            <div className="form-group">
-              <label htmlFor="username"><b>Username</b></label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                className="form-control"
-                disabled={loading}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="name"><b>Name</b></label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="form-control"
-                disabled={loading}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email"><b>Email</b></label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="form-control"
-                disabled={loading}
-              />
-            </div>
-            <div className="form-group text-center">
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={loading}
-              >
-                {loading ? 'Registering...' : 'Register'}
-              </button>
-            </div>
-            <div className="text-center mt-2">
-              <span>Already registered? <a href="/login">Login here</a></span>
-            </div>
+    <div style={styles.container}>
+      <div style={styles.formContainer}>
+        {/* Heading */}
+        <h2 style={styles.heading}>Registration</h2>
+
+        {error && <div style={styles.error}>{error}</div>}
+
+        <form onSubmit={handleSubmit} style={styles.form}>
+          {/* Username Field */}
+          <div style={styles.inputGroup}>
+            <label htmlFor="username" style={styles.label}>Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              disabled={loading}
+              style={styles.input}
+            />
           </div>
+
+          {/* Name Field */}
+          <div style={styles.inputGroup}>
+            <label htmlFor="name" style={styles.label}>Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={loading}
+              style={styles.input}
+            />
+          </div>
+
+          {/* Email Field */}
+          <div style={styles.inputGroup}>
+            <label htmlFor="email" style={styles.label}>Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+              style={styles.input}
+            />
+          </div>
+
+          {/* Register Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            style={styles.button}
+          >
+            {loading ? 'Registering...' : 'Register'}
+          </button>
+
+          {/* Already registered? */}
+          <p style={styles.registerText}>
+            Already registered? <a href="/login" style={styles.link}>Login here</a>
+          </p>
         </form>
       </div>
-    </section>
+    </div>
   );
+};
+
+/* INLINE CSS STYLES */
+const styles = {
+  container: {
+    display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            backgroundImage: `url(${bgImage})`, // ✅ Use imported image
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+  },
+  formContainer: {
+    backgroundColor: 'white',
+    padding: '30px',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    width: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  heading: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: '20px',
+    color:'#5DDAB4',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  inputGroup: {
+    marginBottom: '20px', // Increased spacing between fields
+  },
+  label: {
+    fontSize: '14px',
+    fontWeight: 'bold',
+    marginBottom: '8px', // Added gap between label and input
+    display: 'block',
+  },
+  input: {
+    width: '100%',
+    padding: '12px', // Increased padding inside input
+    fontSize: '16px',
+    border: '1px solid #ddd',
+    borderRadius: '5px',
+    marginTop: '5px', // Extra gap after label
+  },
+  button: {
+    padding: '12px',
+    backgroundColor: '#033452',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '15px', // More space above button
+  },
+  registerText: {
+    textAlign: 'center',
+    marginTop: '20px',
+  },
+  link: {
+    color: '#007bff',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+  },
+  error: {
+    color: 'red',
+    textAlign: 'center',
+    marginBottom: '10px',
+  },
 };
 
 export default RegisterPage;

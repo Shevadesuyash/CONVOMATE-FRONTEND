@@ -508,8 +508,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 /* Sections Header
 --------------------------------*/
+
 .section-header {
-  margin-bottom: 30px;
+  text-align: center;  /* Center align header */
+  width: 100%; /* Ensure it spans full width */
+  margin: 0 auto 40px; /* Add spacing below */
 }
 
 .section-header h2 {
@@ -518,7 +521,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-transform: uppercase;
   font-weight: 700;
   position: relative;
-  padding-bottom: 20px;
+  padding-bottom: 10px; /* Reduce spacing */
+  display: inline-block; /* Keep text inline */
 }
 
 .section-header h2::before {
@@ -529,13 +533,23 @@ body.mobile-nav-active #mobile-nav-toggle {
   height: 3px;
   background: #50d8af;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Center line below heading */
 }
 
 .section-header p {
   padding: 0;
-  margin: 0;
+  margin: 5px auto;
+  font-size: 16px;
+  color: #555;
+  max-width: 600px; /* Limit width for better readability */
 }
+
+/* Ensure the section header stays at the top */
+#services .section-header {
+  order: -1; /* Forces the header to be at the top */
+}
+
 
 /* About Section
 --------------------------------*/
@@ -600,79 +614,111 @@ body.mobile-nav-active #mobile-nav-toggle {
   padding-bottom: 10px;
 }
 
-/* Services Section
---------------------------------*/
+
+/* Services Section */
 #services {
-  padding: 30px 0 0 0;
-}
-
-#services .box {
-  padding: 40px;
-  margin-bottom: 40px;
-  box-shadow: 10px 10px 15px rgba(73, 78, 92, 0.1);
-  background: #fff;
-  transition: 0.4s;
-}
-
-#services .box:hover {
-  box-shadow: 0px 0px 30px rgba(73, 78, 92, 0.15);
-  transform: translateY(-10px);
-  -webkit-transform: translateY(-10px);
-  -moz-transform: translateY(-10px);
-}
-
-#services .box .icon {
-  float: left;
-}
-
-#services .box .icon i {
-  color: #444;
-  font-size: 64px;
-  transition: 0.5s;
-  line-height: 0;
-  margin-top: 34px;
-}
-
-#services .box .icon i:before {
-  background: #0c2e8a;
-  background: linear-gradient(45deg, #50d8af 0%, #a3ebd5 100%);
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-#services .box h4 {
-  margin-left: 100px;
-  font-weight: 700;
-  margin-bottom: 15px;
-  font-size: 22px;
-}
-
-#services .box h4 a {
-  color: #444;
-}
-
-#services .box p {
-  font-size: 14px;
-  margin-left: 100px;
-  margin-bottom: 0;
-  line-height: 24px;
-}
-
-@media (max-width: 767px) {
-  #services .box .box {
-    margin-bottom: 20px;
-  }
-  #services .box .icon {
-    float: none;
+    padding: 40px 0;
     text-align: center;
-    padding-bottom: 15px;
-  }
-  #services .box h4, #services .box p {
-    margin-left: 0;
-    text-align: center;
-  }
 }
+
+#services .container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Section Header - Always at the Top */
+.section-header {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    color: #0c2e8a;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.section-header h2::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #50d8af;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-header p {
+    padding: 0;
+    margin: 5px auto;
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+}
+
+/* Main Service Board */
+.main-service {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 40px;
+    border: 2px solid #50d8af;
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Stacked Services */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.box {
+    background: #fff;
+    padding: 30px;
+    box-shadow: 5px 5px 15px rgba(73, 78, 92, 0.1);
+    transition: 0.3s ease-in-out;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.box:hover {
+    box-shadow: 0px 0px 25px rgba(73, 78, 92, 0.2);
+    transform: translateY(-5px);
+}
+
+.box .icon {
+    font-size: 50px;
+    color: #50d8af;
+    margin-bottom: 15px;
+}
+
+.box h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.box p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #555;
+}
+
+/* Mobile View: Keep Boxes Stacked */
+@media (max-width: 768px) {
+    .box {
+        width: 100%;
+    }
+}
+
 
 /* Our Team Section
 --------------------------------*/

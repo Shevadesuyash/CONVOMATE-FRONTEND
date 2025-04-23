@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../assets/css/Main.css'; // Updated to Main.css
-import Team1 from '../../assets/img/team-1.jpg';
+import '../../assets/css/style.css'; // Updated to Main.css
+import Team1 from '../../assets/img/team-1.jpeg';
 import Team2 from '../../assets/img/team-2.jpeg';
 import Team3 from '../../assets/img/team-3.jpeg';
 import Team4 from '../../assets/img/team-4.jpeg';
@@ -8,7 +8,7 @@ import Team4 from '../../assets/img/team-4.jpeg';
 const TeamSection = () => {
   return (
     <section id="team">
-      <div className="container">
+      <div className="container11">
         <div className="section-header">
           <h2>Our Team</h2>
         </div>

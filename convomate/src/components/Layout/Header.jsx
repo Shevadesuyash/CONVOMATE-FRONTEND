@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'; // Import useAuth
 
 const Header = () => {
-  const { authenticated, logout } = useAuth(); // Use authentication state and logout function
+  const { authenticated, logout, authKey } = useAuth(); // Use authentication state and logout function
 
   return (
-    <header id="header">
+    <header id="header" key={authKey}>
       <div className="container">
         <div className="pull-left" id="logo">
           <h1>
@@ -22,7 +22,7 @@ const Header = () => {
             </li>
             {authenticated ? (
               <li id="logoutLink">
-                <button onClick={logout} style={{ background: 'none', border: 'none', color: 'white' }}>
+                <button onClick={logout}>
                   Logout
                 </button>
               </li>
@@ -32,30 +32,30 @@ const Header = () => {
               </li>
             )}
             <li>
-              <Link to="/about">About Us</Link>
+              <Link to="/">About Us</Link>
             </li>
             <li>
-              <Link to="/team">Team</Link>
+              <Link to="/">Team</Link>
             </li>
             <li className="menu-has-children">
               <Link to="/models">Models</Link>
               <ul>
                 <li>
-                  <Link to="/models/translator">Translator</Link>
+                  <Link to="/model/Chat-bot">Chat-bot</Link>
                 </li>
                 <li>
-                  <Link to="/models/paragraph-checker">Paragraph Checker</Link>
+                  <Link to="/model/translator">Translator</Link>
                 </li>
                 <li>
-                  <Link to="/models/learning-languages">Learning Basics of Languages</Link>
+                  <Link to="/model/grammar-check">Paragraph Checker</Link>
                 </li>
                 <li>
-                  <Link to="/models/voice-convomate">Voice Convomate</Link>
+                  <Link to="/model/Summariser">Text Summarizer</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/">Contact</Link>
             </li>
           </ul>
         </nav>
