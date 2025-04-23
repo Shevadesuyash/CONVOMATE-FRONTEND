@@ -1,8 +1,10 @@
+// convomate/src/components/Sections/TranslationModule.jsx
 import React, { useState, useEffect } from 'react';
 import api from '../../api';
 import '../../assets/css/style.css';
+import VoiceInput from './VoiceInput';
+import { loadVoices, getDefaultVoice } from './voiceUtils';
 
-// Language options (Top 50 common languages with their codes)
 const languages = [
   { code: 'auto', label: 'Auto Detect' },
   { code: 'en', label: 'English' },
@@ -59,72 +61,37 @@ const TranslationModule = () => {
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [error, setError] = useState(null);
-  const [isListening, setIsListening] = useState(false);
-  const [voices, setVoices] = useState([]); // Available voices for text-to-speech
-  const [selectedVoice, setSelectedVoice] = useState(null); // Selected voice for text-to-speech
+  const [voices, setVoices] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(null);
 
-  // Load available voices for text-to-speech
   useEffect(() => {
-    const loadVoices = () => {
-            const allVoices = window.speechSynthesis.getVoices();
-            // Filter only Google voices
-            const googleVoices = allVoices.filter((voice) =>
-              voice.name.toLowerCase().includes('google')
-            );
-            setVoices(googleVoices);
-            if (googleVoices.length > 0) {
-              setSelectedVoice(googleVoices[0]);
-      }
+    const initializeVoices = async () => {
+      const loadedVoices = await loadVoices();
+      setVoices(loadedVoices);
+      setSelectedVoice(getDefaultVoice(loadedVoices));
     };
-
-    // Load voices when the component mounts
-    loadVoices();
-
-    // Add event listener for when voices are loaded
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-
-    // Cleanup event listener
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-    };
+    initializeVoices();
   }, []);
 
-  // Handle Chat-bot input
-  const handleVoiceInput = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = fromLanguage === 'auto' ? 'en-US' : fromLanguage; // Default to English if auto-detect
-    recognition.interimResults = false;
-
-    recognition.start();
-    setIsListening(true);
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      setTextToTranslate(transcript);
-      setIsListening(false);
-    };
-
-    recognition.onerror = (event) => {
-      console.error('Error occurred in recognition:', event.error);
-      setIsListening(false);
-    };
+  const handleVoiceResult = (transcript) => {
+    setTextToTranslate(transcript);
   };
 
-  // Handle text-to-speech for translated text
   const handleTextToSpeech = () => {
-    if (!translatedText) {
-      setError('No translated text to speak.');
+    if (!translatedText || !selectedVoice) {
+      setError('No translated text or voice selected');
       return;
     }
 
     const synth = window.speechSynthesis;
+    synth.cancel();
+
     const utterance = new SpeechSynthesisUtterance(translatedText);
-    utterance.lang = toLanguage; // Set language for TTS
-    utterance.voice = selectedVoice; // Set selected voice
+    utterance.voice = selectedVoice;
+    utterance.lang = toLanguage || 'en-US';
     synth.speak(utterance);
   };
 
-  // Handle translation
   const handleTranslate = async () => {
     setError(null);
     if (!toLanguage) {
@@ -137,9 +104,7 @@ const TranslationModule = () => {
         to_language: toLanguage,
         text_to_translate: textToTranslate,
       };
-      console.log('Request Data:', data);
       const response = await api.translate(data);
-      console.log('API Response:', response);
       if (response.error) {
         setError(response.error);
       } else if (response.translatedText) {
@@ -192,25 +157,19 @@ const TranslationModule = () => {
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
           ></textarea>
-          <button
-            type="button"
-            onClick={handleVoiceInput}
-            disabled={isListening}
-            className="voice-button"
-          >
-            <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
-          </button>
+          <VoiceInput
+            onResult={handleVoiceResult}
+            language={fromLanguage === 'auto' ? 'en-US' : fromLanguage}
+            buttonStyle={{ marginLeft: '8px' }}
+          />
         </div>
 
-        {/* Translate Button */}
         <button type="button" onClick={handleTranslate}>
           Translate
         </button>
 
-        {/* Error Message */}
         {error && <div className="error-message">{error}</div>}
 
-        {/* Translated Text */}
         <label htmlFor="translatedText">Translated Text:</label>
         <div className="input-container">
           <textarea
@@ -223,27 +182,34 @@ const TranslationModule = () => {
             type="button"
             onClick={handleTextToSpeech}
             className="voice-button"
+            disabled={!translatedText || !selectedVoice}
           >
             <i className="fa fa-volume-up"></i>
           </button>
         </div>
 
-        {/* Voice Selection for Text-to-Speech */}
         <label htmlFor="voice-select">Select Voice:</label>
-                  <select
-                    id="voice-select"
-                    value={selectedVoice ? selectedVoice.name : ''}
-                    onChange={(e) => {
-                      const voice = voices.find((v) => v.name === e.target.value);
-                      setSelectedVoice(voice);
-                    }}
-                  >
-                    {voices.map((voice) => (
-                      <option key={voice.name} value={voice.name}>
-                        {voice.name} ({voice.lang})
-                      </option>
-                    ))}
-                  </select>
+        <select
+          id="voice-select"
+          value={selectedVoice ? selectedVoice.name : ''}
+          onChange={(e) => {
+            const voice = voices.find((v) => v.name === e.target.value);
+            setSelectedVoice(voice);
+          }}
+          style={{
+            padding: '8px',
+            borderRadius: '4px',
+            border: '1px solid #ddd',
+            width: '100%',
+            maxWidth: '300px'
+          }}
+        >
+          {voices.map((voice) => (
+            <option key={voice.name} value={voice.name}>
+              {voice.name} ({voice.lang})
+            </option>
+          ))}
+        </select>
       </form>
     </div>
   );

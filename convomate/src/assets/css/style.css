@@ -80,6 +80,26 @@ h3 {
   color: #333;
 }
 
+/* Voice input button states */
+.voice-button {
+  transition: all 0.3s ease;
+}
+
+.voice-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Voice selection dropdown */
+#voice-select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
 /* Summarizer specific styles */
 /* Summary output container */
 .output-display {

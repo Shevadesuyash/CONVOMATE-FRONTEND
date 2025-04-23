@@ -1,12 +1,14 @@
+// convomate/src/components/Sections/ChatbotSection.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/style.css';
 import api from '../../api';
+import VoiceInput from './VoiceInput';
+import { loadVoices, getDefaultVoice } from './voiceUtils';
 
 const ChatbotSection = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
-  const [isListening, setIsListening] = useState(false);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
   const [conversationStarted, setConversationStarted] = useState(false);
@@ -14,23 +16,12 @@ const ChatbotSection = () => {
   const conversationRef = useRef(null);
 
   useEffect(() => {
-    const loadVoices = () => {
-      const allVoices = window.speechSynthesis.getVoices();
-      const googleVoices = allVoices.filter((voice) =>
-        voice.name.toLowerCase().includes('google')
-      );
-      setVoices(googleVoices);
-      if (googleVoices.length > 0) {
-        setSelectedVoice(googleVoices[0]);
-      }
+    const initializeVoices = async () => {
+      const loadedVoices = await loadVoices();
+      setVoices(loadedVoices);
+      setSelectedVoice(getDefaultVoice(loadedVoices));
     };
-
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-    };
+    initializeVoices();
   }, []);
 
   useEffect(() => {
@@ -39,37 +30,8 @@ const ChatbotSection = () => {
     }
   }, [messages]);
 
-  const handleVoiceInput = () => {
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
-
-    let timeout;
-    recognition.onresult = (event) => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        recognition.stop();
-        setIsListening(false);
-      }, 5000);
-
-      let transcript = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        transcript += event.results[i][0].transcript;
-      }
-
-      setInputText((prevText) => (prevText ? `${prevText} ${transcript}` : transcript));
-    };
-
-    recognition.onerror = (event) => {
-      console.error('Error in recognition:', event.error);
-      setIsListening(false);
-    };
-
-    recognition.onend = () => setIsListening(false);
-
-    recognition.start();
-    setIsListening(true);
+  const handleVoiceResult = (transcript) => {
+    setInputText(transcript);
   };
 
   const startConversation = async () => {
@@ -108,38 +70,24 @@ const ChatbotSection = () => {
       );
 
       if (response) {
-        // Show correction if needed
         if (response.is_corrected) {
           setMessages(prev => [
             ...prev,
-            {
-              text: `Correction: ${response.corrected_text}`,
-              sender: 'bot',
-              isCorrection: true
-            }
+            { text: `Correction: ${response.corrected_text}`, sender: 'bot', isCorrection: true }
           ]);
         }
 
-        // Show compliment if available
         if (response.compliment) {
           setMessages(prev => [
             ...prev,
-            {
-              text: response.compliment,
-              sender: 'bot',
-              isCompliment: true
-            }
+            { text: response.compliment, sender: 'bot', isCompliment: true }
           ]);
         }
 
-        // Show next question
         if (response.next_question) {
           setMessages(prev => [
             ...prev,
-            {
-              text: response.next_question,
-              sender: 'bot'
-            }
+            { text: response.next_question, sender: 'bot' }
           ]);
         }
       }
@@ -147,11 +95,7 @@ const ChatbotSection = () => {
       console.error('Error in chat:', error);
       setMessages(prev => [
         ...prev,
-        {
-          text: 'Sorry, there was an error processing your message.',
-          sender: 'bot',
-          isError: true
-        }
+        { text: 'Sorry, there was an error processing your message.', sender: 'bot', isError: true }
       ]);
     } finally {
       setIsLoading(false);
@@ -159,10 +103,14 @@ const ChatbotSection = () => {
   };
 
   const handleTextToSpeech = (text) => {
+    if (!selectedVoice) return;
+
     const synth = window.speechSynthesis;
+    synth.cancel(); // Cancel any ongoing speech
+
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
     utterance.voice = selectedVoice;
+    utterance.lang = 'en-US';
     synth.speak(utterance);
   };
 
@@ -295,22 +243,11 @@ const ChatbotSection = () => {
               }}
             />
 
-            <button
-              id="voice-recorder"
-              type="button"
-              onClick={handleVoiceInput}
-              disabled={isListening || isLoading}
-              style={{
-                backgroundColor: isListening ? '#dc3545' : '#007bff',
-                border: 'none',
-                color: '#fff',
-                padding: '10px 15px',
-                borderRadius: '50%',
-                cursor: 'pointer'
-              }}
-            >
-              <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
-            </button>
+            <VoiceInput
+              onResult={handleVoiceResult}
+              disabled={isLoading}
+              buttonStyle={{ marginRight: '8px' }}
+            />
 
             <button
               id="submit-button"
@@ -350,7 +287,7 @@ const ChatbotSection = () => {
             >
               {voices.map((voice) => (
                 <option key={voice.name} value={voice.name}>
-                  {voice.name}
+                  {voice.name} ({voice.lang})
                 </option>
               ))}
             </select>
