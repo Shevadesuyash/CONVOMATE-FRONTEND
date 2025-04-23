@@ -62,11 +62,13 @@ const AuthProvider = ({ children }) => {
       setLoading(true);
       setError(null);
       const response = await api.register({ username, name, email });
-      const token = response.token;
-      if (!token) throw new Error('Token missing in response');
 
-      localStorage.setItem('token', token);
-      setAuthenticated(true);
+      if (response.message?.includes('success')) {
+        // Registration succeeded, optionally show a toast or redirect
+        return;
+      }
+
+      throw new Error(response.message || 'Registration failed');
     } catch (err) {
       setError(err.message || 'Registration failed');
       throw err;
