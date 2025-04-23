@@ -103,12 +103,7 @@ const ParagraphChecker = () => {
                 onChange={(e) => setInputText(e.target.value)}
               />
 
-        <div className="input-section">
-          <h3>Original Text:</h3>
-          <div className="input-display">
-            {highlightedOriginal.length > 0 ? highlightedOriginal : inputText}
-          </div>
-        </div>
+
 
         <div className="output-section">
           <h3>Corrected Text:</h3>

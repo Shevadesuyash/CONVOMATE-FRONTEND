@@ -32,30 +32,30 @@ const Header = () => {
               </li>
             )}
             <li>
-              <Link to="/about">About Us</Link>
+              <Link to="/">About Us</Link>
             </li>
             <li>
-              <Link to="/team">Team</Link>
+              <Link to="/">Team</Link>
             </li>
             <li className="menu-has-children">
               <Link to="/models">Models</Link>
               <ul>
                 <li>
+                  <Link to="/model/Chat-bot">Chat-bot</Link>
+                </li>
+                <li>
                   <Link to="/model/translator">Translator</Link>
                 </li>
                 <li>
-                  <Link to="/models/paragraph-checker">Paragraph Checker</Link>
+                  <Link to="/model/grammar-check">Paragraph Checker</Link>
                 </li>
                 <li>
-                  <Link to="/model/voice-to-text">/model/voice-to-text</Link>
-                </li>
-                <li>
-                  <Link to="/model/grammar-check">/model/grammar-check</Link>
+                  <Link to="/model/Summariser">Text Summarizer</Link>
                 </li>
               </ul>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/">Contact</Link>
             </li>
           </ul>
         </nav>

@@ -24,10 +24,10 @@ const ModelSection = () => {
 
             {/* Second Image Column */}
             <div className="col-lg-6">
-              <img alt="First Image" src={Image8} style={{ width: '50%', height: '70%' }} />
+              <img alt="First Image" src={Image11} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/voice-to-text" style={{ color: 'black' }}>Voice to text </Link>
+                <Link to="/model/Chat-bot" style={{ color: 'black' }}>ConvoMate Chatbot  </Link>
               </button>
             </div>
 
@@ -42,10 +42,10 @@ const ModelSection = () => {
 
             {/* Fourth Image Column */}
             <div className="col-lg-6">
-              <img alt="Fourth Image" src={Image11} style={{ width: '50%', height: 'auto' }} />
+              <img alt="Fourth Image" src={Image6} style={{ width: '50%', height: 'auto' }} />
               <br /><br />
               <button className="btn btn-primary">
-                <Link to="/model/translator" style={{ color: 'black' }}>ConvoMate ChatBot </Link>
+                <Link to="/model/Summariser" style={{ color: 'black' }}>Text Summarizer </Link>
               </button>
             </div>
           </div>
