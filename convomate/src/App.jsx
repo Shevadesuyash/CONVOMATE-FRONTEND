@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/Shared/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import PublicRoute from './components/Shared/PublicRoute';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 
 const ModelPage = lazy(() => import('./pages/ModelPage'));
@@ -25,8 +26,8 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/models" element={<ModelPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
+                <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
                 <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
                 <Route path="/model/grammar-check" element={<ProtectedRoute><ParagraphCheckerPage /></ProtectedRoute>} />
                 <Route path="/model/Chat-bot" element={<ChatbotPage />} />

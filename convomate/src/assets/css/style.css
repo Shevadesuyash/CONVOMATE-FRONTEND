@@ -80,6 +80,57 @@ h3 {
   color: #333;
 }
 
+/* Summarizer specific styles */
+/* Summary output container */
+.output-display {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+/* Summary content styling */
+.summary-result {
+  white-space: normal; /* Changed from pre-line */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Paragraph styling */
+.summary-paragraph {
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+/* Bullet point styling */
+.summary-result ul {
+  padding-left: 20px;
+  margin: 0 0 12px 0;
+  list-style-type: none;
+}
+
+.bullet-point {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 8px;
+}
+
+.bullet-point::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #333;
+}
+
+/* Minimal spacing between items */
+.summary-result br {
+  content: "";
+  display: block;
+  margin-bottom: 8px;
+}
 /* Reset default styles */
 body, h1, h2, h3, p, ul, li {
   margin: 0;
