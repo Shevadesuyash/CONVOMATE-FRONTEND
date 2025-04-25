@@ -1,3 +1,156 @@
+/*ParagraphChecker.css'; //  CSS for styling*/
+.grammar-checker-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.text-area-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.input-section, .output-section {
+  flex: 1;
+}
+
+.input-display, .output-display {
+  min-height: 200px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  white-space: pre-wrap;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.input-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.correct-button, .clear-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.correct-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.correct-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.clear-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.error-message {
+  color: #d32f2f;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #ffebee;
+  border-radius: 4px;
+}
+
+h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+/* Voice input button states */
+.voice-button {
+  transition: all 0.3s ease;
+}
+
+.voice-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Voice selection dropdown */
+#voice-select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-top: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Summarizer specific styles */
+/* Summary output container */
+.output-display {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  min-height: 200px;
+  overflow-y: auto;
+}
+
+/* Summary content styling */
+.summary-result {
+  white-space: normal; /* Changed from pre-line */
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+/* Paragraph styling */
+.summary-paragraph {
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+/* Bullet point styling */
+.summary-result ul {
+  padding-left: 20px;
+  margin: 0 0 12px 0;
+  list-style-type: none;
+}
+
+.bullet-point {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 8px;
+}
+
+.bullet-point::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #333;
+}
+
+/* Minimal spacing between items */
+.summary-result br {
+  content: "";
+  display: block;
+  margin-bottom: 8px;
+}
 /* Reset default styles */
 body, h1, h2, h3, p, ul, li {
   margin: 0;
@@ -95,10 +248,12 @@ button:hover {
 
 
 /* Chatbot Container */
+/* Chatbot Container */
+/* Chatbot Container */
 .chatbot-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 800px; /* Adjusted max width */
+  margin: 20px auto;
+  padding: 20px; /* Slightly reduced padding */
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f9f9f9;
@@ -107,29 +262,29 @@ button:hover {
 /* Header */
 #header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Slightly reduced margin */
 }
 
 /* Voice Selection Dropdown */
 .voice-selection {
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Slightly reduced margin */
   text-align: center;
 }
 
 .voice-selection label {
-  margin-right: 10px;
+  margin-right: 8px; /* Slightly reduced margin */
   font-weight: bold;
 }
 
 .voice-selection select {
-  padding: 8px;
+  padding: 6px; /* Reduced padding */
   border-radius: 5px;
   border: 1px solid #ccc;
   background-color: #fff;
   color: #333;
   font-size: 14px;
-  width: 100%;
-  max-width: 300px;
+  width: auto; /* Adjust width to content */
+  max-width: 200px; /* Reasonable max width */
 }
 
 .voice-selection select:focus {
@@ -140,115 +295,136 @@ button:hover {
 
 /* Chatbot */
 #chatbot {
+  height: 400px;
   display: flex;
   flex-direction: column;
-  height: 400px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
 }
 
 /* Conversation */
 #conversation {
-  flex: 1;
-  padding: 10px;
+  max-height: 380px; /* Adjusted max height */
   overflow-y: auto;
-  border-bottom: 1px solid #ddd;
+  padding: 0.8rem; /* Reduced padding */
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Reduced gap between messages */
+  flex: 1 1 auto;
 }
 
 /* Chatbot Message */
 .chatbot-message {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 80%;
+  max-width: 70%; /* Keep a reasonable max width */
+  padding: 8px 12px; /* Reduced padding inside messages */
+  border-radius: 15px; /* Slightly smaller radius */
+  position: relative;
+  font-size: 15px;
+  word-wrap: break-word;
 }
 
 .chatbot-message.user {
+  align-self: flex-end;
   background-color: #007bff;
   color: white;
-  align-self: flex-end;
+  border-bottom-right-radius: 0;
 }
 
 .chatbot-message.bot {
-  background-color: #f1f1f1;
-  color: black;
   align-self: flex-start;
+  background-color: #e9ecef;
+  color: #000;
+  border-bottom-left-radius: 0;
 }
 
 /* Speaker Button */
 .speaker-button {
+  position: absolute;
+  bottom: 5px; /* Adjusted position */
+  right: 8px; /* Adjusted position */
   background: none;
   border: none;
   color: inherit;
+  font-size: 14px; /* Slightly smaller icon */
   cursor: pointer;
-  margin-left: 10px;
+  opacity: 0.7; /* Slightly less prominent */
 }
 
 .speaker-button:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 /* Input Form */
 #input-form {
+  flex: 0 0 auto;
   display: flex;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ddd;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px; /* Reduced padding */
+  background: #fff;
+  border-top: 1px solid #dee2e6;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
 }
 
-/* Message Container */
+/* Message Container (Consider removing if not specifically needed) */
 .message-container {
   display: flex;
-  flex: 1;
-  gap: 10px;
+  flex-direction: column;
+  gap: 6px; /* Reduced gap */
+  padding: 6px; /* Reduced padding */
 }
 
 /* Input Field */
 #input-field {
+  font-size: 15px; /* Slightly smaller font */
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  resize: none; /* Prevent resizing */
-  overflow-y: auto; /* Add scrollbar if content overflows */
-  height: 40px; /* Fixed height */
-  max-height: 100px; /* Maximum height before scrolling */
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
 }
 
 /* Voice Recorder and Submit Button */
 #voice-recorder,
 #submit-button {
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
   background-color: #007bff;
+  border: none;
+  border-radius: 50%;
+  padding: 8px; /* Reduced padding */
   color: white;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 36px; /* Fixed width for circular buttons */
+  height: 36px; /* Fixed height for circular buttons */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #voice-recorder:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  background-color: #0056b3;
 }
 
 /* Error Message */
 .error-message {
   color: red;
-  margin: 10px 0;
+  margin: 8px 0; /* Reduced margin */
 }
 
-/* Voice Button Styling */
+/* Voice Button Styling (Redundant with #voice-recorder styling) */
 .voice-button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
-  margin-left: 10px;
+  padding: 4px; /* Reduced padding */
+  margin-left: 6px; /* Reduced margin */
+}
+
+#submit-button i,
+#voice-recorder i {
+  font-size: 16px; /* Slightly smaller icons */
 }
 
 .voice-button:hover {
@@ -263,11 +439,34 @@ button:hover {
 
 /* Animations for Chatbot Messages */
 .chatbot-message.user {
-  animation: slideInRight 0.5s ease-out;
+  animation: slideInRight 0.3s ease-out; /* Faster animation */
 }
 
 .chatbot-message.bot {
-  animation: slideInLeft 0.5s ease-out;
+  animation: slideInLeft 0.3s ease-out; /* Faster animation */
+}
+
+.chat-bubble { /* Consider removing if .chatbot-message covers all needs */
+  max-width: 70%;
+  padding: 8px 12px; /* Reduced padding */
+  border-radius: 15px; /* Slightly smaller radius */
+  line-height: 1.4;
+  font-size: 15px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  position: relative;
+}
+
+.user-message { /* Redundant with .chatbot-message.user */
+  align-self: flex-end;
+  background-color: #007bff;
+  color: white;
+}
+
+.bot-message { /* Redundant with .chatbot-message.bot */
+  align-self: flex-start;
+  background-color: #e9ecef;
+  color: black;
 }
 
 @keyframes slideInRight {

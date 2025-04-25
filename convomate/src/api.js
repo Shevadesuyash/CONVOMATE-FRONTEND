@@ -7,9 +7,18 @@ const apiCall = async (endpoint, method = 'GET', data = null, params = null) => 
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 
-  const url = params ? `${BASE_URL}${endpoint}?${new URLSearchParams(params)}` : `${BASE_URL}${endpoint}`;
-  const options = { method, headers, ...(data && { body: JSON.stringify(data) }) };
+  // For GET requests, we should use params, not body
+  let url = `${BASE_URL}${endpoint}`;
+  if (params || (method === 'GET' && data)) {
+    const queryParams = new URLSearchParams(params || data).toString();
+    url += `?${queryParams}`;
+  }
 
+  const options = {
+      method,
+      headers,
+      ...(method !== 'GET' && data && { body: JSON.stringify(data) })
+    };
   try {
     const response = await fetch(url, options);
 
@@ -22,18 +31,12 @@ const apiCall = async (endpoint, method = 'GET', data = null, params = null) => 
       throw new Error(errorText || `Request failed with status ${response.status}`);
     }
 
-    const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      return response.json();
-    } else {
-      return { message: await response.text() };
-    }
+    return response.json();
   } catch (error) {
     console.error(`API Call Error: ${endpoint}`, error);
     throw error;
   }
 };
-
 
 export default {
   register: (userData) => apiCall('/user/register', 'POST', userData),
@@ -47,5 +50,9 @@ export default {
   sendMail: (emailData) => apiCall('/model/sendMail', 'POST', emailData),
   test: () => apiCall('/model/test', 'GET'),
   translate: (data) => apiCall('/model/translate', 'POST', data),
-  grammarCheck: (data) => apiCall('/model/grammar-check', 'POST', data),
+  grammarCheck: (data) => apiCall('/model/correct_text', 'POST', data),
+  summarizeText: (data) => apiCall('/model/summarize', 'POST', data),
+  startChat: (params) => apiCall('/model/start', 'GET', null, params),
+  chatWithBot: (data) => apiCall('/model/chat', 'POST', data),
+
 };

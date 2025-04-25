@@ -1,14 +1,17 @@
 import React from 'react';
 import bgImage from '../../assets/img/intro-carousel/bg1.jpg';
+
 const LoginSection = ({
   email,
   setEmail,
   otp,
   setOtp,
   otpSent,
+  timer,
   error,
   loading,
   handleGenerateOtp,
+  handleResendOtp,
   handleSubmit,
 }) => {
   return (
@@ -39,31 +42,54 @@ const LoginSection = ({
           </div>
 
           {/* Send OTP Button */}
-          <button
-            type="button"
-            onClick={handleGenerateOtp}
-            disabled={loading}
-            style={styles.button}
-          >
-            {loading ? 'Sending...' : 'Send OTP'}
-          </button>
+          {!otpSent && (
+            <button
+              type="button"
+              onClick={handleGenerateOtp}
+              disabled={loading}
+              style={styles.button}
+            >
+              {loading ? 'Sending...' : 'Send OTP'}
+            </button>
+          )}
 
           {/* OTP Input Field (Visible only after sending OTP) */}
           {otpSent && (
-            <div style={styles.inputGroup}>
-              <label htmlFor="otp" style={styles.label}>OTP</label>
-              <input
-                type="text"
-                id="otp"
-                name="otp"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                required
+            <>
+              <div style={styles.inputGroup}>
+                <label htmlFor="otp" style={styles.label}>OTP</label>
+                <input
+                  type="text"
+                  id="otp"
+                  name="otp"
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  required
+                  disabled={loading}
+                  style={styles.input}
+                />
+              </div>
+
+              {/* Resend OTP Button */}
+              <button
+                type="button"
+                onClick={handleResendOtp}
+                disabled={timer > 0 || loading}
+                style={{ ...styles.button, backgroundColor: '#6c757d', marginTop: '10px' }}
+              >
+                Resend OTP {timer > 0 ? `(${timer}s)` : ''}
+              </button>
+
+              {/* Submit OTP Button */}
+              <button
+                type="submit"
                 disabled={loading}
-                style={styles.input}
-              />
-            </div>
+                style={{ ...styles.button, marginTop: '10px' }}
+              >
+                {loading ? 'Submitting...' : 'Submit OTP'}
+              </button>
+            </>
           )}
 
           {/* Registration Link */}
@@ -78,16 +104,15 @@ const LoginSection = ({
 
 /* INLINE CSS STYLES */
 const styles = {
-
-    container: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundImage: `url(${bgImage})`, // ✅ Use imported image
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   },
   formContainer: {
     backgroundColor: 'white',
@@ -97,12 +122,6 @@ const styles = {
     width: '400px',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: "url('/bg1.jpg')",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      zIndex: 1,
-
   },
   headingContainer: {
     display: 'flex',
@@ -112,28 +131,28 @@ const styles = {
   heading: {
     fontSize: '24px',
     fontWeight: 'bold',
-    color:'#5DDAB4',
+    color: '#5DDAB4',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
   },
   inputGroup: {
-    marginBottom: '20px', // ⬅ Increased spacing between fields
+    marginBottom: '20px',
   },
   label: {
     fontSize: '14px',
     fontWeight: 'bold',
-    marginBottom: '8px', // ⬅ Added gap between label and input
+    marginBottom: '8px',
     display: 'block',
   },
   input: {
     width: '100%',
-    padding: '12px', // ⬅ Increased padding inside input
+    padding: '12px',
     fontSize: '16px',
     border: '1px solid #ddd',
     borderRadius: '5px',
-    marginTop: '5px', // ⬅ Extra gap after label
+    marginTop: '5px',
   },
   button: {
     padding: '12px',
@@ -142,7 +161,7 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    marginTop: '15px', // ⬅ More space above button
+    marginTop: '15px',
   },
   registerText: {
     textAlign: 'center',
