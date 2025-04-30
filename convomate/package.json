@@ -1,17 +1,16 @@
 {
-  "name": "my-react-app",
+  "name": "convomate-frontend",
   "version": "1.0.0",
+  "private": true,
+  "homepage": ".",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "serve -s build -l $PORT"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
@@ -21,7 +20,8 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.2.0",
-    "serve": "^14.2.4"
+    "serve": "^14.2.4",
+    "web-vitals": "^3.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.9",
@@ -36,5 +36,17 @@
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
