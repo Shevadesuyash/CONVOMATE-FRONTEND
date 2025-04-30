@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: convomate-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    staticPublishPath: "./build"
+    startCommand: serve -s build -l $PORT
