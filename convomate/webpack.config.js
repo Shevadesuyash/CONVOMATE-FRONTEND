@@ -42,7 +42,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
           patterns: [
-            { from: 'public/_redirects', to: '_redirects' },
+//            { from: 'public/_redirects', to: '_redirects' },
+            {from: 'netlify.toml',to:''},
           ],
         }),
     new Dotenv({
