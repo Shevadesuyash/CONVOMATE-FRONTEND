@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../api';
 import "../../assets/css/style.css";
+import ErrorPopup from '../Sections/ErrorPopup'; //
 
 const Summariser = () => {
   const [inputText, setInputText] = useState('');
@@ -9,6 +10,7 @@ const Summariser = () => {
   const [error, setError] = useState('');
   const [summaryType, setSummaryType] = useState('paragraph');
   const [originalText, setOriginalText] = useState('');
+  const [errorPopupMessage, setErrorPopupMessage] = useState(''); // 👈 Error popup state
 
   const token = localStorage.getItem('jwtToken');
 
@@ -33,18 +35,21 @@ const Summariser = () => {
       );
 
       if (response && response.summarized_text) {
-        // Clean up the summarized text by removing excessive whitespace
         const cleanedText = response.summarized_text
-          .replace(/\n\s*\n/g, '\n') // Replace multiple newlines with single
-          .replace(/^\s+|\s+$/g, ''); // Trim whitespace from start/end
+          .replace(/\n\s*\n/g, '\n')
+          .replace(/^\s+|\s+$/g, '');
 
         setSummarizedText(cleanedText);
         setOriginalText(response.original_text || inputText);
       } else {
-        setError('No summarized text found.');
+        const message = 'No summarized text found.';
+        setError(message);
+        setErrorPopupMessage(message);
       }
     } catch (err) {
-      setError(err.message || 'Failed to summarize text. Please try again.');
+      const message = err.message || 'Failed to summarize text. Please try again.';
+      setError(message);
+      setErrorPopupMessage(message.includes('504') ? 'Server timeout. Please try again. (504 Gateway Timeout)' : message);
     } finally {
       setLoading(false);
     }
@@ -57,33 +62,31 @@ const Summariser = () => {
     setError('');
   };
 
-const formatSummaryText = (text) => {
-  if (!text) return null;
+  const formatSummaryText = (text) => {
+    if (!text) return null;
 
-  // Normalize whitespace - replace multiple newlines with single, trim spaces
-  const normalizedText = text
-    .replace(/\n\s*\n/g, '\n')  // Replace multiple newlines with single
-    .replace(/^\s+|\s+$/g, ''); // Trim start/end whitespace
+    const normalizedText = text
+      .replace(/\n\s*\n/g, '\n')
+      .replace(/^\s+|\s+$/g, '');
 
-  // Split by newlines but filter out empty lines
-  const paragraphs = normalizedText.split('\n').filter(p => p.trim().length > 0);
+    const paragraphs = normalizedText.split('\n').filter(p => p.trim().length > 0);
 
-  return paragraphs.map((paragraph, index) => (
-    <React.Fragment key={index}>
-      {paragraph.startsWith('- ') ? (
-        <li className="bullet-point">{paragraph.substring(2)}</li>
-      ) : (
-        <p className="summary-paragraph">{paragraph}</p>
-      )}
-      {/* Add minimal spacing between items */}
-      {index < paragraphs.length - 1 && <br />}
-    </React.Fragment>
-  ));
-};
+    return paragraphs.map((paragraph, index) => (
+      <React.Fragment key={index}>
+        {paragraph.startsWith('- ') ? (
+          <li className="bullet-point">{paragraph.substring(2)}</li>
+        ) : (
+          <p className="summary-paragraph">{paragraph}</p>
+        )}
+        {index < paragraphs.length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
 
   return (
     <div className="summariser-container">
       <h2>Text Summarizer</h2>
+
       <div className="controls">
         <div className="summary-type-selector">
           <label>
@@ -135,6 +138,7 @@ const formatSummaryText = (text) => {
         </div>
       </div>
 
+      {/* Inline error if any */}
       {error && <div className="error-message">{error}</div>}
 
       <div className="button-container">
@@ -163,6 +167,12 @@ const formatSummaryText = (text) => {
           </p>
         </div>
       )}
+
+      {/* ErrorPopup integration */}
+      <ErrorPopup
+        message={errorPopupMessage}
+        onClose={() => setErrorPopupMessage('')}
+      />
     </div>
   );
 };
