@@ -16,16 +16,20 @@ const LoginSection = ({
 }) => {
   return (
     <div style={styles.container}>
+      {/* Central Error Popup */}
+      {error && (
+        <div style={styles.popup}>
+          <p style={styles.popupText}>{error}</p>
+        </div>
+      )}
+
       <div style={styles.formContainer}>
-        {/* Heading with Proper Alignment */}
         <div style={styles.headingContainer}>
           <h2 style={styles.heading}>Login</h2>
         </div>
 
-        {error && <div style={styles.error}>{error}</div>}
-
         <form onSubmit={handleSubmit} style={styles.form}>
-          {/* Email Section with More Spacing */}
+          {/* Email Input */}
           <div style={styles.inputGroup}>
             <label htmlFor="email" style={styles.label}>Email</label>
             <input
@@ -53,7 +57,7 @@ const LoginSection = ({
             </button>
           )}
 
-          {/* OTP Input Field (Visible only after sending OTP) */}
+          {/* OTP Input and Buttons */}
           {otpSent && (
             <>
               <div style={styles.inputGroup}>
@@ -71,7 +75,6 @@ const LoginSection = ({
                 />
               </div>
 
-              {/* Resend OTP Button */}
               <button
                 type="button"
                 onClick={handleResendOtp}
@@ -81,7 +84,6 @@ const LoginSection = ({
                 Resend OTP {timer > 0 ? `(${timer}s)` : ''}
               </button>
 
-              {/* Submit OTP Button */}
               <button
                 type="submit"
                 disabled={loading}
@@ -92,7 +94,6 @@ const LoginSection = ({
             </>
           )}
 
-          {/* Registration Link */}
           <p style={styles.registerText}>
             Not registered? <a href="/register" style={styles.link}>Register/Signup here</a>
           </p>
@@ -102,7 +103,7 @@ const LoginSection = ({
   );
 };
 
-/* INLINE CSS STYLES */
+/* Styles */
 const styles = {
   container: {
     display: 'flex',
@@ -113,6 +114,23 @@ const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
+    position: 'relative',
+  },
+  popup: {
+    position: 'absolute',
+    top: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    backgroundColor: '#f44336',
+    color: 'white',
+    padding: '10px 20px',
+    borderRadius: '8px',
+    zIndex: 1000,
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.2)',
+    fontWeight: 'bold',
+  },
+  popupText: {
+    margin: 0,
   },
   formContainer: {
     backgroundColor: 'white',
@@ -171,11 +189,6 @@ const styles = {
     color: '#007bff',
     textDecoration: 'none',
     fontWeight: 'bold',
-  },
-  error: {
-    color: 'red',
-    textAlign: 'center',
-    marginBottom: '10px',
   },
 };
 

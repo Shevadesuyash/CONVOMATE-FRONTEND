@@ -1,10 +1,10 @@
-// convomate/src/components/Sections/ChatbotSection.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import '../../assets/css/style.css';
 import api from '../../api';
 import VoiceInput from './VoiceInput';
 import { loadVoices, getDefaultVoice } from './voiceUtils';
+import ErrorPopup from './ErrorPopup';
 
 const ChatbotSection = () => {
   const [messages, setMessages] = useState([]);
@@ -13,6 +13,7 @@ const ChatbotSection = () => {
   const [selectedVoice, setSelectedVoice] = useState(null);
   const [conversationStarted, setConversationStarted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const conversationRef = useRef(null);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ChatbotSection = () => {
       }
     } catch (error) {
       console.error('Error starting conversation:', error);
-      setMessages([{ text: 'Failed to start conversation. Please try again.', sender: 'bot' }]);
+      setError('Failed to start conversation. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -97,6 +98,7 @@ const ChatbotSection = () => {
         ...prev,
         { text: 'Sorry, there was an error processing your message.', sender: 'bot', isError: true }
       ]);
+      setError('An error occurred while sending your message.');
     } finally {
       setIsLoading(false);
     }
@@ -106,7 +108,7 @@ const ChatbotSection = () => {
     if (!selectedVoice) return;
 
     const synth = window.speechSynthesis;
-    synth.cancel(); // Cancel any ongoing speech
+    synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = selectedVoice;
@@ -114,13 +116,17 @@ const ChatbotSection = () => {
     synth.speak(utterance);
   };
 
+  const handleClosePopup = () => {
+    setError('');
+  };
+
   return (
     <div className="chatbot-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
       <h2 style={{ textAlign: 'center' }}>Chat-bot Chat</h2>
 
-      <div id="chatbot" style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '20px', backgroundColor: '#fdfdfd' }}>
+      {error && <ErrorPopup message={error} onClose={handleClosePopup} />}
 
-        {/* Conversation Box */}
+      <div id="chatbot" style={{ border: '1px solid #ccc', borderRadius: '10px', padding: '20px', backgroundColor: '#fdfdfd' }}>
         <div
           id="conversation"
           ref={conversationRef}
@@ -135,11 +141,7 @@ const ChatbotSection = () => {
           }}
         >
           {!conversationStarted && messages.length === 0 && (
-            <div className="start-conversation-prompt" style={{
-              textAlign: 'center',
-              padding: '20px',
-              color: '#666'
-            }}>
+            <div className="start-conversation-prompt" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
               <p>Click "Start Conversation" to begin chatting with the bot</p>
             </div>
           )}
@@ -203,7 +205,6 @@ const ChatbotSection = () => {
           )}
         </div>
 
-        {/* Controls */}
         {!conversationStarted ? (
           <div style={{ textAlign: 'center' }}>
             <button
@@ -265,7 +266,6 @@ const ChatbotSection = () => {
               <i className="fa fa-paper-plane"></i>
             </button>
 
-            {/* Voice selector */}
             <select
               title="Select Voice"
               value={selectedVoice ? selectedVoice.name : ''}
