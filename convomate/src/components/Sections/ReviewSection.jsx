@@ -89,8 +89,12 @@ const ReviewSection = () => {
               <div className="validation"></div>
             </div>
             <div className="text-center">
-              <button type="submit" disabled={loading}>
-                {loading ? 'Submitting...' : 'Send Message'}
+              <button
+                type="submit"
+                disabled={loading}
+                className="submit-button"
+              >
+                {loading ? 'Submitting...' : 'Submit'}
               </button>
             </div>
           </form>

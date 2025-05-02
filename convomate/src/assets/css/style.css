@@ -8068,3 +8068,28 @@ tbody.collapse.show {
   font-size: 0.875rem;
   line-height: 1.5;
 }
+
+/*submit button*/
+
+.submit-button {
+  background-color: #000080; /* Bootstrap Primary Blue */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
