@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import api from '../../api';
 import { diffWords } from 'diff';
 import "../../assets/css/style.css";
+import VoiceInput from './VoiceInput';
+import ErrorPopup from './ErrorPopup';
 
 const ParagraphChecker = () => {
   const [inputText, setInputText] = useState('');
@@ -48,7 +50,6 @@ const ParagraphChecker = () => {
 
     const differences = diffWords(original, corrected);
 
-    // Highlight original text (red for removed parts)
     const originalHighlighted = differences.map((part, index) => {
       if (part.removed) {
         return (
@@ -64,7 +65,6 @@ const ParagraphChecker = () => {
       );
     });
 
-    // Highlight corrected text (green for added parts)
     const correctedHighlighted = differences.map((part, index) => {
       if (part.added) {
         return (
@@ -92,18 +92,31 @@ const ParagraphChecker = () => {
     setError('');
   };
 
+  const handleVoiceResult = (transcript) => {
+    setInputText(transcript);
+  };
+
+  const handleClosePopup = () => {
+    setError('');
+  };
+
   return (
     <div className="grammar-checker-container">
       <h2>Paragraph Grammar Checker</h2>
       <div className="text-area-container">
-      <textarea
-                className="input-textarea"
-                placeholder="Type your paragraph here..."
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-              />
-
-
+        <div className="input-with-voice">
+          <textarea
+            className="input-textarea"
+            placeholder="Type your paragraph here..."
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+          />
+          <VoiceInput
+            onResult={handleVoiceResult}
+            language="en-US"
+            buttonStyle={{ marginLeft: '8px' }}
+          />
+        </div>
 
         <div className="output-section">
           <h3>Corrected Text:</h3>
@@ -115,9 +128,7 @@ const ParagraphChecker = () => {
       </div>
 
       <div className="controls">
-
-
-        {error && <div className="error-message">{error}</div>}
+        {error && <ErrorPopup message={error} onClose={handleClosePopup} />}
 
         <div className="button-container">
           <button

@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack'); // Add this line
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     publicPath: '/', // Ensure correct routing for React Router
   },
@@ -39,6 +40,11 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html',
     }),
+    new CopyWebpackPlugin({
+          patterns: [
+            {from: 'netlify.toml',to:''},
+          ],
+        }),
     new Dotenv({
       path: './.env', // Path to your .env file
       safe: true, // Ensures all variables are defined
