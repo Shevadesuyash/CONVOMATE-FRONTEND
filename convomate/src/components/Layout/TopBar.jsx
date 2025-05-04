@@ -7,8 +7,8 @@ const TopBar = () => {
       <div className="container">
         <div className="contact-info">
           <i className="fa fa-envelope-o"></i>
-          <a href="mailto:contact@example.com">convomate@star.com</a>
-          <i className="fa fa-phone"></i> +1 5589 55488 55
+          <a href="mailto:convomate.contact@gmail.com">convomate.contact@gmail.com</a>
+          <i className="fa fa-phone"></i> 9359782454
         </div>
         <div className="social-links">
 
