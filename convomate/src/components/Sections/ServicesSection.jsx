@@ -9,36 +9,36 @@ const ServicesSection = () => {
           <p>Following are the services provided by our Convomate!</p>
         </div>
 
-        <div className="row">
+<div className="row">
           <div className="col-lg-6 mb-4"> {/* Added mb-4 for spacing */}
             <div className="box wow fadeInLeft">
-              <div className="icon"><i className="fa fa-bar-chart"></i></div>
-              <h4 className="title"><a href="#">Voice Convomate</a></h4>
-              <p className="description">User can communicate with the bot by entering text or by voice, Convomate will correct any grammatical mistake in it and will have a casual communicate with you as a human.</p>
+              <div className="icon"><i className="fa fa-check-square-o"></i></div> {/* Changed icon */}
+              <h4 className="title"><a href="#">Grammar Checker</a></h4> {/* Updated title */}
+              <p className="description">Ensure your writing is clear and error-free. This tool helps you identify and correct grammatical mistakes, spelling errors, and punctuation issues in your text.</p> {/* Updated description */}
             </div>
           </div>
           <div className="col-lg-6 mb-4"> {/* Added mb-4 for spacing */}
             <div className="box wow fadeInRight">
-              <div className="icon"><i className="fa fa-picture-o"></i></div>
-              <h4 className="title"><a href="#">Text to Voice</a></h4>
-              <p className="description">Convert text to voice and vice-versa. Additionally, it can transcribe spoken words into text with high accuracy, making communication smoother and more efficient.</p>
+              <div className="icon"><i className="fa fa-commenting-o"></i></div> {/* Changed icon */}
+              <h4 className="title"><a href="#">ConvoMate Chatbot</a></h4> {/* Updated title */}
+              <p className="description">Engage in natural and helpful conversations. This chatbot can understand your queries, provide information, and assist you with various tasks in a conversational manner.</p> {/* Updated description */}
             </div>
           </div>
           <div className="col-lg-6 mb-4"> {/* Added mb-4 for spacing */}
             <div className="box wow fadeInRight" data-wow-delay="0.2s">
-              <div className="icon"><i className="fa fa-map"></i></div>
-              <h4 className="title"><a href="#">Paragraph Checker</a></h4>
-              <p className="description">Correct grammatical errors in written paragraphs.on.Automatically detect and correct grammatical errors in written paragraphs with precision. This feature analyzes sentence structure, punctuation, spelling, and word usage to enhance clarity and readability.</p>
+              <div className="icon"><i className="fa fa-language"></i></div> {/* Changed icon */}
+              <h4 className="title"><a href="#">Language Translator</a></h4> {/* Updated title */}
+              <p className="description">Break down language barriers. This tool allows you to translate text from one language to another, facilitating communication across different linguistic communities.</p> {/* Updated description */}
             </div>
           </div>
           <div className="col-lg-6 mb-4"> {/* Added mb-4 for spacing */}
             <div className="box wow fadeInLeft" data-wow-delay="0.2s">
-              <div className="icon"><i className="fa fa-shopping-bag"></i></div>
-              <h4 className="title"><a href="#">Learning Basics of a Language</a></h4>
-              <p className="description">Learn basic phrases of foreign languages like Japanese, French, German, etc.Enhance your communication skills by learning essential phrases in foreign languages such as Japanese, French, German, and more. This feature provides  help to navigate different linguistic and cultural contexts.</p>
+              <div className="icon"><i className="fa fa-file-text-o"></i></div> {/* Changed icon */}
+              <h4 className="title"><a href="#">Text Summarizer</a></h4> {/* Updated title */}
+              <p className="description">Get the key information quickly. This tool can condense long pieces of text into concise summaries, saving you time and effort in understanding the main points.</p> {/* Updated description */}
             </div>
           </div>
-        </div>
+</div>
       </div>
     </section>
   );
