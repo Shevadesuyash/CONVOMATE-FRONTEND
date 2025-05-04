@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../../assets/css/style.css";
-import introImage from '../../assets/img/intro-carousel/3.1.jpeg'; // Import the image
+import introImage from '../../assets/img/4.jpeg'; // Import the image
 
 const IntroSection = () => {
   return (

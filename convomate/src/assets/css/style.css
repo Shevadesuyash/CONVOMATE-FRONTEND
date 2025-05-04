@@ -920,7 +920,12 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 700px; /* Adjust image size */
     height: 500px;
 }
-
+.intro-image img {
+    width: 500%;
+    max-width: 700px;
+    height: auto;
+    object-fit: contain;
+}
 .intro-content {
     text-align: right;  /* Aligns text to the right */
     display: flex;
@@ -5768,14 +5773,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #33fff5;
+  border-color: #33fff5;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #33ecff;
+  border-color: #33ecff;
 }
 
 .btn-primary:focus, .btn-primary.focus {
