@@ -8093,3 +8093,22 @@ tbody.collapse.show {
   cursor: not-allowed;
 }
 
+.summarize-button {
+  background-color: #007bff; /* Blue background */
+  color: white;               /* White text */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: inline-block !important;
+  transition: background-color 0.3s ease;
+}
+
+.summarize-button:hover {
+  background-color: #0056b3; /* Darker on hover */
+}
+
+
