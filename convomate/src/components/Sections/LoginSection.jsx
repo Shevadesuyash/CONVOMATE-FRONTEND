@@ -18,7 +18,10 @@ const LoginSection = ({
     <div style={styles.container}>
       {/* Central Error Popup */}
       {error && (
-        <div style={styles.popup}>
+        <div style={{
+          ...styles.popup,
+          backgroundColor: error.includes('success') ? '#4CAF50' : '#f44336'  // Green if success, Red if failure
+        }}>
           <p style={styles.popupText}>{error}</p>
         </div>
       )}
@@ -121,7 +124,7 @@ const styles = {
     top: '20px',
     left: '50%',
     transform: 'translateX(-50%)',
-    backgroundColor: '#f44336',
+    backgroundColor: '#f44336', //Default red color, will be overridden by condition
     color: 'white',
     padding: '10px 20px',
     borderRadius: '8px',
