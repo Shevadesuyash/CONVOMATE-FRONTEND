@@ -56,7 +56,7 @@ const languages = [
 
 const TranslationModule = () => {
   const [fromLanguage, setFromLanguage] = useState('auto');
-  const [toLanguage, setToLanguage] = useState(''); // Initialize as empty string
+  const [toLanguage, setToLanguage] = useState('');
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [error, setError] = useState(null);
@@ -73,7 +73,11 @@ const TranslationModule = () => {
   }, []);
 
   const handleVoiceResult = (transcript) => {
-    setTextToTranslate(transcript);
+    setTextToTranslate((prevText) => prevText + (prevText ? ' ' : '') + transcript);
+  };
+
+  const handleClearText = () => {
+    setTextToTranslate('');
   };
 
   const handleTextToSpeech = () => {
@@ -109,7 +113,7 @@ const TranslationModule = () => {
     try {
       const data = {
         from_language: fromLangCode,
-        to_language: toLangCode || toLanguage, // Use typed value if no code found
+        to_language: toLangCode || toLanguage,
         text_to_translate: textToTranslate,
       };
       const response = await api.translate(data);
@@ -173,6 +177,20 @@ const TranslationModule = () => {
           font-size: 14px;
           margin-top: 10px;
         }
+
+        .input-controls {
+          display: flex;
+          align-items: center;
+        }
+
+        .input-controls > textarea {
+          flex-grow: 1;
+          margin-right: 10px;
+        }
+
+        .input-controls > button {
+          margin-left: 10px;
+        }
       `}</style>
 
       <form onSubmit={(e) => e.preventDefault()}>
@@ -210,10 +228,10 @@ const TranslationModule = () => {
 
         {/* Text to Translate */}
         <label htmlFor="textToTranslate">Text to Translate:</label>
-        <div className="input-container">
+        <div className="input-controls">
           <textarea
             id="textToTranslate"
-            rows="4"
+            rows="5"
             value={textToTranslate}
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
@@ -223,6 +241,9 @@ const TranslationModule = () => {
             language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
             buttonStyle={{ marginLeft: '8px' }}
           />
+          <button type="button" onClick={handleClearText} className="clear-button" >
+            Clear
+          </button>
         </div>
 
         <button type="button" onClick={handleTranslate}>
