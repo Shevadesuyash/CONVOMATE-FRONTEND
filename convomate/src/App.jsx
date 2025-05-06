@@ -9,6 +9,7 @@ import PublicRoute from './components/Shared/PublicRoute';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 
 const ModelPage = lazy(() => import('./pages/ModelPage'));
+const TeamPage = lazy(() => import('./pages/TeamPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const TranslationModulePage = lazy(() => import('./pages/TranslationModulePage'));
@@ -26,6 +27,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/model" element={<ModelPage />} />
+                <Route path="/team" element={<TeamPage />} />
                 <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
                 <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
                 <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
