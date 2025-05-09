@@ -227,7 +227,9 @@ const TranslationModule = () => {
         </datalist>
 
         {/* Text to Translate */}
+        <div>
         <label htmlFor="textToTranslate">Text to Translate:</label>
+        </div>
         <div className="input-controls">
           <textarea
             id="textToTranslate"
@@ -236,19 +238,24 @@ const TranslationModule = () => {
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
           ></textarea>
-          <VoiceInput
-            onResult={handleVoiceResult}
-            language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
-            buttonStyle={{ marginLeft: '8px' }}
-          />
-          <button type="button" onClick={handleClearText} className="clear-button" >
-            Clear
-          </button>
-        </div>
 
-        <button type="button" onClick={handleTranslate}>
-          Translate
-        </button>
+        </div>
+        <div>
+                  <VoiceInput
+                    onResult={handleVoiceResult}
+                    language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
+                    buttonStyle={{ marginLeft: '8px' }}
+                  />
+
+                  <button type="button" onClick={handleClearText} className="clear-button" >
+                    Clear
+                  </button>
+                  <button type="button" onClick={handleTranslate}>
+                            Translate
+                          </button>
+                  </div>
+
+
 
         {/* Error Popup */}
         {error && (
@@ -269,6 +276,8 @@ const TranslationModule = () => {
             value={translatedText}
             readOnly
           ></textarea>
+          </div>
+          <div>
           <button
             type="button"
             onClick={handleTextToSpeech}

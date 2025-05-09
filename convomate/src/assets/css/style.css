@@ -971,7 +971,7 @@ a:hover, a:active, a:focus {
 
 /* Translation Module */
 #translator {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 50px auto;
   background-color: #fff;
   padding: 20px;
@@ -980,16 +980,15 @@ a:hover, a:active, a:focus {
 }
 
 #translator h2 {
-  color: #343a40;
+  color: #343a40; /* translator button colour change */
   text-align: center;
   margin-bottom: 20px;
 }
 
 #translator select,
-#translator textarea,
-#translator button {
+ {
   margin-bottom: 15px;
-  width: 100%;
+  width: 10%;
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid #ddd;
@@ -997,15 +996,35 @@ a:hover, a:active, a:focus {
 }
 
 #translator button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+                     padding: 10px 130px;
+                     margin-top: 10px;
+                     font-size: 16px;
+                     margin-bottom: .9rem;
+                     border: none;
+                     border-radius: 5px;
+                     cursor: pointer;
+                     align: center;
+                   }
+#translator textarea {
+                      color: #fff;
+                      border: auto;
+                      cursor: pointer;
+                      transition: background-color 0.3s ease;
+                    }
+
+ #translator button {
+                     background-color: #50d8af;
+                     color: #fff;
+                     border: none;
+                     margin-right: 140px;
+                     cursor: pointer;
+                     transition: background-color 0.3s ease;
+                     align: center;
+                     justify-content: center;
+                   }
 
 #translator button:hover {
-  background-color: #0056b3;
+  background-color: #50d8af;
 }
 
 #translator textarea {
@@ -1014,6 +1033,7 @@ a:hover, a:active, a:focus {
 
 #translatedText {
   margin-top: 20px;
+  max-width: 1200px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   padding: 10px;
@@ -3838,7 +3858,7 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: .5rem;
+  margin-bottom: .9rem;
 }
 
 button {
