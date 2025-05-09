@@ -38,35 +38,57 @@ const VoiceInput = ({ onResult, language = 'en-US', buttonStyle = {}, disabled =
     };
   }, [language, onResult]);
 
-  const toggleListening = () => {
-    if (!recognition) return;
+  const startListening = () => {
+    if (!recognition || disabled) return;
+    recognition.start();
+    setIsListening(true);
+  };
 
-    if (isListening) {
+  const stopListening = () => {
+    if (recognition && isListening) {
       recognition.stop();
-    } else {
-      recognition.start();
-      setIsListening(true);
+      setIsListening(false);
     }
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggleListening}
-      disabled={!recognition || disabled}
-      style={{
-        backgroundColor: isListening ? '#dc3545' : '#007bff',
-        border: 'none',
-        color: '#fff',
-        padding: '10px 15px',
-        borderRadius: '50%',
-        cursor: 'pointer',
-        position: 'relative',
-        ...buttonStyle
-      }}
-      title={isListening ? 'Stop listening' : 'Start voice input'}
-    >
-      <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      {!isListening ? (
+        <button
+          type="button"
+          onClick={startListening}
+          disabled={!recognition || disabled}
+          style={{
+            backgroundColor: '#007bff',
+            border: 'none',
+            color: '#fff',
+            padding: '10px 15px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            ...buttonStyle
+          }}
+          title="Start voice input"
+        >
+          <i className="fa fa-microphone"></i>
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={stopListening}
+          style={{
+            backgroundColor: '#dc3545',
+            border: 'none',
+            color: '#fff',
+            padding: '10px 15px',
+            borderRadius: '50%',
+            cursor: 'pointer',
+            ...buttonStyle
+          }}
+          title="Stop listening"
+        >
+          <i className="fa fa-microphone-slash"></i>
+        </button>
+      )}
       {isListening && (
         <span style={{
           position: 'absolute',
@@ -79,7 +101,7 @@ const VoiceInput = ({ onResult, language = 'en-US', buttonStyle = {}, disabled =
           animation: 'pulse 1.5s infinite'
         }}></span>
       )}
-    </button>
+    </div>
   );
 };
 

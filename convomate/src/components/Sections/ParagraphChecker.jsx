@@ -103,29 +103,32 @@ const ParagraphChecker = () => {
   return (
     <div className="grammar-checker-container">
       <h2>Paragraph Grammar Checker</h2>
-      <div className="text-area-container">
-        <div className="input-with-voice">
+      <div className="text-area-row">
+        <div className="input-section">
+            <h3 className="box-title1">Input Text</h3>
           <textarea
             className="input-textarea"
             placeholder="Type your paragraph here..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
-          <VoiceInput
-            onResult={handleVoiceResult}
-            language="en-US"
-            buttonStyle={{ marginLeft: '8px' }}
-          />
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+            <VoiceInput
+              onResult={handleVoiceResult}
+              language="en-US"
+              buttonStyle={{ marginTop: '10px' }}
+            />
+          </div>
         </div>
 
         <div className="output-section">
-          <h3>Corrected Text:</h3>
+          <h3 className="box-title2">Corrected Text</h3>
           <div className="output-display">
-            {highlightedCorrected.length > 0 ? highlightedCorrected :
-             correctedText || 'Corrected text will appear here...'}
+            {highlightedCorrected.length > 0 ? highlightedCorrected : correctedText || 'Corrected text will appear here...'}
           </div>
         </div>
       </div>
+
 
       <div className="controls">
         {error && <ErrorPopup message={error} onClose={handleClosePopup} />}

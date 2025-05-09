@@ -32,7 +32,11 @@ const ChatbotSection = () => {
   }, [messages]);
 
   const handleVoiceResult = (transcript) => {
-    setInputText(transcript);
+    setInputText((prevText) => prevText + (prevText ? ' ' : '') + transcript);
+  };
+
+  const handleClearInput = () => {
+    setInputText('');
   };
 
   const startConversation = async () => {
@@ -249,6 +253,24 @@ const ChatbotSection = () => {
               disabled={isLoading}
               buttonStyle={{ marginRight: '8px' }}
             />
+
+            <button
+              type="button"
+              onClick={handleClearInput}
+              disabled={isLoading}
+              className="clear-button"
+              style={{
+                backgroundColor: '#6c757d',
+                border: 'none',
+                color: '#fff',
+                padding: '10px 15px',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                marginRight: '8px',
+              }}
+            >
+              Clear
+            </button>
 
             <button
               id="submit-button"
