@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import api from '../../api';
 import "../../assets/css/style.css";
-import ErrorPopup from '../Sections/ErrorPopup'; //
+import ErrorPopup from '../Sections/ErrorPopup';
+import VoiceInput from '../Sections/VoiceInput'; // 👈 Make sure you have this component
 
 const Summariser = () => {
   const [inputText, setInputText] = useState('');
@@ -10,7 +11,7 @@ const Summariser = () => {
   const [error, setError] = useState('');
   const [summaryType, setSummaryType] = useState('paragraph');
   const [originalText, setOriginalText] = useState('');
-  const [errorPopupMessage, setErrorPopupMessage] = useState(''); // 👈 Error popup state
+  const [errorPopupMessage, setErrorPopupMessage] = useState('');
 
   const token = localStorage.getItem('jwtToken');
 
@@ -49,7 +50,11 @@ const Summariser = () => {
     } catch (err) {
       const message = err.message || 'Failed to summarize text. Please try again.';
       setError(message);
-      setErrorPopupMessage(message.includes('504') ? 'Server timeout. Please try again. (504 Gateway Timeout)' : message);
+      setErrorPopupMessage(
+        message.includes('504')
+          ? 'Server timeout. Please try again. (504 Gateway Timeout)'
+          : message
+      );
     } finally {
       setLoading(false);
     }
@@ -60,6 +65,10 @@ const Summariser = () => {
     setSummarizedText('');
     setOriginalText('');
     setError('');
+  };
+
+  const handleVoiceResult = (transcript) => {
+    setInputText((prevText) => `${prevText} ${transcript}`.trim());
   };
 
   const formatSummaryText = (text) => {
@@ -110,19 +119,19 @@ const Summariser = () => {
         </div>
       </div>
 
-      <div className="text-area-container">
-        <div className="input-section">
+      <div className="text-area-row">
+        <div className="text-box">
           <h3>Original Text:</h3>
           <textarea
             className="input-textarea"
             placeholder="Type or paste your text here..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            rows={8}
+            rows={14}
           />
         </div>
 
-        <div className="output-section">
+        <div className="text-box">
           <h3>Summarized Text:</h3>
           <div className="output-display">
             {loading ? (
@@ -138,10 +147,14 @@ const Summariser = () => {
         </div>
       </div>
 
-      {/* Inline error if any */}
       {error && <div className="error-message">{error}</div>}
 
       <div className="button-container">
+        <VoiceInput
+          onResult={handleVoiceResult}
+          language="en-US"
+          buttonStyle={{}}
+        />
         <button
           onClick={handleSummarize}
           disabled={loading || !inputText.trim()}
@@ -163,12 +176,14 @@ const Summariser = () => {
           <p>
             Original length: {originalText.split(' ').length} words |
             Summary length: {summarizedText.split(' ').length} words |
-            Reduction: {Math.round(100 - (summarizedText.split(' ').length / originalText.split(' ').length * 100))}%
+            Reduction: {Math.round(
+              100 -
+              (summarizedText.split(' ').length / originalText.split(' ').length) * 100
+            )}%
           </p>
         </div>
       )}
 
-      {/* ErrorPopup integration */}
       <ErrorPopup
         message={errorPopupMessage}
         onClose={() => setErrorPopupMessage('')}
