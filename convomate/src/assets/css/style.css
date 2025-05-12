@@ -1,10 +1,13 @@
 /*ParagraphChecker.css'; //  CSS for styling*/
-.grammar-checker-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.grammar-checker-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 60px;
+  min-height: 100vh;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  text-align: center;
 }
 
 .text-area-container {
@@ -28,7 +31,8 @@
 }
 
 .controls {
-  margin-top: 20px;
+  margin-top: 10px;
+  width:100%;
 }
 
 .input-textarea {
@@ -171,12 +175,7 @@ html {
 section {
   padding: 60px 0;
 }
-.grammar-checker-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
-}
+
 
 .text-area-container {
   display: flex;
@@ -8487,23 +8486,47 @@ tbody.collapse.show {
 
 .text-area-row {
                  display: flex;
-                 justify-content: space-between;
+                 justify-content: flex-start;
                  align-items: flex-start;
-                 gap: 40px;
-                 margin: 30px 0;
-                 flex-wrap: wrap;
+                 gap: 30px;
                }
 
-.input-section,
-.output-section {
-  flex: 1;
-  min-width: 45%;;
+.input-section-3,
+.output-section-3 {
+                    display: flex;
+                    flex-direction: column;
+                    width: 400px;
+                  }
+
+.input-textarea-3 {
+  width: 400px;
+  height: 350px;
+  margin-right:70px;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  resize: none;
 }
 
-.input-textarea /* paragraph checker*/
-{
-  width: 100%;
+.output-display-3 {
+  width: 400px;
   height: 350px;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  resize: none;
+}
+
+/*
+.input-textarea-3 -->paragrapgh
+{
+  width: 400px;
+  height: 300px;
+  margin-right:120px;
   padding: 15px;
   font-size: 16px;
   border-radius: 8px;
@@ -8514,9 +8537,10 @@ tbody.collapse.show {
   text-align: left;
 }
 
-.output-display { /*Done 2*/
-                  width: 100%;
-                  height: 350px;
+.output-display-3 {
+                  width: 400px;
+                  height: 300px;
+                  margin-left:180px;
                   padding: 15px;
                   font-size: 16px;
                   border-radius: 8px;
@@ -8526,8 +8550,8 @@ tbody.collapse.show {
                   background-color: #fff;
                   text-align: left;
                 }
-
-.output-display {
+*/
+.output-display-3 {
   background-color: #f8f8f8;
   overflow-y: auto;
 
@@ -8592,7 +8616,7 @@ tbody.collapse.show {
   resize: none;
 }
 
-.output-display {
+.output-display-4 {
   background-color: #f8f8f8;
   overflow-y: auto;
 }

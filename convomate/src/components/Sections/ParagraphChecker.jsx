@@ -104,19 +104,19 @@ const ParagraphChecker = () => {
     <div className="grammar-checker-container">
       <h2>Paragraph Grammar Checker</h2>
       <div className="text-area-row">
-        <div className="input-section">
+        <div className="input-section-3">
           <h3 className="box-title1">Input Text</h3>
           <textarea
-            className="input-textarea"
+            className="input-textarea-3"
             placeholder="Type your paragraph here..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
         </div>
 
-        <div className="output-section">
+        <div className="output-section-3">
           <h3 className="box-title2">Corrected Text</h3>
-          <div className="output-display">
+          <div className="output-display-3">
             {highlightedCorrected.length > 0 ? highlightedCorrected : correctedText || 'Corrected text will appear here...'}
           </div>
         </div>
