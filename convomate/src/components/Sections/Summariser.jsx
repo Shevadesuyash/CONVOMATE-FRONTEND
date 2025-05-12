@@ -123,7 +123,7 @@ const Summariser = () => {
         <div className="text-box">
           <h3>Original Text:</h3>
           <textarea
-            className="input-textarea"
+            className="input-textarea-4"
             placeholder="Type or paste your text here..."
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -133,7 +133,7 @@ const Summariser = () => {
 
         <div className="text-box">
           <h3>Summarized Text:</h3>
-          <div className="output-display">
+          <div className="output-display-4">
             {loading ? (
               <div className="loading-spinner">Summarizing...</div>
             ) : summarizedText ? (
