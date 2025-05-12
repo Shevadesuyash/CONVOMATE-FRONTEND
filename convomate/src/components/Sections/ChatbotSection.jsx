@@ -126,7 +126,7 @@ const ChatbotSection = () => {
 
   return (
     <div className="chatbot-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ textAlign: 'center' }}>Chat-bot Chat</h2>
+      <h2 style={{ textAlign: 'center', width:'75%' }}>Chat-bot Chat</h2>
 
       {error && <ErrorPopup message={error} onClose={handleClosePopup} />}
 
