@@ -56,7 +56,7 @@ const languages = [
 
 const TranslationModule = () => {
   const [fromLanguage, setFromLanguage] = useState('auto');
-  const [toLanguage, setToLanguage] = useState(null);
+  const [toLanguage, setToLanguage] = useState('');
   const [textToTranslate, setTextToTranslate] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const [error, setError] = useState(null);
@@ -73,7 +73,11 @@ const TranslationModule = () => {
   }, []);
 
   const handleVoiceResult = (transcript) => {
-    setTextToTranslate(transcript);
+    setTextToTranslate((prevText) => prevText + (prevText ? ' ' : '') + transcript);
+  };
+
+  const handleClearText = () => {
+    setTextToTranslate('');
   };
 
   const handleTextToSpeech = () => {
@@ -97,10 +101,19 @@ const TranslationModule = () => {
       setError('Please select the "To Language".');
       return;
     }
+    // Find the language code based on the selected/typed label
+    const fromLangCode = languages.find(lang => lang.label === fromLanguage)?.code || 'auto';
+    const toLangCode = languages.find(lang => lang.label === toLanguage)?.code;
+
+    if (!toLangCode && toLanguage !== '') {
+      setError('Invalid "To Language" selected.');
+      return;
+    }
+
     try {
       const data = {
-        from_language: fromLanguage,
-        to_language: toLanguage,
+        from_language: fromLangCode,
+        to_language: toLangCode || toLanguage,
         text_to_translate: textToTranslate,
       };
       const response = await api.translate(data);
@@ -164,6 +177,20 @@ const TranslationModule = () => {
           font-size: 14px;
           margin-top: 10px;
         }
+
+        .input-controls {
+          display: flex;
+          align-items: center;
+        }
+
+        .input-controls > textarea {
+          flex-grow: 1;
+          margin-right: 10px;
+        }
+
+        .input-controls > button {
+          margin-left: 10px;
+        }
       `}</style>
 
       <form onSubmit={(e) => e.preventDefault()}>
@@ -191,27 +218,44 @@ const TranslationModule = () => {
           onChange={(e) => setToLanguage(e.target.value)}
           placeholder="Type or select a language"
         />
+        <datalist id="languages">
+          {languages.map((lang) => (
+            <option key={lang.label} value={lang.label}>
+              {lang.label}
+            </option>
+          ))}
+        </datalist>
 
         {/* Text to Translate */}
+        <div>
         <label htmlFor="textToTranslate">Text to Translate:</label>
-        <div className="input-container">
+        </div>
+        <div className="input-controls">
           <textarea
             id="textToTranslate"
-            rows="4"
+            rows="5"
             value={textToTranslate}
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
           ></textarea>
-          <VoiceInput
-            onResult={handleVoiceResult}
-            language={fromLanguage === 'auto' ? 'en-US' : fromLanguage}
-            buttonStyle={{ marginLeft: '8px' }}
-          />
-        </div>
 
-        <button type="button" onClick={handleTranslate}>
-          Translate
-        </button>
+        </div>
+        <div>
+                  <VoiceInput
+                    onResult={handleVoiceResult}
+                    language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
+                    buttonStyle={{ marginLeft: '8px' }}
+                  />
+
+                  <button type="button" onClick={handleClearText} className="clear-button" >
+                    Clear
+                  </button>
+                  <button type="button" onClick={handleTranslate}>
+                            Translate
+                          </button>
+                  </div>
+
+
 
         {/* Error Popup */}
         {error && (
@@ -232,6 +276,8 @@ const TranslationModule = () => {
             value={translatedText}
             readOnly
           ></textarea>
+          </div>
+          <div>
           <button
             type="button"
             onClick={handleTextToSpeech}

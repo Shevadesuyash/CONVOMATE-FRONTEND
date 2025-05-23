@@ -15,7 +15,7 @@ const ModelSection = () => {
           <div className="row">
             {/* First Image Column */}
             <div className="col-lg-6">
-              <img alt="Second Image" src={Image7} style={{ width: '50%', height: 'auto' }} />
+              <img alt="Second Image" src={Image7} style={{ width: '50%', height: '70' }} />
               <br /><br />
               <button className="btn btn-primary">
                 <Link to="/model/grammar-check" style={{ color: 'black' }}>Grammar Checker </Link>
@@ -33,7 +33,7 @@ const ModelSection = () => {
 
             {/* Third Image Column */}
             <div className="col-lg-6">
-              <img alt="Third Image" src={Image6} style={{ width: '50%', height: '65%' }} />
+              <img alt="Third Image" src={Image8} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
                 <Link to="/model/translator" style={{ color: 'black' }}>Language translator</Link>
@@ -42,7 +42,7 @@ const ModelSection = () => {
 
             {/* Fourth Image Column */}
             <div className="col-lg-6">
-              <img alt="Fourth Image" src={Image6} style={{ width: '50%', height: 'auto' }} />
+              <img alt="Fourth Image" src={Image6} style={{ width: '50%', height: '70%' }} />
               <br /><br />
               <button className="btn btn-primary">
                 <Link to="/model/Summariser" style={{ color: 'black' }}>Text Summarizer </Link>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../../assets/css/style.css";
-import introImage from '../../assets/img/intro-carousel/3.1.jpeg'; // Import the image
+import introImage from '../../assets/img/4.jpeg'; // Import the image
 
 const IntroSection = () => {
   return (
@@ -15,8 +15,8 @@ const IntroSection = () => {
       <div className="intro-content">
         <h2>An AI for,<br /><span>Better</span> Communication</h2>
         <div>
-          <Link to="/models" className="btn-get-started scrollto">Get Started</Link>
-          <Link to="/services" className="btn-projects scrollto">Our Models</Link>
+          <Link to="/model" className="btn-get-started scrollto">Get Started</Link>
+          <Link to="/model" className="btn-projects scrollto">Our Models</Link>
         </div>
       </div>
     </section>
