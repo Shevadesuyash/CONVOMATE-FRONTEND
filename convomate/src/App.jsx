@@ -30,10 +30,10 @@ const App = () => {
                 <Route path="/team" element={<TeamPage />} />
                 <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
                 <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
-                <Route path="/model/translator" element={<TranslationModulePage />} />
-                <Route path="/model/grammar-check" element={<ParagraphCheckerPage />} />
-                <Route path="/model/Chat-bot" element={<ChatbotPage />} />
-                <Route path="/model/Summariser" element={<SummariserPage/>} />
+                <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
+                <Route path="/model/grammar-check" element={<ProtectedRoute><ParagraphCheckerPage /></ProtectedRoute>} />
+                <Route path="/model/Chat-bot" element={<ProtectedRoute><ChatbotPage /></ProtectedRoute>} />
+                <Route path="/model/Summariser" element={<ProtectedRoute><SummariserPage/></ProtectedRoute>} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
