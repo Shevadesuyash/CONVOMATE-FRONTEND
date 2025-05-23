@@ -160,23 +160,19 @@ const ChatbotSection = () => {
                 marginBottom: '10px'
               }}
             >
-              <div
-                style={{
-                  backgroundColor: message.isCorrection ? '#fff3cd' :
-                                    message.isCompliment ? '#d4edda' :
-                                    message.isError ? '#f8d7da' :
-                                    message.sender === 'user' ? '#007bff' : '#e9ecef',
-                  color: message.sender === 'user' ? '#fff' : '#000',
-                  padding: '10px 15px',
-                  borderRadius: '20px',
-                  maxWidth: '70%',
-                  position: 'relative',
-                  border: message.isCorrection ? '1px solid #ffc107' :
-                         message.isCompliment ? '1px solid #28a745' :
-                         message.isError ? '1px solid #dc3545' : 'none'
-                }}
-              >
-                <p style={{ margin: 0 }}>{message.text}</p>
+              <div className={`message-bubble ${message.sender}
+                                  ${message.isCorrection ? 'correction' : ''}
+                                  ${message.isCompliment ? 'compliment' : ''}
+                                  ${message.isError ? 'error' : ''}`}>
+                <p style={{
+                  margin: 0,
+                  whiteSpace: 'pre-wrap',
+                  wordBreak: 'break-word',
+                  display: 'inline'
+                }}>
+                  {Array.isArray(message.text) ? message.text.join('') : String(message.text)}
+                </p>
+
                 {message.sender === 'bot' && (
                   <button
                     className="speaker-button"
