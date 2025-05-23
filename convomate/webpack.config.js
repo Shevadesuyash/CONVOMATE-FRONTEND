@@ -40,12 +40,6 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html',
     }),
-    new CopyWebpackPlugin({
-          patterns: [
-//            { from: 'public/_redirects', to: '_redirects' },
-            {from: 'netlify.toml',to:''},
-          ],
-        }),
     new Dotenv({
       path: './.env', // Path to your .env file
       safe: true, // Ensures all variables are defined
