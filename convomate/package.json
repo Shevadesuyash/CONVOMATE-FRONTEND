@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "webpack serve --mode development --port 2031",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -11,6 +11,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
     "diff": "^7.0.0",
@@ -25,6 +28,7 @@
     "@babel/preset-env": "^7.26.9",
     "@babel/preset-react": "^7.26.3",
     "babel-loader": "^9.2.1",
+    "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
     "dotenv-webpack": "^8.1.0",
     "html-webpack-plugin": "^5.6.3",

@@ -9,6 +9,7 @@ import PublicRoute from './components/Shared/PublicRoute';
 import ErrorBoundary from './components/Shared/ErrorBoundary';
 
 const ModelPage = lazy(() => import('./pages/ModelPage'));
+const TeamPage = lazy(() => import('./pages/TeamPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const TranslationModulePage = lazy(() => import('./pages/TranslationModulePage'));
@@ -25,13 +26,14 @@ const App = () => {
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/models" element={<ModelPage />} />
+                <Route path="/model" element={<ModelPage />} />
+                <Route path="/team" element={<TeamPage />} />
                 <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
                 <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
-                <Route path="/model/translator" element={<ProtectedRoute><TranslationModulePage /></ProtectedRoute>} />
-                <Route path="/model/grammar-check" element={<ProtectedRoute><ParagraphCheckerPage /></ProtectedRoute>} />
-                <Route path="/model/Chat-bot" element={<ProtectedRoute><ChatbotPage /></ProtectedRoute>} />
-                <Route path="/model/Summariser" element={<ProtectedRoute><SummariserPage/></ProtectedRoute>} />
+                <Route path="/model/translator" element={<TranslationModulePage />} />
+                <Route path="/model/grammar-check" element={<ParagraphCheckerPage />} />
+                <Route path="/model/Chat-bot" element={<ChatbotPage />} />
+                <Route path="/model/Summariser" element={<SummariserPage/>} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>

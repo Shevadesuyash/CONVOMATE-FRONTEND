@@ -35,10 +35,10 @@ const Header = () => {
               <Link to="/">About Us</Link>
             </li>
             <li>
-              <Link to="/">Team</Link>
+              <Link to="/Team">Team</Link>
             </li>
             <li className="menu-has-children">
-              <Link to="/models">Models</Link>
+              <Link to="/model">Models</Link>
               <ul>
                 <li>
                   <Link to="/model/Chat-bot">Chat-bot</Link>
