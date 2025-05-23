@@ -177,20 +177,12 @@ const TranslationModule = () => {
           font-size: 14px;
           margin-top: 10px;
         }
+    textarea {
+           color: black !important;
+           background-color: white !important;
+         }
 
-        .input-controls {
-          display: flex;
-          align-items: center;
-        }
 
-        .input-controls > textarea {
-          flex-grow: 1;
-          margin-right: 10px;
-        }
-
-        .input-controls > button {
-          margin-left: 10px;
-        }
       `}</style>
 
       <form onSubmit={(e) => e.preventDefault()}>
@@ -230,7 +222,7 @@ const TranslationModule = () => {
         <div>
         <label htmlFor="textToTranslate">Text to Translate:</label>
         </div>
-        <div className="input-controls">
+        <div className="input-container">
           <textarea
             id="textToTranslate"
             rows="5"
@@ -238,25 +230,22 @@ const TranslationModule = () => {
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
           ></textarea>
+          </div>
+                  <div>
+          <VoiceInput
+            onResult={handleVoiceResult}
+            language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
+            buttonStyle={{ marginLeft: '8px' }}
+          />
+          <button type="button" onClick={handleClearText} className="clear-button" >
+            Clear
+          </button>
 
+
+        <button type="button" onClick={handleTranslate}>
+          Translate
+        </button>
         </div>
-        <div>
-                  <VoiceInput
-                    onResult={handleVoiceResult}
-                    language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
-                    buttonStyle={{ marginLeft: '8px' }}
-                  />
-
-                  <button type="button" onClick={handleClearText} className="clear-button" >
-                    Clear
-                  </button>
-                  <button type="button" onClick={handleTranslate}>
-                            Translate
-                          </button>
-                  </div>
-
-
-
         {/* Error Popup */}
         {error && (
           <div className="error-popup-overlay">

@@ -441,6 +441,20 @@ button:hover {
   align-items: center;
 }
 
+.input-container {
+          display: flex;
+          align-items: center;
+        }
+
+        .input-container > textarea {
+          flex-grow: 1;
+          margin-right: 10px;
+        }
+
+        .input-container > button {
+          margin-left: 10px;
+        }
+
 /* Animations for Chatbot Messages */
 .chatbot-message.user {
   animation: slideInRight 0.3s ease-out; /* Faster animation */
