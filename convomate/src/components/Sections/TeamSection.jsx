@@ -46,20 +46,20 @@ const TeamSection = () => {
           fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
         },
         {
-                  id: 3,
-                  name: "Abhijeet Borkar",
-                  role: "Frontend Developer",
-                  image: Team3,
-                  bio: "Focuses on creating interactive user experiences with clean, maintainable code.",
-                  education: "B.Tech in Computer Science Engineering (2025)",
-                  skills: ["Java", "Python", "CSS", "ReactJs", "SQL"],
-                  social: {
-                    linkedin: "https://www.linkedin.com/in/abhijeet-borkar-586b97259/",
-                    github: "https://github.com/abhijeetborkar?tab=repositories",
-                    instagram: "#"
-                  },
-                  fullBio: "I'm a frontend developer specializing in React and TypeScript, focused on building scalable and maintainable applications. I’m passionate about state management and frontend performance optimization to create fast, seamless user experiences."
-                  },
+          id: 3,
+          name: "Abhijeet Borkar",
+          role: "Frontend Developer",
+          image: Team3,
+          bio: "Focuses on creating interactive user experiences with clean, maintainable code.",
+          education: "Information Technology Graduate",
+          skills: ["React", "Redux", "TypeScript", "Bootstrap"],
+          social: {
+            linkedin: "#",
+            github: "#",
+            instagram: "#"
+          },
+          fullBio: "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences."
+        },
         {
           id: 4,
           name: "Roshan Anand",
