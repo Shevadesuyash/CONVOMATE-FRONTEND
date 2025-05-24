@@ -126,7 +126,7 @@ const ParagraphChecker = () => {
         {error && <ErrorPopup message={error} onClose={handleClosePopup} />}
 
         {/* 🎯 Buttons all in one row */}
-        <div className="button-row">
+        <div className="checker-button-row">
           <VoiceInput
             onResult={handleVoiceResult}
             language="en-US"
@@ -135,11 +135,11 @@ const ParagraphChecker = () => {
           <button
             onClick={handleGrammarCheck}
             disabled={loading}
-            className="correct-button"
+            className="checker-correct-button"
           >
             {loading ? 'Checking...' : 'Correct'}
           </button>
-          <button onClick={handleClearText} className="clear-button">
+          <button onClick={handleClearText} className="checker-clear-button">
             Clear
           </button>
         </div>
