@@ -7,6 +7,8 @@ import Team4 from '../../assets/img/team-4.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faGraduationCap, faGlobe, faLightbulb, faHandsHelping, faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -39,7 +41,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
         },
@@ -54,7 +56,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences."
         },
@@ -69,7 +71,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "As our machine learning specialist, I develop and implement AI models to solve complex problems. My expertise includes natural language processing and predictive analytics. I'm passionate about making AI accessible and creating solutions that have real-world impact."
         }
@@ -117,9 +119,9 @@ const TeamSection = () => {
                         <a href={member.social.github} aria-label={`${member.name} GitHub`}>
                           <FontAwesomeIcon icon={faGithub} />
                         </a>
-                        {member.social.portfolio && (
-                          <a href={member.social.portfolio} aria-label={`${member.name} Portfolio`}>
-                            <FontAwesomeIcon icon={faGlobe} />
+                        {member.social.instagram && (
+                          <a href={member.social.instagram} aria-label={`${member.name} instagram`}>
+                            <FontAwesomeIcon icon={faInstagram} />
                           </a>
                         )}
                       </div>
@@ -151,9 +153,9 @@ const TeamSection = () => {
                   <a href={selectedMember.social.github} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faGithub} />
                   </a>
-                  {selectedMember.social.portfolio && (
-                    <a href={selectedMember.social.portfolio} target="_blank" rel="noopener noreferrer">
-                      <FontAwesomeIcon icon={faGlobe} />
+                  {selectedMember.social.instagram && (
+                    <a href={selectedMember.social.instagram} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={faInstagram} />
                     </a>
                   )}
                 </div>
