@@ -1,59 +1,60 @@
-import React, { useState } from 'react';
-import api from '../../api';
+import React, { useState } from "react";
+import api from "../../api";
 import "../../assets/css/style.css";
-import ErrorPopup from '../Sections/ErrorPopup';
-import VoiceInput from '../Sections/VoiceInput'; // 👈 Make sure you have this component
+import ErrorPopup from "../Sections/ErrorPopup";
+import VoiceInput from "../Sections/VoiceInput"; // 👈 Make sure you have this component
 
 const Summariser = () => {
-  const [inputText, setInputText] = useState('');
-  const [summarizedText, setSummarizedText] = useState('');
+  const [inputText, setInputText] = useState("");
+  const [summarizedText, setSummarizedText] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [summaryType, setSummaryType] = useState('paragraph');
-  const [originalText, setOriginalText] = useState('');
-  const [errorPopupMessage, setErrorPopupMessage] = useState('');
+  const [error, setError] = useState("");
+  const [summaryType, setSummaryType] = useState("paragraph");
+  const [originalText, setOriginalText] = useState("");
+  const [errorPopupMessage, setErrorPopupMessage] = useState("");
 
-  const token = localStorage.getItem('jwtToken');
+  const token = localStorage.getItem("jwtToken");
 
   const handleSummarize = async () => {
     if (!inputText.trim()) {
-      setError('Please enter text to summarize.');
+      setError("Please enter text to summarize.");
       return;
     }
 
-    setError('');
+    setError("");
     setLoading(true);
-    setSummarizedText('');
-    setOriginalText('');
+    setSummarizedText("");
+    setOriginalText("");
 
     try {
       const response = await api.summarizeText(
         {
           text: inputText,
-          type: summaryType
+          type: summaryType,
         },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${token}` } },
       );
 
       if (response && response.summarized_text) {
         const cleanedText = response.summarized_text
-          .replace(/\n\s*\n/g, '\n')
-          .replace(/^\s+|\s+$/g, '');
+          .replace(/\n\s*\n/g, "\n")
+          .replace(/^\s+|\s+$/g, "");
 
         setSummarizedText(cleanedText);
         setOriginalText(response.original_text || inputText);
       } else {
-        const message = 'No summarized text found.';
+        const message = "No summarized text found.";
         setError(message);
         setErrorPopupMessage(message);
       }
     } catch (err) {
-      const message = err.message || 'Failed to summarize text. Please try again.';
+      const message =
+        err.message || "Failed to summarize text. Please try again.";
       setError(message);
       setErrorPopupMessage(
-        message.includes('504')
-          ? 'Server timeout. Please try again. (504 Gateway Timeout)'
-          : message
+        message.includes("504")
+          ? "Server timeout. Please try again. (504 Gateway Timeout)"
+          : message,
       );
     } finally {
       setLoading(false);
@@ -61,10 +62,10 @@ const Summariser = () => {
   };
 
   const handleClearText = () => {
-    setInputText('');
-    setSummarizedText('');
-    setOriginalText('');
-    setError('');
+    setInputText("");
+    setSummarizedText("");
+    setOriginalText("");
+    setError("");
   };
 
   const handleVoiceResult = (transcript) => {
@@ -75,14 +76,16 @@ const Summariser = () => {
     if (!text) return null;
 
     const normalizedText = text
-      .replace(/\n\s*\n/g, '\n')
-      .replace(/^\s+|\s+$/g, '');
+      .replace(/\n\s*\n/g, "\n")
+      .replace(/^\s+|\s+$/g, "");
 
-    const paragraphs = normalizedText.split('\n').filter(p => p.trim().length > 0);
+    const paragraphs = normalizedText
+      .split("\n")
+      .filter((p) => p.trim().length > 0);
 
     return paragraphs.map((paragraph, index) => (
       <React.Fragment key={index}>
-        {paragraph.startsWith('- ') ? (
+        {paragraph.startsWith("- ") ? (
           <li className="bullet-point">{paragraph.substring(2)}</li>
         ) : (
           <p className="summary-paragraph">{paragraph}</p>
@@ -102,8 +105,8 @@ const Summariser = () => {
             <input
               type="radio"
               value="paragraph"
-              checked={summaryType === 'paragraph'}
-              onChange={() => setSummaryType('paragraph')}
+              checked={summaryType === "paragraph"}
+              onChange={() => setSummaryType("paragraph")}
             />
             Paragraph Summary
           </label>
@@ -111,8 +114,8 @@ const Summariser = () => {
             <input
               type="radio"
               value="points"
-              checked={summaryType === 'points'}
-              onChange={() => setSummaryType('points')}
+              checked={summaryType === "points"}
+              onChange={() => setSummaryType("points")}
             />
             Bullet Points
           </label>
@@ -141,7 +144,9 @@ const Summariser = () => {
                 {formatSummaryText(summarizedText)}
               </div>
             ) : (
-              <div className="placeholder">Summarized text will appear here...</div>
+              <div className="placeholder">
+                Summarized text will appear here...
+              </div>
             )}
           </div>
         </div>
@@ -160,7 +165,7 @@ const Summariser = () => {
           disabled={loading || !inputText.trim()}
           className="summarize-button"
         >
-          {loading ? 'Processing...' : 'Summarize'}
+          {loading ? "Processing..." : "Summarize"}
         </button>
         <button
           onClick={handleClearText}
@@ -174,19 +179,22 @@ const Summariser = () => {
       {originalText && summarizedText && (
         <div className="summary-stats">
           <p>
-            Original length: {originalText.split(' ').length} words |
-            Summary length: {summarizedText.split(' ').length} words |
-            Reduction: {Math.round(
+            Original length: {originalText.split(" ").length} words | Summary
+            length: {summarizedText.split(" ").length} words | Reduction:{" "}
+            {Math.round(
               100 -
-              (summarizedText.split(' ').length / originalText.split(' ').length) * 100
-            )}%
+                (summarizedText.split(" ").length /
+                  originalText.split(" ").length) *
+                  100,
+            )}
+            %
           </p>
         </div>
       )}
 
       <ErrorPopup
         message={errorPopupMessage}
-        onClose={() => setErrorPopupMessage('')}
+        onClose={() => setErrorPopupMessage("")}
       />
     </div>
   );

@@ -1,5 +1,5 @@
-import React from 'react';
-import Summariser from '../components/Sections/Summariser';
+import React from "react";
+import Summariser from "../components/Sections/Summariser";
 import "../assets/css/style.css";
 
 const SummariserPage = () => {

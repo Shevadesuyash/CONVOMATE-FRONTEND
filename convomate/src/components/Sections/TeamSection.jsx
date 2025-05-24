@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import '../../assets/css/style.css'; // Assuming your CSS is in this path
-import Team1 from '../../assets/img/team-1.jpeg';
-import Team2 from '../../assets/img/team-2.jpeg';
-import Team3 from '../../assets/img/team-3.jpeg';
-import Team4 from '../../assets/img/team-4.jpeg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faGraduationCap, faGlobe, faLightbulb, faHandsHelping, faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
-
+import React, { useState } from "react";
+import "../../assets/css/style.css"; // Assuming your CSS is in this path
+import Team1 from "../../assets/img/team-1.jpeg";
+import Team2 from "../../assets/img/team-2.jpeg";
+import Team3 from "../../assets/img/team-3.jpeg";
+import Team4 from "../../assets/img/team-4.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTimes,
+  faGraduationCap,
+  faGlobe,
+  faLightbulb,
+  faHandsHelping,
+  faBook,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
+import { faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -21,60 +28,71 @@ const TeamSection = () => {
       image: Team1,
       bio: "Java backend developer skilled in Spring Boot, PostgreSQL, and AWS. Passionate about building scalable and efficient systems.",
       education: "B.Tech in Computer Science Engineering (2025)",
-      skills: ["Java", "Spring Boot", "PostgreSQL", "Docker", "AWS", "Liquibase"],
+      skills: [
+        "Java",
+        "Spring Boot",
+        "PostgreSQL",
+        "Docker",
+        "AWS",
+        "Liquibase",
+      ],
       social: {
         linkedin: "https://www.linkedin.com/in/suyash-shevade-8b07a9236/",
         github: "https://github.com/Shevadesuyash",
-        instagram: "https://www.instagram.com/shevadesuyash30/"
+        instagram: "https://www.instagram.com/shevadesuyash30/",
       },
-      fullBio: "I am a backend developer with hands-on experience in Java and Spring Boot. I have worked on real-world projects during my internship at Brandspark Technologies, where I developed RESTful APIs, integrated AWS services, managed PostgreSQL databases, and used Docker for containerization. I am passionate about creating robust and scalable server-side applications and continuously improving my skills in backend technologies and DevOps tools."
+      fullBio:
+        "I am a backend developer with hands-on experience in Java and Spring Boot. I have worked on real-world projects during my internship at Brandspark Technologies, where I developed RESTful APIs, integrated AWS services, managed PostgreSQL databases, and used Docker for containerization. I am passionate about creating robust and scalable server-side applications and continuously improving my skills in backend technologies and DevOps tools.",
     },
-        {
-          id: 2,
-                    name: "Taranjeet Kaur",
-                    role: "Frontend Developer",
-                    image: Team2,
-                    bio: "Creative UI/UX enthusiast with expertise in React and modern CSS frameworks.",
-                    education: "Web Development Certification",
-                    skills: ["React", "JavaScript", "CSS3", "Responsive Design"],
-                    social: {
-                      linkedin: "https://www.linkedin.com/in/taranjeet-kaur-bhatova-549950239",
-                      github: "https://github.com/Taranjeet11kaur",
-                      instagram: "https://www.instagram.com/taran_1101_b"
-                    },
-                    fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
-
-          },
-        {
-          id: 3,
-          name: "Abhijeet Borkar",
-          role: "Frontend Developer",
-          image: Team3,
-          bio: "Focuses on creating interactive user experiences with clean, maintainable code.",
-          education: "Information Technology Graduate",
-          skills: ["React", "Redux", "TypeScript", "Bootstrap"],
-          social: {
-            linkedin: "#",
-            github: "#",
-            instagram: "#"
-          },
-          fullBio: "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences."
-        },
-        {
- id: 4,
-          name: "Roshan Anand",
-          role: "Machine Learning Engineer",
-          image: Team4,
-          bio: "Passionate about AI and data science. Enjoys implementing ML models to solve real-world problems.",
-          education: "AI & Machine Learning Specialization",
-          skills: ["Python", "TensorFlow", "Data Analysis", "NLP","SQL"],
-          social: {
-            linkedin: "http://www.linkedin.com/in/roshananand",
-            github: "https://github.com/Roshan2403",
-            instagram: "https://www.instagram.com/roshananand20/"
-          },
-          fullBio: "As our machine learning specialist, I develop and implement AI models to solve complex problems. My expertise includes natural language processing and predictive analytics. I'm passionate about making AI accessible and creating solutions that have real-world impact."
-          }
+    {
+      id: 2,
+      name: "Taranjeet Kaur",
+      role: "Frontend Developer",
+      image: Team2,
+      bio: "Creative UI/UX enthusiast with expertise in React and modern CSS frameworks.",
+      education: "Web Development Certification",
+      skills: ["React", "JavaScript", "CSS3", "Responsive Design"],
+      social: {
+        linkedin:
+          "https://www.linkedin.com/in/taranjeet-kaur-bhatova-549950239",
+        github: "https://github.com/Taranjeet11kaur",
+        instagram: "https://www.instagram.com/taran_1101_b",
+      },
+      fullBio:
+        "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use.",
+    },
+    {
+      id: 3,
+      name: "Abhijeet Borkar",
+      role: "Frontend Developer",
+      image: Team3,
+      bio: "Focuses on creating interactive user experiences with clean, maintainable code.",
+      education: "Information Technology Graduate",
+      skills: ["React", "Redux", "TypeScript", "Bootstrap"],
+      social: {
+        linkedin: "#",
+        github: "#",
+        instagram: "#",
+      },
+      fullBio:
+        "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences.",
+    },
+    {
+      id: 4,
+      name: "Roshan Anand",
+      role: "Machine Learning Engineer",
+      image: Team4,
+      bio: "Passionate about AI and data science. Enjoys implementing ML models to solve real-world problems.",
+      education: "AI & Machine Learning Specialization",
+      skills: ["Python", "TensorFlow", "Data Analysis", "NLP", "SQL"],
+      social: {
+        linkedin: "http://www.linkedin.com/in/roshananand",
+        github: "https://github.com/Roshan2403",
+        instagram: "https://www.instagram.com/roshananand20/",
+      },
+      fullBio:
+        "As our machine learning specialist, I develop and implement AI models to solve complex problems. My expertise includes natural language processing and predictive analytics. I'm passionate about making AI accessible and creating solutions that have real-world impact.",
+    },
   ];
 
   const handleMemberClick = (member) => {
@@ -90,37 +108,51 @@ const TeamSection = () => {
       <div>
         <div className="section-header">
           <h2>Meet Our Team</h2>
-          <p className="section-subtitle">A group of passionate freshers ready to make an impact</p>
+          <p className="section-subtitle">
+            A group of passionate freshers ready to make an impact
+          </p>
         </div>
 
         <div className="team-intro">
           <p>
-            We are a team of recent graduates and self-taught developers who believe in the power of
-            collaboration and continuous learning. Though we're new to the industry, we bring fresh
-            perspectives, up-to-date knowledge, and boundless enthusiasm to every project.
+            We are a team of recent graduates and self-taught developers who
+            believe in the power of collaboration and continuous learning.
+            Though we're new to the industry, we bring fresh perspectives,
+            up-to-date knowledge, and boundless enthusiasm to every project.
           </p>
         </div>
 
         <div className="team-members-grid">
-          <div className="row"> {/* Added a 'row' here to contain the grid items */}
+          <div className="row">
+            {" "}
+            {/* Added a 'row' here to contain the grid items */}
             {teamMembers.map((member) => (
               <div className="col-lg-3 col-md-6" key={member.id}>
                 <div
-                  className={`team-member-card ${selectedMember?.id === member.id ? 'active' : ''}`}
+                  className={`team-member-card ${selectedMember?.id === member.id ? "active" : ""}`}
                   onClick={() => handleMemberClick(member)}
                 >
                   <div className="member-image">
                     <img src={member.image} alt={member.name} />
                     <div className="image-overlay">
                       <div className="social-links">
-                        <a href={member.social.linkedin} aria-label={`${member.name} LinkedIn`}>
+                        <a
+                          href={member.social.linkedin}
+                          aria-label={`${member.name} LinkedIn`}
+                        >
                           <FontAwesomeIcon icon={faLinkedinIn} />
                         </a>
-                        <a href={member.social.github} aria-label={`${member.name} GitHub`}>
+                        <a
+                          href={member.social.github}
+                          aria-label={`${member.name} GitHub`}
+                        >
                           <FontAwesomeIcon icon={faGithub} />
                         </a>
                         {member.social.instagram && (
-                          <a href={member.social.instagram} aria-label={`${member.name} instagram`}>
+                          <a
+                            href={member.social.instagram}
+                            aria-label={`${member.name} instagram`}
+                          >
                             <FontAwesomeIcon icon={faInstagram} />
                           </a>
                         )}
@@ -147,14 +179,26 @@ const TeamSection = () => {
               <div className="details-left">
                 <img src={selectedMember.image} alt={selectedMember.name} />
                 <div className="social-links">
-                  <a href={selectedMember.social.linkedin} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={selectedMember.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <FontAwesomeIcon icon={faLinkedinIn} />
                   </a>
-                  <a href={selectedMember.social.github} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={selectedMember.social.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <FontAwesomeIcon icon={faGithub} />
                   </a>
                   {selectedMember.social.instagram && (
-                    <a href={selectedMember.social.instagram} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={selectedMember.social.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <FontAwesomeIcon icon={faInstagram} />
                     </a>
                   )}
@@ -174,7 +218,9 @@ const TeamSection = () => {
                   <h4>Skills & Expertise</h4>
                   <div className="skill-tags">
                     {selectedMember.skills.map((skill, index) => (
-                      <span key={index} className="skill-tag">{skill}</span>
+                      <span key={index} className="skill-tag">
+                        {skill}
+                      </span>
                     ))}
                   </div>
                 </div>
