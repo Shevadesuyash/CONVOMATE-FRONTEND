@@ -14,7 +14,6 @@ const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
 
   const teamMembers = [
-    // ... (your teamMembers array remains the same)
     {
       id: 1,
       name: "Suyash Shevade",
@@ -32,19 +31,20 @@ const TeamSection = () => {
     },
         {
           id: 2,
-          name: "Taranjeet Kaur",
-          role: "Frontend Developer",
-          image: Team2,
-          bio: "Creative UI/UX enthusiast with expertise in React and modern CSS frameworks.",
-          education: "Web Development Certification",
-          skills: ["React", "JavaScript", "CSS3", "Responsive Design"],
-          social: {
-            linkedin: "#",
-            github: "#",
-            instagram: "#"
+                    name: "Taranjeet Kaur",
+                    role: "Frontend Developer",
+                    image: Team2,
+                    bio: "Creative UI/UX enthusiast with expertise in React and modern CSS frameworks.",
+                    education: "Web Development Certification",
+                    skills: ["React", "JavaScript", "CSS3", "Responsive Design"],
+                    social: {
+                      linkedin: "https://www.linkedin.com/in/taranjeet-kaur-bhatova-549950239",
+                      github: "https://github.com/Taranjeet11kaur",
+                      instagram: "https://www.instagram.com/taran_1101_b"
+                    },
+                    fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
+
           },
-          fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
-        },
         {
           id: 3,
           name: "Abhijeet Borkar",
@@ -61,20 +61,20 @@ const TeamSection = () => {
           fullBio: "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences."
         },
         {
-          id: 4,
+ id: 4,
           name: "Roshan Anand",
           role: "Machine Learning Engineer",
           image: Team4,
           bio: "Passionate about AI and data science. Enjoys implementing ML models to solve real-world problems.",
           education: "AI & Machine Learning Specialization",
-          skills: ["Python", "TensorFlow", "Data Analysis", "NLP"],
+          skills: ["Python", "TensorFlow", "Data Analysis", "NLP","SQL"],
           social: {
-            linkedin: "#",
-            github: "#",
-            instagram: "#"
+            linkedin: "http://www.linkedin.com/in/roshananand",
+            github: "https://github.com/Roshan2403",
+            instagram: "https://www.instagram.com/roshananand20/"
           },
           fullBio: "As our machine learning specialist, I develop and implement AI models to solve complex problems. My expertise includes natural language processing and predictive analytics. I'm passionate about making AI accessible and creating solutions that have real-world impact."
-        }
+          }
   ];
 
   const handleMemberClick = (member) => {
