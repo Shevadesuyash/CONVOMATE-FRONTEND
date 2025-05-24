@@ -661,11 +661,14 @@ a:hover, a:active, a:focus {
 
 .team-member-card {
   background: #fff;
+  height: auto;
+  min-height: 500px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
+
 }
 
 .team-member-card:hover {
@@ -680,7 +683,7 @@ a:hover, a:active, a:focus {
 .member-image {
   position: relative;
   overflow: hidden;
-  height: 250px;
+  height: 450px;
 }
 
 .member-image img {
@@ -740,10 +743,13 @@ a:hover, a:active, a:focus {
 }
 
 .member-basic-info h3 {
-  margin-bottom: 5px;
+  margin: 0 auto 5px;
   color: #0c2e8a;
   font-size: 20px;
+  display: inline-block;
+  text-align: center;
 }
+
 
 .member-basic-info .role {
   color: #50d8af;
@@ -768,6 +774,7 @@ a:hover, a:active, a:focus {
   background: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
+  max-height: 800px;
   justify-content: center;
   z-index: 1000;
   padding: 20px;

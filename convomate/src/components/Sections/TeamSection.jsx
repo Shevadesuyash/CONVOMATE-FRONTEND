@@ -14,20 +14,20 @@ const TeamSection = () => {
   const teamMembers = [
     // ... (your teamMembers array remains the same)
     {
-          id: 1,
-          name: "Suyash Shevade",
-          role: "Backend Developer",
-          image: Team1,
-          bio: "Specializes in Node.js and database architecture. Passionate about building scalable server solutions.",
-          education: "Computer Science Graduate",
-          skills: ["Node.js", "Express", "MongoDB", "SQL"],
-          social: {
-            linkedin: "#",
-            github: "#",
-            portfolio: "#"
-          },
-          fullBio: "With a strong foundation in computer science, I specialize in backend development using Node.js. I have experience building RESTful APIs and working with both SQL and NoSQL databases. My passion lies in creating efficient, scalable server architectures that can handle high traffic loads while maintaining performance."
-        },
+      id: 1,
+      name: "Suyash Shevade",
+      role: "Backend Developer",
+      image: Team1,
+      bio: "Java backend developer skilled in Spring Boot, PostgreSQL, and AWS. Passionate about building scalable and efficient systems.",
+      education: "B.Tech in Computer Science Engineering (2025)",
+      skills: ["Java", "Spring Boot", "PostgreSQL", "Docker", "AWS", "Liquibase"],
+      social: {
+        linkedin: "https://www.linkedin.com/in/suyash-shevade-8b07a9236/",
+        github: "https://github.com/Shevadesuyash",
+        instagram: "https://www.instagram.com/shevadesuyash30/"
+      },
+      fullBio: "I am a backend developer with hands-on experience in Java and Spring Boot. I have worked on real-world projects during my internship at Brandspark Technologies, where I developed RESTful APIs, integrated AWS services, managed PostgreSQL databases, and used Docker for containerization. I am passionate about creating robust and scalable server-side applications and continuously improving my skills in backend technologies and DevOps tools."
+    },
         {
           id: 2,
           name: "Taranjeet Kaur",
