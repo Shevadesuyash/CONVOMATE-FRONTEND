@@ -1,7 +1,7 @@
-import React from 'react';
-import ParagraphChecker from '../components/Sections/ParagraphChecker';
+import React from "react";
+import ParagraphChecker from "../components/Sections/ParagraphChecker";
 import "../assets/css/style.css";
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 const ParagraphCheckerPage = () => {
   return (

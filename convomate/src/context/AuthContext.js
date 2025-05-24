@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import api from '../api';
+import React, { createContext, useState, useEffect, useContext } from "react";
+import api from "../api";
 
 const AuthContext = createContext();
 
@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   // Keep user logged in on page refresh
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) setAuthenticated(true);
     setLoading(false);
   }, []);
@@ -23,14 +23,14 @@ const AuthProvider = ({ children }) => {
       await api.generateOtp(email);
       return true;
     } catch (err) {
-      setError(err.message || 'Failed to generate OTP');
+      setError(err.message || "Failed to generate OTP");
       throw err;
     } finally {
       setLoading(false);
     }
   };
 
- const [authKey, setAuthKey] = useState(0);
+  const [authKey, setAuthKey] = useState(0);
 
   const login = async (email, otp) => {
     try {
@@ -38,13 +38,13 @@ const AuthProvider = ({ children }) => {
       setError(null);
       const response = await api.login(email, otp);
       const token = response.token;
-      if (!token) throw new Error('Token missing in response');
+      if (!token) throw new Error("Token missing in response");
 
-      localStorage.setItem('token', token);
+      localStorage.setItem("token", token);
       setAuthenticated(true);
       window.location.reload();
     } catch (err) {
-      setError(err.message || 'Login failed');
+      setError(err.message || "Login failed");
       throw err;
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setAuthenticated(false);
     window.location.reload();
   };
@@ -63,14 +63,14 @@ const AuthProvider = ({ children }) => {
       setError(null);
       const response = await api.register({ username, name, email });
 
-      if (response.message?.includes('success')) {
+      if (response.message?.includes("success")) {
         // Registration succeeded, optionally show a toast or redirect
         return;
       }
 
-      throw new Error(response.message || 'Registration failed');
+      throw new Error(response.message || "Registration failed");
     } catch (err) {
-      setError(err.message || 'Registration failed');
+      setError(err.message || "Registration failed");
       throw err;
     } finally {
       setLoading(false);
@@ -78,7 +78,17 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ authenticated, generateOtp, login, register, logout, error, loading }}>
+    <AuthContext.Provider
+      value={{
+        authenticated,
+        generateOtp,
+        login,
+        register,
+        logout,
+        error,
+        loading,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

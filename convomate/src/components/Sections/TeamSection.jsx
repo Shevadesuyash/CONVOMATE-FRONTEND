@@ -7,6 +7,8 @@ import Team4 from '../../assets/img/team-4.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faGraduationCap, faGlobe, faLightbulb, faHandsHelping, faBook, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faLinkedinIn, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -14,20 +16,20 @@ const TeamSection = () => {
   const teamMembers = [
     // ... (your teamMembers array remains the same)
     {
-          id: 1,
-          name: "Suyash Shevade",
-          role: "Backend Developer",
-          image: Team1,
-          bio: "Specializes in Node.js and database architecture. Passionate about building scalable server solutions.",
-          education: "Computer Science Graduate",
-          skills: ["Node.js", "Express", "MongoDB", "SQL"],
-          social: {
-            linkedin: "#",
-            github: "#",
-            portfolio: "#"
-          },
-          fullBio: "With a strong foundation in computer science, I specialize in backend development using Node.js. I have experience building RESTful APIs and working with both SQL and NoSQL databases. My passion lies in creating efficient, scalable server architectures that can handle high traffic loads while maintaining performance."
-        },
+      id: 1,
+      name: "Suyash Shevade",
+      role: "Backend Developer",
+      image: Team1,
+      bio: "Java backend developer skilled in Spring Boot, PostgreSQL, and AWS. Passionate about building scalable and efficient systems.",
+      education: "B.Tech in Computer Science Engineering (2025)",
+      skills: ["Java", "Spring Boot", "PostgreSQL", "Docker", "AWS", "Liquibase"],
+      social: {
+        linkedin: "https://www.linkedin.com/in/suyash-shevade-8b07a9236/",
+        github: "https://github.com/Shevadesuyash",
+        instagram: "https://www.instagram.com/shevadesuyash30/"
+      },
+      fullBio: "I am a backend developer with hands-on experience in Java and Spring Boot. I have worked on real-world projects during my internship at Brandspark Technologies, where I developed RESTful APIs, integrated AWS services, managed PostgreSQL databases, and used Docker for containerization. I am passionate about creating robust and scalable server-side applications and continuously improving my skills in backend technologies and DevOps tools."
+    },
         {
           id: 2,
           name: "Taranjeet Kaur",
@@ -39,7 +41,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "As a frontend developer, I bridge the gap between design and technology. I create beautiful, intuitive interfaces using React and modern CSS techniques. With a keen eye for design and user experience, I ensure our applications are not only functional but also delightful to use."
         },
@@ -54,7 +56,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "I specialize in building complex frontend applications with React and TypeScript. My focus is on creating maintainable, well-structured code that scales. I'm particularly interested in state management solutions and optimizing frontend performance for better user experiences."
         },
@@ -69,7 +71,7 @@ const TeamSection = () => {
           social: {
             linkedin: "#",
             github: "#",
-            portfolio: "#"
+            instagram: "#"
           },
           fullBio: "As our machine learning specialist, I develop and implement AI models to solve complex problems. My expertise includes natural language processing and predictive analytics. I'm passionate about making AI accessible and creating solutions that have real-world impact."
         }
@@ -117,9 +119,9 @@ const TeamSection = () => {
                         <a href={member.social.github} aria-label={`${member.name} GitHub`}>
                           <FontAwesomeIcon icon={faGithub} />
                         </a>
-                        {member.social.portfolio && (
-                          <a href={member.social.portfolio} aria-label={`${member.name} Portfolio`}>
-                            <FontAwesomeIcon icon={faGlobe} />
+                        {member.social.instagram && (
+                          <a href={member.social.instagram} aria-label={`${member.name} instagram`}>
+                            <FontAwesomeIcon icon={faInstagram} />
                           </a>
                         )}
                       </div>
@@ -151,9 +153,9 @@ const TeamSection = () => {
                   <a href={selectedMember.social.github} target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faGithub} />
                   </a>
-                  {selectedMember.social.portfolio && (
-                    <a href={selectedMember.social.portfolio} target="_blank" rel="noopener noreferrer">
-                      <FontAwesomeIcon icon={faGlobe} />
+                  {selectedMember.social.instagram && (
+                    <a href={selectedMember.social.instagram} target="_blank" rel="noopener noreferrer">
+                      <FontAwesomeIcon icon={faInstagram} />
                     </a>
                   )}
                 </div>

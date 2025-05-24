@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import api from '../../api';
+import React, { useState } from "react";
+import api from "../../api";
 
 const ReviewSection = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
       await api.submitReview(formData);
-      alert('Review submitted successfully!');
-      setFormData({ name: '', email: '', subject: '', message: '' }); // Reset form
+      alert("Review submitted successfully!");
+      setFormData({ name: "", email: "", subject: "", message: "" }); // Reset form
     } catch (err) {
-      setError(err.message || 'Failed to submit review.');
+      setError(err.message || "Failed to submit review.");
     } finally {
       setLoading(false);
     }
@@ -34,7 +34,12 @@ const ReviewSection = () => {
         </div>
         <div className="form">
           {error && <div className="alert alert-danger">{error}</div>}
-          <form onSubmit={handleSubmit} className="contactForm" method="post" role="form">
+          <form
+            onSubmit={handleSubmit}
+            className="contactForm"
+            method="post"
+            role="form"
+          >
             <div className="form-row">
               <div className="form-group col-md-6">
                 <input
@@ -44,7 +49,9 @@ const ReviewSection = () => {
                   placeholder="Your Name"
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   disabled={loading}
                 />
                 <div className="validation"></div>
@@ -57,7 +64,9 @@ const ReviewSection = () => {
                   placeholder="Your Email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   disabled={loading}
                 />
                 <div className="validation"></div>
@@ -71,7 +80,9 @@ const ReviewSection = () => {
                 placeholder="Subject"
                 type="text"
                 value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, subject: e.target.value })
+                }
                 disabled={loading}
               />
               <div className="validation"></div>
@@ -83,7 +94,9 @@ const ReviewSection = () => {
                 placeholder="Message"
                 rows="5"
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 disabled={loading}
               />
               <div className="validation"></div>
@@ -94,7 +107,7 @@ const ReviewSection = () => {
                 disabled={loading}
                 className="submit-button"
               >
-                {loading ? 'Submitting...' : 'Submit'}
+                {loading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

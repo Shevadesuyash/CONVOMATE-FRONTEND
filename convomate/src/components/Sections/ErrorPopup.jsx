@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const ErrorPopup = ({ message, onClose }) => {
   if (!message) return null;

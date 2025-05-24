@@ -7,15 +7,27 @@ const TopBar = () => {
       <div className="container">
         <div className="contact-info">
           <i className="fa fa-envelope-o"></i>
-          <a href="mailto:convomate.contact@gmail.com">convomate.contact@gmail.com</a>
+          <a href="mailto:convomate.contact@gmail.com">
+            convomate.contact@gmail.com
+          </a>
           <i className="fa fa-phone"></i> 9359782454
         </div>
         <div className="social-links">
-
-          <a href="https://www.facebook.com/" className="facebook"><i className="fa fa-facebook"></i></a>
-          <a href="https://www.instagram.com/accounts/login/?hl=en" className="instagram"><i className="fa fa-instagram"></i></a>
-          <a href="https://g.co/kgs/KxRpUCz" className="google-plus"><i className="fa fa-google-plus"></i></a>
-          <a href="https://in.linkedin.com/" className="linkedin"><i className="fa fa-linkedin"></i></a>
+          <a href="https://www.facebook.com/" className="facebook">
+            <i className="fa fa-facebook"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/accounts/login/?hl=en"
+            className="instagram"
+          >
+            <i className="fa fa-instagram"></i>
+          </a>
+          <a href="https://g.co/kgs/KxRpUCz" className="google-plus">
+            <i className="fa fa-google-plus"></i>
+          </a>
+          <a href="https://in.linkedin.com/" className="linkedin">
+            <i className="fa fa-linkedin"></i>
+          </a>
         </div>
       </div>
     </section>

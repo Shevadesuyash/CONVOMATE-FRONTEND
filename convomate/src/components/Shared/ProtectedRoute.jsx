@@ -1,12 +1,12 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
   const { authenticated, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;  // ✅ Wait until token check completes
+    return <div>Loading...</div>; // ✅ Wait until token check completes
   }
 
   if (!authenticated) {
@@ -15,6 +15,5 @@ const ProtectedRoute = ({ children }) => {
 
   return children;
 };
-
 
 export default ProtectedRoute;

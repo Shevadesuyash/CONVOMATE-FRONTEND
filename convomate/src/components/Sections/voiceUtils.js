@@ -14,15 +14,15 @@ export const loadVoices = () => {
 
 export const getDefaultVoice = (voices) => {
   // Try to find Google US English first
-  const googleUS = voices.find(voice =>
-    voice.name.includes('Google US English') ||
-    voice.name.includes('English United States')
+  const googleUS = voices.find(
+    (voice) =>
+      voice.name.includes("Google US English") ||
+      voice.name.includes("English United States"),
   );
 
   // Fallback to first English voice
-  const englishVoice = voices.find(voice =>
-    voice.lang.includes('en-US') ||
-    voice.lang.includes('en_GB')
+  const englishVoice = voices.find(
+    (voice) => voice.lang.includes("en-US") || voice.lang.includes("en_GB"),
   );
 
   return googleUS || englishVoice || voices[0];

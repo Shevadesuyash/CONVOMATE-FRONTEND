@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import LoginSection from '../components/Sections/LoginSection';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import LoginSection from "../components/Sections/LoginSection";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [timer, setTimer] = useState(30);
   const { generateOtp, login, error, loading } = useAuth();
@@ -15,11 +15,11 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await generateOtp(email);
-      console.log('OTP generated:', response);
+      console.log("OTP generated:", response);
       setOtpSent(true);
       setTimer(30);
     } catch (err) {
-      console.error('OTP generation failed:', err);
+      console.error("OTP generation failed:", err);
     }
   };
 
@@ -28,10 +28,10 @@ const LoginPage = () => {
     if (!otp) return;
     try {
       const response = await login(email, otp);
-      console.log('Login successful:', response);
-      navigate('/');
+      console.log("Login successful:", response);
+      navigate("/");
     } catch (err) {
-      console.error('Login failed:', err);
+      console.error("Login failed:", err);
     }
   };
 
@@ -40,7 +40,7 @@ const LoginPage = () => {
       await generateOtp(email);
       setTimer(30);
     } catch (err) {
-      console.error('OTP resend failed:', err);
+      console.error("OTP resend failed:", err);
     }
   };
 
