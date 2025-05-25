@@ -1,64 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../api';
-import '../../assets/css/style.css';
-import VoiceInput from './VoiceInput';
-import { loadVoices, getDefaultVoice } from './voiceUtils';
+import React, { useState, useEffect } from "react";
+import api from "../../api";
+import "../../assets/css/style.css";
+import VoiceInput from "./VoiceInput";
+import { loadVoices, getDefaultVoice } from "./voiceUtils";
 
 const languages = [
-  { code: 'auto', label: 'Auto Detect' },
-  { code: 'en', label: 'English' },
-  { code: 'hi', label: 'Hindi' },
-  { code: 'es', label: 'Spanish' },
-  { code: 'fr', label: 'French' },
-  { code: 'de', label: 'German' },
-  { code: 'zh-cn', label: 'Chinese (Simplified)' },
-  { code: 'zh-tw', label: 'Chinese (Traditional)' },
-  { code: 'ja', label: 'Japanese' },
-  { code: 'ko', label: 'Korean' },
-  { code: 'ru', label: 'Russian' },
-  { code: 'ar', label: 'Arabic' },
-  { code: 'pt', label: 'Portuguese' },
-  { code: 'it', label: 'Italian' },
-  { code: 'mr', label: 'Marathi' },
-  { code: 'bn', label: 'Bengali' },
-  { code: 'pa', label: 'Punjabi' },
-  { code: 'gu', label: 'Gujarati' },
-  { code: 'ur', label: 'Urdu' },
-  { code: 'tr', label: 'Turkish' },
-  { code: 'vi', label: 'Vietnamese' },
-  { code: 'id', label: 'Indonesian' },
-  { code: 'ms', label: 'Malay' },
-  { code: 'ta', label: 'Tamil' },
-  { code: 'te', label: 'Telugu' },
-  { code: 'th', label: 'Thai' },
-  { code: 'pl', label: 'Polish' },
-  { code: 'nl', label: 'Dutch' },
-  { code: 'sv', label: 'Swedish' },
-  { code: 'fa', label: 'Persian' },
-  { code: 'ro', label: 'Romanian' },
-  { code: 'uk', label: 'Ukrainian' },
-  { code: 'he', label: 'Hebrew' },
-  { code: 'fi', label: 'Finnish' },
-  { code: 'el', label: 'Greek' },
-  { code: 'cs', label: 'Czech' },
-  { code: 'hu', label: 'Hungarian' },
-  { code: 'sr', label: 'Serbian' },
-  { code: 'sk', label: 'Slovak' },
-  { code: 'bg', label: 'Bulgarian' },
-  { code: 'no', label: 'Norwegian' },
-  { code: 'da', label: 'Danish' },
-  { code: 'sw', label: 'Swahili' },
-  { code: 'fil', label: 'Filipino' },
-  { code: 'ne', label: 'Nepali' },
-  { code: 'si', label: 'Sinhala' },
-  { code: 'af', label: 'Afrikaans' },
+  { code: "auto", label: "Auto Detect" },
+  { code: "en", label: "English" },
+  { code: "hi", label: "Hindi" },
+  { code: "es", label: "Spanish" },
+  { code: "fr", label: "French" },
+  { code: "de", label: "German" },
+  { code: "zh-cn", label: "Chinese (Simplified)" },
+  { code: "zh-tw", label: "Chinese (Traditional)" },
+  { code: "ja", label: "Japanese" },
+  { code: "ko", label: "Korean" },
+  { code: "ru", label: "Russian" },
+  { code: "ar", label: "Arabic" },
+  { code: "pt", label: "Portuguese" },
+  { code: "it", label: "Italian" },
+  { code: "mr", label: "Marathi" },
+  { code: "bn", label: "Bengali" },
+  { code: "pa", label: "Punjabi" },
+  { code: "gu", label: "Gujarati" },
+  { code: "ur", label: "Urdu" },
+  { code: "tr", label: "Turkish" },
+  { code: "vi", label: "Vietnamese" },
+  { code: "id", label: "Indonesian" },
+  { code: "ms", label: "Malay" },
+  { code: "ta", label: "Tamil" },
+  { code: "te", label: "Telugu" },
+  { code: "th", label: "Thai" },
+  { code: "pl", label: "Polish" },
+  { code: "nl", label: "Dutch" },
+  { code: "sv", label: "Swedish" },
+  { code: "fa", label: "Persian" },
+  { code: "ro", label: "Romanian" },
+  { code: "uk", label: "Ukrainian" },
+  { code: "he", label: "Hebrew" },
+  { code: "fi", label: "Finnish" },
+  { code: "el", label: "Greek" },
+  { code: "cs", label: "Czech" },
+  { code: "hu", label: "Hungarian" },
+  { code: "sr", label: "Serbian" },
+  { code: "sk", label: "Slovak" },
+  { code: "bg", label: "Bulgarian" },
+  { code: "no", label: "Norwegian" },
+  { code: "da", label: "Danish" },
+  { code: "sw", label: "Swahili" },
+  { code: "fil", label: "Filipino" },
+  { code: "ne", label: "Nepali" },
+  { code: "si", label: "Sinhala" },
+  { code: "af", label: "Afrikaans" },
 ];
 
 const TranslationModule = () => {
-  const [fromLanguage, setFromLanguage] = useState('auto');
-  const [toLanguage, setToLanguage] = useState('');
-  const [textToTranslate, setTextToTranslate] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
+  const [fromLanguage, setFromLanguage] = useState("auto");
+  const [toLanguage, setToLanguage] = useState("");
+  const [textToTranslate, setTextToTranslate] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
   const [error, setError] = useState(null);
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
@@ -73,16 +73,18 @@ const TranslationModule = () => {
   }, []);
 
   const handleVoiceResult = (transcript) => {
-    setTextToTranslate((prevText) => prevText + (prevText ? ' ' : '') + transcript);
+    setTextToTranslate(
+      (prevText) => prevText + (prevText ? " " : "") + transcript,
+    );
   };
 
   const handleClearText = () => {
-    setTextToTranslate('');
+    setTextToTranslate("");
   };
 
   const handleTextToSpeech = () => {
     if (!translatedText || !selectedVoice) {
-      setError('No translated text or voice selected');
+      setError("No translated text or voice selected");
       return;
     }
 
@@ -91,7 +93,7 @@ const TranslationModule = () => {
 
     const utterance = new SpeechSynthesisUtterance(translatedText);
     utterance.voice = selectedVoice;
-    utterance.lang = toLanguage || 'en-US';
+    utterance.lang = toLanguage || "en-US";
     synth.speak(utterance);
   };
 
@@ -102,10 +104,13 @@ const TranslationModule = () => {
       return;
     }
     // Find the language code based on the selected/typed label
-    const fromLangCode = languages.find(lang => lang.label === fromLanguage)?.code || 'auto';
-    const toLangCode = languages.find(lang => lang.label === toLanguage)?.code;
+    const fromLangCode =
+      languages.find((lang) => lang.label === fromLanguage)?.code || "auto";
+    const toLangCode = languages.find(
+      (lang) => lang.label === toLanguage,
+    )?.code;
 
-    if (!toLangCode && toLanguage !== '') {
+    if (!toLangCode && toLanguage !== "") {
       setError('Invalid "To Language" selected.');
       return;
     }
@@ -122,11 +127,11 @@ const TranslationModule = () => {
       } else if (response.translatedText) {
         setTranslatedText(response.translatedText);
       } else {
-        setError('No translated text received from API.');
+        setError("No translated text received from API.");
       }
     } catch (err) {
-      setError('Translation failed. Please try again.');
-      console.error('Error during translation:', err);
+      setError("Translation failed. Please try again.");
+      console.error("Error during translation:", err);
     }
   };
 
@@ -177,20 +182,12 @@ const TranslationModule = () => {
           font-size: 14px;
           margin-top: 10px;
         }
+    textarea {
+           color: black !important;
+           background-color: white !important;
+         }
 
-        .input-controls {
-          display: flex;
-          align-items: center;
-        }
 
-        .input-controls > textarea {
-          flex-grow: 1;
-          margin-right: 10px;
-        }
-
-        .input-controls > button {
-          margin-left: 10px;
-        }
       `}</style>
 
       <form onSubmit={(e) => e.preventDefault()}>
@@ -228,9 +225,9 @@ const TranslationModule = () => {
 
         {/* Text to Translate */}
         <div>
-        <label htmlFor="textToTranslate">Text to Translate:</label>
+          <label htmlFor="textToTranslate">Text to Translate:</label>
         </div>
-        <div className="input-controls">
+        <div className="input-container">
           <textarea
             id="textToTranslate"
             rows="5"
@@ -238,25 +235,30 @@ const TranslationModule = () => {
             onChange={(e) => setTextToTranslate(e.target.value)}
             placeholder="Enter text here..."
           ></textarea>
-
         </div>
         <div>
-                  <VoiceInput
-                    onResult={handleVoiceResult}
-                    language={fromLanguage === 'auto' ? 'en-US' : languages.find(lang => lang.label === fromLanguage)?.code || 'en-US'}
-                    buttonStyle={{ marginLeft: '8px' }}
-                  />
+          <VoiceInput
+            onResult={handleVoiceResult}
+            language={
+              fromLanguage === "auto"
+                ? "en-US"
+                : languages.find((lang) => lang.label === fromLanguage)?.code ||
+                  "en-US"
+            }
+            buttonStyle={{ marginLeft: "8px" }}
+          />
+          <button
+            type="button"
+            onClick={handleClearText}
+            className="clear-button"
+          >
+            Clear
+          </button>
 
-                  <button type="button" onClick={handleClearText} className="clear-button" >
-                    Clear
-                  </button>
-                  <button type="button" onClick={handleTranslate}>
-                            Translate
-                          </button>
-                  </div>
-
-
-
+          <button type="button" onClick={handleTranslate}>
+            Translate
+          </button>
+        </div>
         {/* Error Popup */}
         {error && (
           <div className="error-popup-overlay">
@@ -276,8 +278,8 @@ const TranslationModule = () => {
             value={translatedText}
             readOnly
           ></textarea>
-          </div>
-          <div>
+        </div>
+        <div>
           <button
             type="button"
             onClick={handleTextToSpeech}
@@ -291,17 +293,17 @@ const TranslationModule = () => {
         <label htmlFor="voice-select">Select Voice:</label>
         <select
           id="voice-select"
-          value={selectedVoice ? selectedVoice.name : ''}
+          value={selectedVoice ? selectedVoice.name : ""}
           onChange={(e) => {
             const voice = voices.find((v) => v.name === e.target.value);
             setSelectedVoice(voice);
           }}
           style={{
-            padding: '8px',
-            borderRadius: '4px',
-            border: '1px solid #ddd',
-            width: '100%',
-            maxWidth: '300px'
+            padding: "8px",
+            borderRadius: "4px",
+            border: "1px solid #ddd",
+            width: "100%",
+            maxWidth: "300px",
           }}
         >
           {voices.map((voice) => (

@@ -1,13 +1,9 @@
-import React from 'react';
-import Layout from '../components/Layout/Layout';
-import TranslationModule from '../components/Sections/TranslationModule';
+import React from "react";
+import Layout from "../components/Layout/Layout";
+import TranslationModule from "../components/Sections/TranslationModule";
 
 const TranslationModulePage = () => {
-  return (
-
-        <TranslationModule />
-
-  );
+  return <TranslationModule />;
 };
 
 export default TranslationModulePage;

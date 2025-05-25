@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import "../../assets/css/style.css";
 const ContactSection = () => {
@@ -13,7 +13,9 @@ const ContactSection = () => {
             <div className="contact-address">
               <i className="ion-ios-location-outline"></i>
               <h3>Address</h3>
-              <address><b>NCER, Talegaon Dabhade</b></address>
+              <address>
+                <b>NCER, Talegaon Dabhade</b>
+              </address>
             </div>
           </div>
           <div className="col-md-4">
