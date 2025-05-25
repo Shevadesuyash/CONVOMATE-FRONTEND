@@ -1,13 +1,19 @@
 // convomate/src/components/Sections/VoiceInput.jsx
-import React, { useState, useEffect } from 'react';
-import 'font-awesome/css/font-awesome.min.css';
+import React, { useState, useEffect } from "react";
+import "font-awesome/css/font-awesome.min.css";
 
-const VoiceInput = ({ onResult, language = 'en-US', buttonStyle = {}, disabled = false }) => {
+const VoiceInput = ({
+  onResult,
+  language = "en-US",
+  buttonStyle = {},
+  disabled = false,
+}) => {
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
 
   useEffect(() => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       const recognizer = new SpeechRecognition();
       recognizer.continuous = false;
@@ -22,7 +28,7 @@ const VoiceInput = ({ onResult, language = 'en-US', buttonStyle = {}, disabled =
       };
 
       recognizer.onerror = (event) => {
-        console.error('Voice input error:', event.error);
+        console.error("Voice input error:", event.error);
         setIsListening(false);
       };
 
@@ -38,48 +44,72 @@ const VoiceInput = ({ onResult, language = 'en-US', buttonStyle = {}, disabled =
     };
   }, [language, onResult]);
 
-  const toggleListening = () => {
-    if (!recognition) return;
+  const startListening = () => {
+    if (!recognition || disabled) return;
+    recognition.start();
+    setIsListening(true);
+  };
 
-    if (isListening) {
+  const stopListening = () => {
+    if (recognition && isListening) {
       recognition.stop();
-    } else {
-      recognition.start();
-      setIsListening(true);
+      setIsListening(false);
     }
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggleListening}
-      disabled={!recognition || disabled}
-      style={{
-        backgroundColor: isListening ? '#dc3545' : '#007bff',
-        border: 'none',
-        color: '#fff',
-        padding: '10px 15px',
-        borderRadius: '50%',
-        cursor: 'pointer',
-        position: 'relative',
-        ...buttonStyle
-      }}
-      title={isListening ? 'Stop listening' : 'Start voice input'}
-    >
-      <i className={`fa ${isListening ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
-      {isListening && (
-        <span style={{
-          position: 'absolute',
-          top: '-5px',
-          right: '-5px',
-          width: '10px',
-          height: '10px',
-          backgroundColor: 'red',
-          borderRadius: '50%',
-          animation: 'pulse 1.5s infinite'
-        }}></span>
+    <div style={{ position: "relative", display: "inline-block" }}>
+      {!isListening ? (
+        <button
+          type="button"
+          onClick={startListening}
+          disabled={!recognition || disabled}
+          style={{
+            backgroundColor: "#007bff",
+            border: "none",
+            color: "#fff",
+            padding: "10px 15px",
+            borderRadius: "50%",
+            cursor: "pointer",
+            ...buttonStyle,
+          }}
+          title="Start voice input"
+        >
+          <i className="fa fa-microphone"></i>
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={stopListening}
+          style={{
+            backgroundColor: "#dc3545",
+            border: "none",
+            color: "#fff",
+            padding: "10px 15px",
+            borderRadius: "50%",
+            cursor: "pointer",
+            ...buttonStyle,
+          }}
+          title="Stop listening"
+        >
+          <i className="fa fa-microphone-slash"></i>
+        </button>
       )}
-    </button>
+      {isListening && (
+        <span
+          style={{
+            position: "absolute",
+            top: "-5px",
+            right: "-5px",
+            width: "10px",
+            height: "10px",
+            backgroundColor: "red",
+            borderRadius: "50%",
+            animation: "pulse 1.5s infinite",
+          }}
+        ></span>
+      )}
+    </div>
   );
 };
 

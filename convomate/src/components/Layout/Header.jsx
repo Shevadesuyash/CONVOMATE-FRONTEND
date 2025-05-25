@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Import useAuth
+import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; // Import useAuth
 
 const Header = () => {
   const { authenticated, logout, authKey } = useAuth(); // Use authentication state and logout function
@@ -22,9 +22,7 @@ const Header = () => {
             </li>
             {authenticated ? (
               <li id="logoutLink">
-                <button onClick={logout}>
-                  Logout
-                </button>
+                <button onClick={logout}>Logout</button>
               </li>
             ) : (
               <li id="loginLink">
@@ -35,10 +33,10 @@ const Header = () => {
               <Link to="/">About Us</Link>
             </li>
             <li>
-              <Link to="/">Team</Link>
+              <Link to="/Team">Team</Link>
             </li>
             <li className="menu-has-children">
-              <Link to="/models">Models</Link>
+              <Link to="/model">Models</Link>
               <ul>
                 <li>
                   <Link to="/model/Chat-bot">Chat-bot</Link>
